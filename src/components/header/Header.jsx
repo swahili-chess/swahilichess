@@ -9,7 +9,7 @@ const Header = () => {
         <header className="header">
             <nav className="nav container">
                 <a href="index.html" className="nav__logo">
-                    <img src={logo} alt="" />
+                    <a href="#home" className="nav__logo">Chesswahili</a>
                 </a>
 
                 <div className={Toggle ? "nav__menu show-menu" : "nav__menu"}>
