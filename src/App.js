@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Header from './components/header/Header';
+import Home from './components/header/home/Home';
+import About from './components/about/About';
+import Leaderboard from './components/leaderboard/Leaderboard';
+import Match from './components/match/Match';
+import League from './components/league/League';
+import Contact from './components/contact/Contact';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+
+      <main className='main'>
+        <Home />
+        <About />
+        <Leaderboard />
+        <Match />
+        <League />
+        <Contact />
+      </main>
+    </>
   );
 }
 
