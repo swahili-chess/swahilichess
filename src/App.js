@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import Home from './components/header/home/Home';
-import About from './components/about/About';
 import Leaderboard from './components/leaderboard/Leaderboard';
 import Match from './components/match/Match';
 import League from './components/league/League';
-import Contact from './components/contact/Contact';
+import Footer from './components/footer/Footer';
+import ScrollUp from './components/scrollup/ScrollUp';
 
 const App = () => {
   return (
@@ -15,12 +15,13 @@ const App = () => {
 
       <main className='main'>
         <Home />
-        <About />
         <Leaderboard />
         <Match />
         <League />
-        <Contact />
       </main>
+
+      <Footer />
+      <ScrollUp />
     </>
   );
 }

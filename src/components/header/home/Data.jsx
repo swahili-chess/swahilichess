@@ -9,7 +9,8 @@ const Data = () => {
             <h3 className="home__subtitle">Welcome</h3>
             <p className="home__description">Tanzania's top chess players.</p>
 
-            <a href="#contact" className="button button--flex">
+            <a href="https://chat.whatsapp.com/ELHXyyug2VbA9XFfR8l7vi"
+                className="button button--flex">
                 Say Hello
 
                 <svg

@@ -3,8 +3,21 @@ import "./header.css";
 import logo from '../../assets/logo.png';
 
 const Header = () => {
+    /*============== Change Background Header =============*/
+    window.addEventListener("scroll", function () {
+        const header = document.querySelector(".header");
+
+        if (this.scrollY >= 80) header.classList.add
+            ("show-header");
+        else header.classList.remove("show-header");
+    });
+
     /*============== Toggle Menu =============*/
     const [Toggle, showMenu] = useState(false);
+
+
+    const [activeNav, setActiveNav] = useState("#home");
+
     return (
         <header className="header">
             <nav className="nav container">
@@ -15,38 +28,38 @@ const Header = () => {
                 <div className={Toggle ? "nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
                         <li className="nav__item">
-                            <a href="#home" className="nav__link active-link">
+                            <a href="#home"
+                                onClick={() => setActiveNav("#home")}
+                                className={activeNav === "#home" ?
+                                    "nav__link active-link" : "nav__link"}>
                                 <i className="uil uil-estate nav__icon"></i> Home
                             </a>
                         </li>
 
                         <li className="nav__item">
-                            <a href="#about" className="nav__link">
-                            <i class="uil uil-chat-bubble-user nav__icon"></i> About
-                            </a>
-                        </li>
-
-                        <li className="nav__item">
-                            <a href="#leaderboard" className="nav__link">
+                            <a href="#leaderboard"
+                                onClick={() => setActiveNav("#leaderboard")}
+                                className={activeNav === "#leaderboard" ?
+                                    "nav__link active-link" : "nav__link"}>
                                 <i class="uil uil-presentation-line nav__icon"></i> Learderboard
                             </a>
                         </li>
 
                         <li className="nav__item">
-                            <a href="#match" className="nav__link">
+                            <a href="#match"
+                                onClick={() => setActiveNav("#match")}
+                                className={activeNav === "#match" ?
+                                    "nav__link active-link" : "nav__link"}>
                                 <i class="uil uil-stopwatch nav__icon"></i> Matches
                             </a>
                         </li>
 
                         <li className="nav__item">
-                            <a href="#league" className="nav__link">
+                            <a href="#league"
+                                onClick={() => setActiveNav("#league")}
+                                className={activeNav === "#league" ?
+                                    "nav__link active-link" : "nav__link"}>
                                 <i class="uil uil-list-ol nav__icon"></i> League
-                            </a>
-                        </li>
-
-                        <li className="nav__item">
-                            <a href="#contact" className="nav__link">
-                                <i class="uil uil-message nav__icon"></i> Contact
                             </a>
                         </li>
                     </ul>
