@@ -1,2 +1,2 @@
 # Chesswahili 
-This repo consists is the frontend for the [Chesswahili.com](https://chesswahili.com/).
+This repo consists of the frontend code for the [Chesswahili.com](https://chesswahili.com/).
