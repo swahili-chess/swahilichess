@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import './leaderboard.css';
 import Rapid from "./Rapid";
 import Blitz from "./Blitz";
+import stopwatch from "../../assets/stopwatch.png";
+import fire from "../../assets/fire.png";
 
 const Leaderboard = () => {
     const [toggleState, setToggleState] = useState(0);
@@ -18,7 +20,7 @@ const Leaderboard = () => {
             <div className="leaderboard__container container grid">
                 <div className="leaderboard__content">
                     <div>
-                        <i class="uil uil-stopwatch leaderboard__icon"></i>
+                        <img src={stopwatch} alt="" className="leaderboard__icon" />
                         <h3 className="leaderboard__title">
                             Rapid
                         </h3>
@@ -51,7 +53,7 @@ const Leaderboard = () => {
 
                 <div className="leaderboard__content">
                     <div>
-                        <i class="uil uil-fire leaderboard__icon"></i>
+                        <img src={fire} alt="" className="leaderboard__icon" />
                         <h3 className="leaderboard__title">
                             Blitz
                         </h3>
