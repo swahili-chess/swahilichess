@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./header.css";
-import logo from '../../assets/logo.png';
 
 const Header = () => {
     /*============== Change Background Header =============*/
