@@ -5,8 +5,8 @@ import Table from "./Table";
 const League = () => {
     return (
         <section className="league container section" id="league">
-            <h2 className="section__title">League Standing</h2>
-            <span className="section__subtitle">As it stands</span>
+            <h2 className="section__title">As it stands</h2>
+            <span className="section__subtitle">League table</span>
 
             <div className="league__container">
                 <Table />
