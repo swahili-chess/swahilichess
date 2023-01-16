@@ -45,7 +45,7 @@ const Footer = () => {
                 </div>
 
                 <span className="footer__copy">
-                    &#169;2023 Chesswahili. All rights reserved
+                    &#169;2023 Chesswahili. All rights reserved.
                 </span>
             </div>
         </div>
