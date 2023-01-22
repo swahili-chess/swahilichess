@@ -172,7 +172,7 @@ const Match = () => {
                                         <li>dinokapon26 vs BiGFiVeWin05</li>
                                         <li>k_dash34Ⓛ vs musir6363Ⓦ</li>
                                         <li>Briodee vs MABESSA</li>
-                                        <li>Kazremy vs Farajahchallo</li>
+                                        <li>KazremyⓌ vs FarajahchalloⓁ</li>
                                         <li>KafitiⓌ vs Andre_BeatzⓁ</li>
                                         <li>arnie_NⓁ vs alphazzz3r0Ⓦ</li>
                                         <li>raheemthefirstⓁ vs ClusteredFib3rⓌ</li>
@@ -195,7 +195,7 @@ const Match = () => {
                                         <li>GN02Ⓓ vs onesmoⒹ</li>
                                         <li>BiGFiVeWin05 vs Hopertz</li>
                                         <li>musir6363Ⓛ vs somrandomguyⓌ</li>
-                                        <li>MABESSA vs dinokapon26</li>
+                                        <li>MABESSAⓁ vs dinokapon26Ⓦ</li>
                                         <li>FarajahchalloⓁ vs k_dash34Ⓦ</li>
                                         <li>Andre_Beatz vs Briodee</li>
                                         <li>alphazzz3r0Ⓛ vs KazremyⓌ</li>
@@ -221,7 +221,7 @@ const Match = () => {
                                         <li>GN02Ⓦ vs musir6363Ⓛ</li>
                                         <li>HopertzⓁ vs MABESSAⓌ</li>
                                         <li>somrandomguy vs Farajahchallo</li>
-                                        <li>dinokapon26 vs Andre_Beatz</li>
+                                        <li>dinokapon26Ⓦ vs Andre_BeatzⓁ</li>
                                         <li>k_dash34Ⓦ vs alphazzz3r0Ⓛ</li>
                                         <li>Briodee vs ClusteredFib3r</li>
                                         <li>KazremyⓁ vs raheemthefirstⓌ</li>
