@@ -258,7 +258,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content 11">
+                <div className="match__content 1">
                     <h3 className="match__title">Match Day 11</h3>
 
                     <div className="match__box">
