@@ -8,7 +8,7 @@ const Match = () => {
             <span className="section__subtitle">Game schedule</span>
 
             <div className="match__container container grid">
-                <div className="match__content">
+                <div className="match__content 1">
                     <h3 className="match__title">Match Day 1</h3>
 
                     <div className="match__box">
@@ -33,7 +33,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 2">
                     <h3 className="match__title">Match Day 2</h3>
 
                     <div className="match__box">
@@ -58,7 +58,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 3">
                     <h3 className="match__title">Match Day 3</h3>
 
                     <div className="match__box">
@@ -83,7 +83,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 4">
                     <h3 className="match__title">Match Day 4</h3>
 
                     <div className="match__box">
@@ -108,7 +108,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 5">
                     <h3 className="match__title">Match Day 5</h3>
 
                     <div className="match__box">
@@ -133,7 +133,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 6">
                     <h3 className="match__title">Match Day 6</h3>
 
                     <div className="match__box">
@@ -158,7 +158,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 7">
                     <h3 className="match__title">Match Day 7</h3>
 
                     <div className="match__box">
@@ -167,15 +167,15 @@ const Match = () => {
                                 <div>
                                     21 Jan, 2023 to 22 Jan, 2023
                                     <h3 className="match__name ⓌⒹⓁ">
-                                        <li>onesmo vs Hopertz</li>
-                                        <li>somrandomguy vs GN02</li>
+                                        <li>onesmoⓌ vs HopertzⓁ</li>
+                                        <li>somrandomguyⓁ vs GN02Ⓦ</li>
                                         <li>dinokapon26 vs BiGFiVeWin05</li>
-                                        <li>k_dash34 vs musir6363</li>
+                                        <li>k_dash34Ⓛ vs musir6363Ⓦ</li>
                                         <li>Briodee vs MABESSA</li>
                                         <li>Kazremy vs Farajahchallo</li>
-                                        <li>Kafiti vs Andre_Beatz</li>
-                                        <li>arnie_N vs alphazzz3r0</li>
-                                        <li>raheemthefirst vs ClusteredFib3r</li>
+                                        <li>KafitiⓌ vs Andre_BeatzⓁ</li>
+                                        <li>arnie_NⓁ vs alphazzz3r0Ⓦ</li>
+                                        <li>raheemthefirstⓁ vs ClusteredFib3rⓌ</li>
                                     </h3>
                                 </div>
                             </div>
@@ -183,7 +183,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 8">
                     <h3 className="match__title">Match Day 8</h3>
 
                     <div className="match__box">
@@ -192,14 +192,14 @@ const Match = () => {
                                 <div>
                                     21 Jan, 2023 to 22 Jan, 2023
                                     <h3 className="match__name ⓌⒹⓁ">
-                                        <li>GN02 vs onesmo</li>
+                                        <li>GN02Ⓓ vs onesmoⒹ</li>
                                         <li>BiGFiVeWin05 vs Hopertz</li>
-                                        <li>musir6363 vs somrandomguy</li>
+                                        <li>musir6363Ⓛ vs somrandomguyⓌ</li>
                                         <li>MABESSA vs dinokapon26</li>
-                                        <li>Farajahchallo vs k_dash34</li>
+                                        <li>FarajahchalloⓁ vs k_dash34Ⓦ</li>
                                         <li>Andre_Beatz vs Briodee</li>
-                                        <li>alphazzz3r0 vs Kazremy</li>
-                                        <li>ClusteredFib3r vs Kafiti</li>
+                                        <li>alphazzz3r0Ⓛ vs KazremyⓌ</li>
+                                        <li>ClusteredFib3rⓁ vs KafitiⓌ</li>
                                         <li>raheemthefirst vs arnie_N</li>
                                     </h3>
                                 </div>
@@ -208,7 +208,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 9">
                     <h3 className="match__title">Match Day 9</h3>
 
                     <div className="match__box">
@@ -217,15 +217,15 @@ const Match = () => {
                                 <div>
                                     21 Jan, 2023 to 22 Jan, 2023
                                     <h3 className="match__name ⓌⒹⓁ">
-                                        <li>onesmo vs BiGFiVeWin05</li>
-                                        <li>GN02 vs musir6363</li>
-                                        <li>Hopertz vs MABESSA</li>
+                                        <li>onesmoⓁ vs BiGFiVeWin05Ⓦ</li>
+                                        <li>GN02Ⓦ vs musir6363Ⓛ</li>
+                                        <li>HopertzⓁ vs MABESSAⓌ</li>
                                         <li>somrandomguy vs Farajahchallo</li>
                                         <li>dinokapon26 vs Andre_Beatz</li>
-                                        <li>k_dash34 vs alphazzz3r0</li>
+                                        <li>k_dash34Ⓦ vs alphazzz3r0Ⓛ</li>
                                         <li>Briodee vs ClusteredFib3r</li>
-                                        <li>Kazremy vs raheemthefirst</li>
-                                        <li>Kafiti vs arnie_N</li>
+                                        <li>KazremyⓁ vs raheemthefirstⓌ</li>
+                                        <li>KafitiⓌ vs arnie_NⓁ</li>
                                     </h3>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 10">
                     <h3 className="match__title">Match Day 10</h3>
 
                     <div className="match__box">
@@ -258,7 +258,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 11">
                     <h3 className="match__title">Match Day 11</h3>
 
                     <div className="match__box">
@@ -283,7 +283,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 12">
                     <h3 className="match__title">Match Day 12</h3>
 
                     <div className="match__box">
@@ -308,7 +308,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 13">
                     <h3 className="match__title">Match Day 13</h3>
 
                     <div className="match__box">
@@ -333,7 +333,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 14">
                     <h3 className="match__title">Match Day 14</h3>
 
                     <div className="match__box">
@@ -358,7 +358,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 15">
                     <h3 className="match__title">Match Day 15</h3>
 
                     <div className="match__box">
@@ -383,7 +383,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 16">
                     <h3 className="match__title">Match Day 16</h3>
 
                     <div className="match__box">
@@ -408,7 +408,7 @@ const Match = () => {
                     </div>
                 </div>
 
-                <div className="match__content">
+                <div className="match__content 17">
                     <h3 className="match__title">Match Day 17</h3>
 
                     <div className="match__box">
