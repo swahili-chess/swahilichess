@@ -17,7 +17,7 @@
   --container-color: #fff;
 
   /*=========== Font and typography ==========*/
-  --body-font: "Poppins", sans-serif;
+  --body-font: "Poppins", "Tw Cen MT";
 
   /*.5rem = 8 px | 1 rem = 16px*/
   --big-font-size: 3.5rem;
