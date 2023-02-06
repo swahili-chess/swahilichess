@@ -324,7 +324,7 @@ const Match = () => {
                                         <li>BiGFiVeWin05 vs arnie_N</li>
                                         <li>GN02Ⓦ vs KafitiⓁ</li>
                                         <li>HopertzⓁ vs KazremyⓌ</li>
-                                        <li>somrandomguy vs Briodee</li>
+                                        <li>somrandomguyⓁ vs BriodeeⓁ</li>
                                         <li>dinokapon26Ⓛ vs k_dash34Ⓦ</li>
                                     </h3>
                                 </div>
@@ -369,13 +369,13 @@ const Match = () => {
                                     <h3 className="match__name ⓌⒹⓁ">
                                         <li>onesmoⓁ vs ClusteredFib3rⓌ</li>
                                         <li>alphazzz3r0Ⓦ vs raheemthefirstⓁ</li>
-                                        <li>Andre_Beatz vs arnie_N</li>
+                                        <li>Andre_BeatzⓌ vs arnie_NⓁ</li>
                                         <li>FarajahchalloⓁ vs KafitiⓌ</li>
                                         <li>MABESSAⓌ vs KazremyⓁ</li>
                                         <li>musir6363 vs Briodee</li>
                                         <li>BiGFiVeWin05 vs k_dash34</li>
                                         <li>GN02Ⓦ vs dinokapon26Ⓛ</li>
-                                        <li>Hopertz vs somrandomguy</li>
+                                        <li>HopertzⓁ vs somrandomguyⓁ</li>
                                     </h3>
                                 </div>
                             </div>
