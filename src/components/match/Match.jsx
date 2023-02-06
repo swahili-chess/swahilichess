@@ -243,7 +243,7 @@ const Match = () => {
                                     28 Jan, 2023 to 29 Jan, 2023
                                     <h3 className="match__name ⓌⒹⓁ">
                                         <li>musir6363Ⓦ vs onesmoⓁ</li>
-                                        <li>MABESSA vs BiGFiVeWin05</li>
+                                        <li>*MABESSA vs BiGFiVeWin05</li>
                                         <li>FarajahchalloⒹ vs GN02Ⓓ</li>
                                         <li>Andre_BeatzⓁ vs HopertzⓌ</li>
                                         <li>alphazzz3r0Ⓦ vs somrandomguyⓁ</li>
