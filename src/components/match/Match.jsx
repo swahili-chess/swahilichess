@@ -320,7 +320,7 @@ const Match = () => {
                                         <li>onesmoⓌ vs Andre_BeatzⓁ</li>
                                         <li>FarajahchalloⒹ vs alphazzz3r0Ⓓ</li>
                                         <li>MABESSAⓁ vs ClusteredFib3rⓌ</li>
-                                        <li>musir6363 vs raheemthefirst</li>
+                                        <li>*musir6363 vs raheemthefirst</li>
                                         <li>BiGFiVeWin05 vs arnie_N</li>
                                         <li>GN02Ⓦ vs KafitiⓁ</li>
                                         <li>HopertzⓁ vs KazremyⓌ</li>
