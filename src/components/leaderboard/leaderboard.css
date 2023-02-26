@@ -159,7 +159,7 @@ api {
 /* For medium devices */
 @media screen and (max-width: 768px) {
     .leaderboard__container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .leaderboard__content {
