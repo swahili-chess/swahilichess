@@ -31,7 +31,8 @@ const Header = () => {
                                 onClick={() => setActiveNav("#home")}
                                 className={activeNav === "#home" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i className="uil uil-estate nav__icon"></i> Home
+                                <i className="uil uil-estate nav__icon"></i>
+                                <div className="nav_title">Home</div>
                             </a>
                         </li>
 
@@ -40,7 +41,8 @@ const Header = () => {
                                 onClick={() => setActiveNav("#leaderboard")}
                                 className={activeNav === "#leaderboard" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-presentation-line nav__icon"></i> Learderboard
+                                <i class="uil uil-presentation-line nav__icon"></i>
+                                <div className="nav_title">Learderboard</div>
                             </a>
                         </li>
 
@@ -49,7 +51,8 @@ const Header = () => {
                                 onClick={() => setActiveNav("#match")}
                                 className={activeNav === "#match" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-stopwatch nav__icon"></i> Matches
+                                <i class="uil uil-stopwatch nav__icon"></i>
+                                <div className="nav_title">Matches</div>
                             </a>
                         </li>
 
@@ -58,7 +61,8 @@ const Header = () => {
                                 onClick={() => setActiveNav("#league")}
                                 className={activeNav === "#league" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-list-ol nav__icon"></i> League
+                                <i class="uil uil-list-ol nav__icon"></i>
+                                <div className="nav_title">League</div>
                             </a>
                         </li>
                     </ul>
