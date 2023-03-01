@@ -243,7 +243,7 @@ const Match = () => {
                                     28 Jan, 2023 to 29 Jan, 2023
                                     <h3 className="match__name ⓌⒹⓁ">
                                         <li>musir6363Ⓦ vs onesmoⓁ</li>
-                                        <li>MABESSA vs BiGFiVeWin05</li>
+                                        <li>MABESSAⓁ vs BiGFiVeWin05Ⓛ</li>
                                         <li>FarajahchalloⒹ vs GN02Ⓓ</li>
                                         <li>Andre_BeatzⓁ vs HopertzⓌ</li>
                                         <li>alphazzz3r0Ⓦ vs somrandomguyⓁ</li>
@@ -269,7 +269,7 @@ const Match = () => {
                                     <h3 className="match__name ⓌⒹⓁ">
                                         <li>onesmoⓁ vs MABESSAⓌ</li>
                                         <li>musir6363Ⓦ vs FarajahchalloⓁ</li>
-                                        <li>BiGFiVeWin05 vs Andre_Beatz</li>
+                                        <li>BiGFiVeWin05Ⓦ vs Andre_BeatzⓁ</li>
                                         <li>GN02Ⓦ vs alphazzz3r0Ⓛ</li>
                                         <li>HopertzⓁ vs ClusteredFib3rⓌ</li>
                                         <li>somrandomguyⒹ vs raheemthefirstⒹ</li>
@@ -295,7 +295,7 @@ const Match = () => {
                                         <li>FarajahchalloⓁ vs onesmoⓌ</li>
                                         <li>Andre_BeatzⓌ vs MABESSAⓁ</li>
                                         <li>alphazzz3r0Ⓛ vs musir6363Ⓦ</li>
-                                        <li>ClusteredFib3r vs BiGFiVeWin05</li>
+                                        <li>ClusteredFib3rⓁ vs BiGFiVeWin05Ⓛ</li>
                                         <li>raheemthefirstⓁ vs GN02Ⓦ</li>
                                         <li>arnie_NⓁ vs HopertzⓌ</li>
                                         <li>KafitiⓌ vs somrandomguyⓁ</li>
@@ -320,8 +320,8 @@ const Match = () => {
                                         <li>onesmoⓌ vs Andre_BeatzⓁ</li>
                                         <li>FarajahchalloⒹ vs alphazzz3r0Ⓓ</li>
                                         <li>MABESSAⓁ vs ClusteredFib3rⓌ</li>
-                                        <li>musir6363 vs raheemthefirst</li>
-                                        <li>BiGFiVeWin05 vs arnie_N</li>
+                                        <li>musir6363Ⓛ vs raheemthefirstⓁ</li>
+                                        <li>BiGFiVeWin05Ⓛ vs arnie_NⓌ</li>
                                         <li>GN02Ⓦ vs KafitiⓁ</li>
                                         <li>HopertzⓁ vs KazremyⓌ</li>
                                         <li>somrandomguyⓁ vs BriodeeⓁ</li>
@@ -346,8 +346,8 @@ const Match = () => {
                                         <li>ClusteredFib3rⓌ vs Andre_BeatzⓁ</li>
                                         <li>raheemthefirstⓁ vs FarajahchalloⓌ</li>
                                         <li>arnie_NⓁ vs MABESSAⓌ</li>
-                                        <li>Kafiti vs musir6363</li>
-                                        <li>Kazremy vs BiGFiVeWin05</li>
+                                        <li>KafitiⓌ vs musir6363Ⓛ</li>
+                                        <li>KazremyⓁ vs BiGFiVeWin05Ⓦ</li>
                                         <li>BriodeeⓁ vs GN02Ⓦ</li>
                                         <li>k_dash34Ⓓ vs HopertzⒹ</li>
                                         <li>dinokapon26Ⓛ vs somrandomguyⓌ</li>
@@ -372,8 +372,8 @@ const Match = () => {
                                         <li>Andre_BeatzⓌ vs arnie_NⓁ</li>
                                         <li>FarajahchalloⓁ vs KafitiⓌ</li>
                                         <li>MABESSAⓌ vs KazremyⓁ</li>
-                                        <li>musir6363 vs Briodee</li>
-                                        <li>BiGFiVeWin05 vs k_dash34</li>
+                                        <li>musir6363Ⓦ vs BriodeeⓁ</li>
+                                        <li>BiGFiVeWin05Ⓦ vs k_dash34Ⓛ</li>
                                         <li>GN02Ⓦ vs dinokapon26Ⓛ</li>
                                         <li>HopertzⓁ vs somrandomguyⓁ</li>
                                     </h3>
