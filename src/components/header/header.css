@@ -36,8 +36,12 @@
     transition: .3s;
 }
 
-.nav_title,
-/*.nav__icon,*/
+.nav_title{
+    font-size: var(--small-font-size);
+}
+
+/*.nav_title,*/
+.nav__icon,
 .nav__close,
 .nav__toggle {
     display: none;
