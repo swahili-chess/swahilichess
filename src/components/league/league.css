@@ -76,6 +76,12 @@ h3 {
     font-size: var(--h3-font-size);
 }
 
+.tt {
+    font-size: var(--small-font-size);
+    justify-content: center;
+    align-items: center;
+}
+
 /*============== BREAKPOINTS =============*/
 /* For large devices */
 @media screen and (max-width: 992px) {

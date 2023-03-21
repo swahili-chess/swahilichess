@@ -32,12 +32,12 @@
     align-items: center;
     font-size: var(--h2-font-size);
     color: var(--title-color);
-    font-weight: var(--font-medium);
+    font-weight: var(--small-font-size);
     transition: .3s;
 }
 
-/*.nav__icon,*/
 .nav_title,
+/*.nav__icon,*/
 .nav__close,
 .nav__toggle {
     display: none;
