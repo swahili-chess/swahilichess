@@ -1,3 +1,9 @@
+.leaderboard {
+    background-image: url(../../assets/bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .leaderboard__container {
     grid-template-columns: repeat(2, 350px);
     justify-content: center;
@@ -172,6 +178,12 @@ api {
 }
 
 @media screen and (max-width: 576px) {
+    .leaderboard {
+        background-image: url(../../assets/bg_phone.png);
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
     .leaderboard__modal-content {
         padding: 4.5rem 1.5rem 2.5rem;
     }
