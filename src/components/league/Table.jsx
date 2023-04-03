@@ -75,10 +75,10 @@ const Table = () => {
                                 <div class="col col-1">1.</div>
                                 <div class="col col-2">dinokapon26</div>
                                 <div class="col col-3">4</div>
-                                <div class="col col-4">4</div>
+                                <div class="col col-4">3</div>
                                 <div class="col col-5">0</div>
-                                <div class="col col-6">0</div>
-                                <div class="col col-7">8</div>
+                                <div class="col col-6">1</div>
+                                <div class="col col-7">6</div>
                             </li>
 
                             <li class="table-row">
