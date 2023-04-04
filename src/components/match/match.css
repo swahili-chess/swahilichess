@@ -50,6 +50,15 @@
     font-size: var(--tiny-font-size);
 }
 
+/*.br {
+    border-radius: 10px;
+    max-width: 73%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
 /*============== BREAKPOINTS =============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
@@ -57,6 +66,15 @@
         grid-template-columns: repeat(2, 1fr);
         row-gap: 1rem;
     }
+
+    /*.br {
+        border-radius: 10px;
+        max-width: 90%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }*/
 }
 
 /* For medium devices */

@@ -1,5 +1,6 @@
 import React from "react";
 import './match.css';
+/*import Bracket from '../../assets/Bracket.png';*/
 
 const Match = () => {
     return (
@@ -212,6 +213,7 @@ const Match = () => {
                     </div>
                 </div>
             </div>
+            {/*<img src={Bracket} className="br" />*/}
         </section>
     );
 };
