@@ -1,14 +1,14 @@
 import React from "react";
 import './match.css';
-/*import Bracket from '../../assets/Bracket.png';*/
+import Bracket from '../../assets/Bracket.png';
 
 const Match = () => {
     return (
         <section className="match section" id="match">
             <h2 className="section__title">Matches</h2>
-            <span className="section__subtitle">Game schedule</span>
+            <span className="section__subtitle">Playoff</span>
 
-            <div className="match__container container grid">
+            {/*<div className="match__container container grid">
                 <div className="match__content 1">
                     <h3 className="match__title">Round 1</h3>
                     <h3 className="match__title">(20 - 22 March)</h3>
@@ -211,9 +211,9 @@ const Match = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            {/*<img src={Bracket} className="br" />*/}
+                </div></div>*/}
+            
+            <img src={Bracket} className="br" />
         </section>
     );
 };

@@ -50,14 +50,14 @@
     font-size: var(--tiny-font-size);
 }
 
-/*.br {
+.br {
     border-radius: 10px;
     max-width: 73%;
     height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
-}*/
+}
 
 /*============== BREAKPOINTS =============*/
 /* For large devices */
@@ -67,14 +67,14 @@
         row-gap: 1rem;
     }
 
-    /*.br {
+    .br {
         border-radius: 10px;
         max-width: 90%;
         height: auto;
         display: block;
         margin-left: auto;
         margin-right: auto;
-    }*/
+    }
 }
 
 /* For medium devices */
