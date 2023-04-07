@@ -81,7 +81,7 @@ const Table = () => {
                                 <div class="col col-7">10</div>
                             </li>
 
-                            <li class="table-row">
+                            <li class="table-row1">
                                 <div class="col col-1">2.</div>
                                 <div class="col col-2">kazremy</div>
                                 <div class="col col-3">6</div>
@@ -91,7 +91,7 @@ const Table = () => {
                                 <div class="col col-7">7</div>
                             </li>
 
-                            <li class="table-row1">
+                            <li class="table-row">
                                 <div class="col col-1">3.</div>
                                 <div class="col col-2">no_mane</div>
                                 <div class="col col-3">6</div>
