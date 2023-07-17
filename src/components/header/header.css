@@ -51,6 +51,7 @@
 .active-link,
 .nav__link:hover {
     color: var(--title-color-dark);
+    font-weight: 700 !important;
 }
 
 /* Change background header */
