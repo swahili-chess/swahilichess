@@ -67,9 +67,11 @@
 
 .leaderboard__modal-content {
     width: 450px;
+    height: 500px;
+    overflow: scroll;
     position: relative;
     background-color: var(--container-color);
-    padding: 4.5rem 2.5rem 2.5rem;
+    padding: 4.5rem 1.5rem 2.5rem;
     border-radius: 1.5rem;
 }
 
@@ -183,7 +185,7 @@ api {
         background-position: center;
         background-repeat: no-repeat;
     }
-    
+
     .leaderboard__modal-content {
         padding: 4.5rem 1.5rem 2.5rem;
     }

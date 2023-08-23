@@ -39,14 +39,15 @@ const Leaderboard = () => {
                             uil-times leaderboard__modal-close"></i>
 
                             <h3 className="leaderboard__modal-title">Rapid</h3>
-
-                            <ul className="srvices__modal-leaderboard grid">
-                                <li className="leaderboard__modal-service">
-                                    <p className="leaderboard__modal-info">
-                                        <Rapid />
-                                    </p>
-                                </li>
-                            </ul>
+                            <div className="x">
+                                <ul className="srvices__modal-leaderboard grid">
+                                    <li className="leaderboard__modal-service">
+                                        <p className="leaderboard__modal-info">
+                                            <Rapid />
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
