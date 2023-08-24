@@ -27,19 +27,23 @@ const Footer = () => {
                 <div className="footer__social">
                     <a href="https://chat.whatsapp.com/ELHXyyug2VbA9XFfR8l7vi"
                         className="footer__social-link"
-                        target="_blank">
+                        target="_blank"
+                        rel="noreferrer"
+                        >
                         <i class="bx bxl-whatsapp"></i>
                     </a>
 
                     <a href="https://github.com/orgs/ChessSwahili"
                         className="footer__social-link"
-                        target="_blank">
+                        target="_blank"
+                        rel="noreferrer">
                         <i class="bx bxl-github"></i>
                     </a>
 
                     <a href="https://chesswahili.com"
                         className="footer__social-link"
-                        target="_blank">
+                        target="_blank"
+                        rel="noreferrer">
                         <i class="bx bxl-google"></i>
                     </a>
                 </div>

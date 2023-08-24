@@ -1,6 +1,5 @@
 import React from "react";
 import './match.css';
-import Bracket from '../../assets/Bracket.png';
 
 const Match = () => {
     return (
