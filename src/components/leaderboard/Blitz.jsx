@@ -8,7 +8,6 @@ const Blitz = () => {
         fetch('https://api.chesswahili.com/lichess/top-ten')
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 setBlitz(json["blitz"]);
             });
     }, []);
