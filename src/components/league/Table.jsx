@@ -38,7 +38,7 @@ const Table = () => {
                                 <div class="col col-7">9</div>
                             </li>
 
-                            <li class="table-row">
+                            <li class="table-row1">
                                 <div class="col col-1">3.</div>
                                 <div class="col col-2">Onesmo</div>
                                 <div class="col col-3">4</div>
