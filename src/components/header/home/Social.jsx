@@ -10,11 +10,11 @@ const Social = () => {
                 <img src={whatsapp} alt="" />
             </a>
 
-            <a href="https://github.com/orgs/ChessSwahili" className="home__social-icon" target="_blank"  rel="noreferrer">
+            <a href="https://github.com/orgs/swahili-chess" className="home__social-icon" target="_blank"  rel="noreferrer">
                 <img src={github} alt="" />
             </a>
 
-            <a href="https://chesswahili.com" className="home__social-icon" target="_blank"  rel="noreferrer">
+            <a href="https://swahilichess.com" className="home__social-icon" target="_blank"  rel="noreferrer">
                 <img src={link} alt="" />
             </a>
         </div>
