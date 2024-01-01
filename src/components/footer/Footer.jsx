@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <div className="footer__container container">
-                <h1 className="footer__title">Chesswahili</h1>
+                <h1 className="footer__title">SwahiliChess</h1>
 
                 <ul className="footer__list">
                     <li>
@@ -33,14 +33,14 @@ const Footer = () => {
                         <i class="bx bxl-whatsapp"></i>
                     </a>
 
-                    <a href="https://github.com/orgs/ChessSwahili"
+                    <a href="https://github.com/orgs/swahili-chess"
                         className="footer__social-link"
                         target="_blank"
                         rel="noreferrer">
                         <i class="bx bxl-github"></i>
                     </a>
 
-                    <a href="https://chesswahili.com"
+                    <a href="https://swahilichess.com"
                         className="footer__social-link"
                         target="_blank"
                         rel="noreferrer">
@@ -49,7 +49,7 @@ const Footer = () => {
                 </div>
 
                 <span className="footer__copy">
-                    &#169;2023 Chesswahili. All rights reserved.
+                    &#169;2023 SwahiliChess. All rights reserved.
                 </span>
             </div>
         </div>
