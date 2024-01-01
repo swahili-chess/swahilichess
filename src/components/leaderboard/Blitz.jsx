@@ -5,7 +5,7 @@ const Blitz = () => {
 
 
     useEffect(() => {
-        fetch('https://api.chesswahili.com/lichess/top-ten')
+        fetch('https://api.swahilichess.com/lichess/top-ten')
             .then((response) => response.json())
             .then((json) => {
                 setBlitz(json["blitz"]);
