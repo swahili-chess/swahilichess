@@ -1,4 +1,4 @@
-name: Deploy chesswahili
+name: Deploy swahilichess.com
 on: 
   push:
     branches:
@@ -26,7 +26,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@v0.7.3
       with:
         local: build
-        remote: /var/www/chesswahili
+        remote: /var/www/lugano/swahilichess
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
