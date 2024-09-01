@@ -5,7 +5,7 @@ const Rapid = () => {
 
 
     useEffect(() => {
-        fetch('https://api.swahilichess.com/lichess/top-ten')
+        fetch('https://api.swahilichess.com/lichess/leaderboard')
             .then((response) => response.json())
             .then((json) => {
                 setRapid(json["rapid"]);
