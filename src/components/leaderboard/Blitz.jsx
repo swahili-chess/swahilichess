@@ -25,11 +25,11 @@ const Blitz = () => {
                 <tbody>
                     {
                         blitz ?
-                            Object.keys(blitz).map((key, index) => (
+                            blitz.map((player, index) => (
                                 <tr>
                                     <td>{index + 1}.</td>
-                                    <td>{key}</td>
-                                    <td>{blitz[key]}</td>
+                                    <td>{player.username}</td>
+                                    <td>{player.rating}</td>
                                 </tr>
                             ))
                             : "loading"}

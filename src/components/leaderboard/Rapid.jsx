@@ -25,11 +25,11 @@ const Rapid = () => {
                 <tbody>
                     {
                         rapid ?
-                            Object.keys(rapid).map((key, index) => (
-                                <tr>
+                            rapid.map((player, index) => (
+                              <tr>
                                     <td>{index + 1}.</td>
-                                    <td>{key}</td>
-                                    <td>{rapid[key]}</td>
+                                    <td>{player.username}</td>
+                                    <td>{player.rating}</td>
                                 </tr>
                             ))
                             : "loading"}
