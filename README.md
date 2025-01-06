@@ -1,2 +1,2 @@
 ### SwahiliChess 
-This repository consists of the frontend code for the [swahilichess.com](https://swahilichess.com/).
+This repository consists of the frontend code for the [prodigies.chess.tz](https://prodigies.chess.tz)
