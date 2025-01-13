@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { leaderboard_url } from "../../constants";
 
 const Blitz = () => {
     const [blitz, setBlitz] = useState();
 
 
     useEffect(() => {
-        fetch('https://api.swahilichess.com/lichess/leaderboard')
+        fetch(leaderboard_url)
             .then((response) => response.json())
             .then((json) => {
                 setBlitz(json["blitz"]);
