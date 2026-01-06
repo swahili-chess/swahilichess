@@ -1,23 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { leaderboard_url } from "../../constants";
+import React from "react";
 
-const Rapid = () => {
-    const [rapid, setRapid] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        fetch(leaderboard_url)
-            .then((response) => response.json())
-            .then((json) => {
-                setRapid(json["rapid"] || []);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError("Failed to load ratings");
-                setLoading(false);
-            });
-    }, []);
+const Rapid = ({ data, loading, error }) => {
 
     return (
         <div>
@@ -42,14 +25,14 @@ const Rapid = () => {
                                 {error}
                             </td>
                         </tr>
-                    ) : rapid.length === 0 ? (
+                    ) : data.length === 0 ? (
                         <tr>
                             <td colSpan="3" style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
                                 No ratings available
                             </td>
                         </tr>
                     ) : (
-                        rapid.map((player, index) => (
+                        data.map((player, index) => (
                             <tr key={index}>
                                 <td>{index + 1}.</td>
                                 <td>{player.username}</td>
