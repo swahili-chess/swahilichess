@@ -16,17 +16,35 @@
 }
 
 .home__social-icon {
-    font-size: 1.25rem;
-    color: var(--title-color);
+    font-size: 1.5rem;
+    color: #666666;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
 }
 
 .home__social-icon:hover {
-    color: var(--title-color-dark)
+    color: #000000;
+    transform: translateY(-2px);
 }
 
 .home__title {
     font-size: var(--big-font-size);
-    margin-bottom: var(--mb-0-25);
+    margin-bottom: var(--mb-0-5);
+    color: #000000;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .home__hand {
@@ -39,23 +57,36 @@
     position: relative;
     font-size: var(--h3-font-size);
     padding-left: 5.4rem;
-    font-weight: var(--font-normal);
+    font-weight: 500;
     margin-bottom: var(--mb-1);
+    color: #666666;
 }
 
 .home__subtitle::before {
     content: '';
     position: absolute;
     width: 70px;
-    height: 1px;
-    background-color: var(--text-color);
+    height: 2px;
+    background: #000000;
     left: 0;
     top: 1rem;
+}
+
+@keyframes slideInLeft {
+    from {
+        width: 0;
+    }
+    to {
+        width: 70px;
+    }
 }
 
 .home__description {
     max-width: 400px;
     margin-bottom: var(--mb-3);
+    line-height: 1.8;
+    color: var(--text-color);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
 .home__img {
@@ -63,16 +94,30 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    box-shadow: inset 0 0 0 9px rgb(255 255 255 / 30%);
     order: 1;
     justify-self: center;
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
     border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
-    /*animation: profile__animate 5s ease-in-out infinite 1s;*/
+    position: relative;
+    animation: profile__animate 8s ease-in-out infinite;
 }
 
-/*
+.home__img::before {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @keyframes profile__animate {
     0% {
         border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
@@ -86,7 +131,6 @@
         border-radius: 60% 40% 30% 70%/60% 30% 70% 40%;
     }
 }
-*/
 .home__scroll {
     margin-left: 9.25rem;
 }
@@ -106,15 +150,18 @@
 }
 
 .home__scroll-name {
-    color: var(--title-color);
-    font-weight: var(--font-medium);
+    color: #666666;
+    font-weight: 500;
     margin-right: var(--mb-0-25);
     margin-left: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: var(--smaller-font-size);
 }
 
 .home__scroll-arrow {
     font-size: 1.25rem;
-    color: var(--title-color);
+    color: #666666;
 }
 
 /*============== BREAKPOINTS =============*/

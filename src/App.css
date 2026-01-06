@@ -1,5 +1,5 @@
 /*=====GOOGLE FONTS=====*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 
 /*=====VARIABLES CSS=====*/
@@ -10,14 +10,28 @@
   /*Color mode HSL(hue, saturation, lightness)*/
   --hue: 0;
   --sat: 0%;
-  --title-color: hsl(var(--hue), var(--sat), 20%);
-  --title-color-dark: hsl(var(--hue), var(--sat), 0%);
-  --text-color: hsl(var(--hue), var(--sat), 46%);
-  --body-color: hsl(var(--hue), var(--sat), 98%);
-  --container-color: #fff;
+  --primary-color: #000000;
+  --primary-dark: #000000;
+  --primary-light: #333333;
+  --secondary-color: #000000;
+  --accent-color: #000000;
+  --title-color: #000000;
+  --title-color-dark: #000000;
+  --text-color: #333333;
+  --text-light: #666666;
+  --body-color: #ffffff;
+  --container-color: #ffffff;
+  --gradient-primary: linear-gradient(135deg, #000000 0%, #333333 100%);
+  --gradient-secondary: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  --gradient-chess: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 
   /*=========== Font and typography ==========*/
-  --body-font: "Poppins", "Tw Cen MT";
+  --body-font: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /*.5rem = 8 px | 1 rem = 16px*/
   --big-font-size: 3.5rem;
@@ -84,8 +98,10 @@ textarea {
 }
 
 body {
-  background-color: var(--body-color);
+  background: #fafafa;
   color: var(--text-color);
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
 h1,
@@ -116,18 +132,30 @@ img {
 
 /*============== REUSABLE CSS CLASSES =============*/
 .section {
-  padding: 6rem 0 2rem;
+  padding: 6rem 0 4rem;
+  background: #fafafa;
+}
+
+.section:nth-child(even) {
+  background: #ffffff;
 }
 
 .section__title {
   font-size: var(--h1-font-size);
   color: var(--title-color);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
 }
 
 .section__subtitle {
   display: block;
   font-size: var(--small-font-size);
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
+  color: var(--text-light);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .section__title,
@@ -138,9 +166,11 @@ img {
 
 /*============== LAYOUT =============*/
 .container {
-  max-width: 968px;
+  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .grid {
@@ -151,16 +181,38 @@ img {
 
 /*============== BUTTONS =============*/
 .button {
-  display: inline-block;
-  background-color: var(--title-color);
-  color: var(--container-color);
-  padding: 1.25rem 2rem;
-  border-radius: 1rem;
-  font-weight: var(--font-medium);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #000000;
+  color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: var(--font-semi-bold);
+  font-size: var(--normal-font-size);
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
 }
 
 .button:hover {
-  background-color: var(--title-color-dark);
+  background: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.button--outline {
+  background: transparent;
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: none;
+}
+
+.button--outline:hover {
+  background: #000000;
+  color: #ffffff;
 }
 
 .button__icon {

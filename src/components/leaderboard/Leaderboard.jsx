@@ -6,83 +6,37 @@ import stopwatch from "../../assets/stopwatch.png";
 import fire from "../../assets/fire.png";
 
 const Leaderboard = () => {
-    const [toggleState, setToggleState] = useState(0);
-
-    const toggleTab = (index) => {
-        setToggleState(index);
-    }
+    const [activeTab, setActiveTab] = useState("rapid");
 
     return (
         <section className="leaderboard section" id="leaderboard">
             <h2 className="section__title">Leaderboard</h2>
             <span className="section__subtitle">LiChess ratings - Top 10</span>
 
-            <div className="leaderboard__container container grid">
-                <div className="leaderboard__content">
-                    <div>
-                        <img src={stopwatch} alt="" className="leaderboard__icon" />
-                        <h3 className="leaderboard__title">
-                            Rapid
-                        </h3>
-                    </div>
-
-                    <span className="leaderboard__button" onClick={() =>
-                        toggleTab(1)}>
-                        View ratings
-                        <i className="uil uil-arrow-right 
-                        leaderboard__button-icon"></i>
-                    </span>
-
-                    <div className={toggleState === 1 ? "leaderboard__modal active-modal" : "leaderboard__modal"}>
-                        <div className="leaderboard__modal-content">
-                            <i onClick={() => toggleTab(0)} className="uil 
-                            uil-times leaderboard__modal-close"></i>
-
-                            <h3 className="leaderboard__modal-title">Rapid</h3>
-                            <div className="x">
-                                <ul className="srvices__modal-leaderboard grid">
-                                    <li className="leaderboard__modal-service">
-                                        <p className="leaderboard__modal-info">
-                                            <Rapid />
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div className="leaderboard__tabs-container container">
+                <div className="leaderboard__tabs">
+                    <button 
+                        className={activeTab === "rapid" ? "leaderboard__tab active-tab" : "leaderboard__tab"}
+                        onClick={() => setActiveTab("rapid")}
+                    >
+                        <img src={stopwatch} alt="" className="leaderboard__tab-icon" />
+                        <span>Rapid</span>
+                    </button>
+                    <button 
+                        className={activeTab === "blitz" ? "leaderboard__tab active-tab" : "leaderboard__tab"}
+                        onClick={() => setActiveTab("blitz")}
+                    >
+                        <img src={fire} alt="" className="leaderboard__tab-icon" />
+                        <span>Blitz</span>
+                    </button>
                 </div>
 
-                <div className="leaderboard__content">
-                    <div>
-                        <img src={fire} alt="" className="leaderboard__icon" />
-                        <h3 className="leaderboard__title">
-                            Blitz
-                        </h3>
+                <div className="leaderboard__content-wrapper">
+                    <div className={activeTab === "rapid" ? "leaderboard__tab-content active-content" : "leaderboard__tab-content"}>
+                        <Rapid />
                     </div>
-
-                    <span className="leaderboard__button" onClick={() =>
-                        toggleTab(2)}>
-                        View ratings
-                        <i className="uil uil-arrow-right 
-                        leaderboard__button-icon"></i>
-                    </span>
-
-                    <div className={toggleState === 2 ? "leaderboard__modal active-modal" : "leaderboard__modal"}>
-                        <div className="leaderboard__modal-content">
-                            <i onClick={() => toggleTab(0)}
-                                className="uil uil-times
-                            leaderboard__modal-close"></i>
-
-                            <h3 className="leaderboard__modal-title">Blitz</h3>
-
-                            <ul className="srvices__modal-leaderboard grid">
-                                <li className="leaderboard__modal-service">
-                                    <p className="leaderboard__modal-info">
-                                        <Blitz />
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
+                    <div className={activeTab === "blitz" ? "leaderboard__tab-content active-content" : "leaderboard__tab-content"}>
+                        <Blitz />
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ const Header = () => {
         <header className="header">
             <nav className="nav container">
                 <a href="index.html" className="nav__logo">
-                    <a href="#home" className="nav__logo"><h4>SwahiliChess</h4></a>
+                    <a href="#home" className="nav__logo"><h4>Chess</h4></a>
                 </a>
 
                 <div className={Toggle ? "nav__menu show-menu" : "nav__menu"}>
@@ -47,22 +47,12 @@ const Header = () => {
                         </li>
 
                         <li className="nav__item">
-                            <a href="#match"
-                                onClick={() => setActiveNav("#match")}
-                                className={activeNav === "#match" ?
+                            <a href="#calendar"
+                                onClick={() => setActiveNav("#calendar")}
+                                className={activeNav === "#calendar" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-stopwatch nav__icon"></i>
-                                <div className="nav_title">Matches</div>
-                            </a>
-                        </li>
-
-                        <li className="nav__item">
-                            <a href="#league"
-                                onClick={() => setActiveNav("#league")}
-                                className={activeNav === "#league" ?
-                                    "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-list-ol nav__icon"></i>
-                                <div className="nav_title">League</div>
+                                <i class="uil uil-calendar-alt nav__icon"></i>
+                                <div className="nav_title">Calendar</div>
                             </a>
                         </li>
                     </ul>

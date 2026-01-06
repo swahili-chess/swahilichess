@@ -1,0 +1,136 @@
+.calendar__container {
+    max-width: 1100px;
+}
+
+.calendar__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.calendar__month {
+    background: #ffffff;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.calendar__month:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.calendar__month-header {
+    background: #fafafa;
+    color: #000000;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.calendar__month-name {
+    font-size: var(--h3-font-size);
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.calendar__events {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.calendar__event {
+    padding: 1rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    background: #fafafa;
+}
+
+.calendar__event:hover {
+    background: #f0f0f0;
+}
+
+.calendar__event-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #000000;
+    font-size: var(--smaller-font-size);
+    background: #000000;
+    color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    margin-bottom: 0.5rem;
+}
+
+.calendar__event-date i {
+    font-size: 0.875rem;
+}
+
+.calendar__event-details {
+    margin-top: 0.5rem;
+}
+
+.calendar__event-name {
+    font-size: var(--normal-font-size);
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+}
+
+.calendar__event-location {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: var(--small-font-size);
+    color: #666666;
+}
+
+.calendar__event-location i {
+    font-size: 0.875rem;
+}
+
+/*============== BREAKPOINTS =============*/
+/* For large devices */
+@media screen and (max-width: 992px) {
+    .calendar__grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 768px) {
+    .calendar__grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .calendar__month-name {
+        font-size: var(--normal-font-size);
+    }
+
+    .calendar__events {
+        padding: 1rem;
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 350px) {
+    .calendar__grid {
+        gap: 1rem;
+    }
+
+    .calendar__event {
+        padding: 0.75rem;
+    }
+
+    .calendar__event-name {
+        font-size: var(--small-font-size);
+    }
+}

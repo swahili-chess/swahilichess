@@ -2,20 +2,26 @@ import React, { useEffect, useState } from "react";
 import { leaderboard_url } from "../../constants";
 
 const Rapid = () => {
-    const [rapid, setRapid] = useState();
-
+    const [rapid, setRapid] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch(leaderboard_url)
             .then((response) => response.json())
             .then((json) => {
-                setRapid(json["rapid"]);
+                setRapid(json["rapid"] || []);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError("Failed to load ratings");
+                setLoading(false);
             });
     }, []);
 
     return (
-        <api>
-            <table class="table">
+        <div>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -24,19 +30,36 @@ const Rapid = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        rapid ?
-                            rapid.map((player, index) => (
-                              <tr>
-                                    <td>{index + 1}.</td>
-                                    <td>{player.username}</td>
-                                    <td>{player.rating}</td>
-                                </tr>
-                            ))
-                            : "loading"}
+                    {loading ? (
+                        <tr>
+                            <td colSpan="3" style={{ textAlign: 'center', padding: '2rem' }}>
+                                Loading ratings...
+                            </td>
+                        </tr>
+                    ) : error ? (
+                        <tr>
+                            <td colSpan="3" style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+                                {error}
+                            </td>
+                        </tr>
+                    ) : rapid.length === 0 ? (
+                        <tr>
+                            <td colSpan="3" style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+                                No ratings available
+                            </td>
+                        </tr>
+                    ) : (
+                        rapid.map((player, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}.</td>
+                                <td>{player.username}</td>
+                                <td>{player.rating}</td>
+                            </tr>
+                        ))
+                    )}
                 </tbody>
             </table>
-        </api>
+        </div>
     );
 };
 

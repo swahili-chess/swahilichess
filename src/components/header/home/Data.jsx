@@ -4,7 +4,7 @@ const Data = () => {
     return (
         <div className="home__data">
             <h1 className="home__title">
-                SwahiliChess♙
+                Chess Prodigies
             </h1>
             <h3 className="home__subtitle">Welcome</h3>
             <p className="home__description">Tanzania's top chess players.</p>
