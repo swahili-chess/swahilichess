@@ -103,8 +103,8 @@
 
 @media screen and (max-width: 768px) {
     .header {
-        top: initial;
-        bottom: 0;
+        top: 0;
+        bottom: initial;
     }
 
     .nav {
@@ -113,47 +113,105 @@
 
     .nav__menu {
         position: fixed;
-        bottom: -100%;
-        left: 0;
+        top: 0;
+        right: -100%;
         width: 100%;
+        max-width: 320px;
+        height: 100vh;
         background-color: var(--body-color);
-        padding: 2rem 1.5rem 4rem;
-        box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
-        border-radius: 1.5rem 1.5rem 0 0;
-        transition: 0.3s;
+        padding: 4rem 2rem 2rem;
+        box-shadow: -2px 0 4px rgba(0, 0, 0, 0.15);
+        border-radius: 0;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+    }
+
+    /* Backdrop overlay */
+    .nav__menu::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+        transition: background-color 0.4s ease;
+        z-index: -1;
     }
 
     /* Show Menu*/
     .show-menu {
-        bottom: 0;
+        right: 0;
+    }
+
+    .show-menu::before {
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: auto;
     }
 
     .nav__list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-direction: column;
         gap: 2rem;
+        row-gap: 2.5rem;
+    }
+
+    .nav__link {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .nav__link:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: translateX(5px);
+    }
+
+    .nav__link.active-link {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: #000000;
+        font-weight: 600;
+    }
+
+    .nav__link::before {
+        display: none;
     }
 
     .nav__icon {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    .nav_title {
+        font-size: var(--normal-font-size);
     }
 
     .nav__close {
         position: absolute;
-        right: 1.3rem;
-        bottom: .5rem;
+        right: 1.5rem;
+        top: 1rem;
         font-size: 1.5rem;
         cursor: pointer;
         color: var(--title-color);
+        transition: transform 0.2s ease;
     }
 
     .nav__close:hover {
         color: var(--title-color-dark);
+        transform: rotate(90deg);
     }
 
     .nav__toggle {
         font-size: 1.1rem;
         cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .nav__toggle:hover {
+        transform: scale(1.1);
     }
 
     .nav__icon,
