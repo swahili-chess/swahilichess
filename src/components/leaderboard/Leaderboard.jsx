@@ -32,7 +32,7 @@ const Leaderboard = () => {
     return (
         <section className="leaderboard section" id="leaderboard">
             <h2 className="section__title">Leaderboard</h2>
-            <span className="section__subtitle">LiChess ratings - Top 10</span>
+            <span className="section__subtitle">LiChess ratings</span>
 
             <div className="leaderboard__tabs-container container">
                 <div className="leaderboard__tabs">
