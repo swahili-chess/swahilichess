@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './leaderboard.css';
 import Rapid from "./Rapid";
 import Blitz from "./Blitz";
+import Bullet from "./Bullet";
 import stopwatch from "../../assets/stopwatch.png";
 import fire from "../../assets/fire.png";
 
@@ -9,6 +10,7 @@ const Leaderboard = () => {
     const [activeTab, setActiveTab] = useState("rapid");
     const [rapidData, setRapidData] = useState([]);
     const [blitzData, setBlitzData] = useState([]);
+    const [bulletData, setBulletData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -18,6 +20,7 @@ const Leaderboard = () => {
             .then((json) => {
                 setRapidData(json["rapid"] || []);
                 setBlitzData(json["blitz"] || []);
+                setBulletData(json["bullet"] || []);
                 setLoading(false);
             })
             .catch((err) => {
@@ -47,6 +50,13 @@ const Leaderboard = () => {
                         <img src={fire} alt="" className="leaderboard__tab-icon" />
                         <span>Blitz</span>
                     </button>
+                    <button 
+                        className={activeTab === "bullet" ? "leaderboard__tab active-tab" : "leaderboard__tab"}
+                        onClick={() => setActiveTab("bullet")}
+                    >
+                        <img src={fire} alt="" className="leaderboard__tab-icon" />
+                        <span>Bullet</span>
+                    </button>
                 </div>
 
                 <div className="leaderboard__content-wrapper">
@@ -55,6 +65,9 @@ const Leaderboard = () => {
                     </div>
                     <div className={activeTab === "blitz" ? "leaderboard__tab-content active-content" : "leaderboard__tab-content"}>
                         <Blitz data={blitzData} loading={loading} error={error} />
+                    </div>
+                    <div className={activeTab === "bullet" ? "leaderboard__tab-content active-content" : "leaderboard__tab-content"}>
+                        <Bullet data={bulletData} loading={loading} error={error} />
                     </div>
                 </div>
             </div>
