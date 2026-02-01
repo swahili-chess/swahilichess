@@ -14,7 +14,7 @@ const Social = () => {
                 <img src={github} alt="" />
             </a>
 
-            <a href="https://swahilichess.com" className="home__social-icon" target="_blank"  rel="noreferrer">
+            <a href="https://chess.tz" className="home__social-icon" target="_blank"  rel="noreferrer">
                 <img src={link} alt="" />
             </a>
         </div>
