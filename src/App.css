@@ -87,6 +87,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 2rem);
 }
 
 body,
@@ -245,11 +246,11 @@ img {
 /* For medium devices */
 @media screen and (max-width: 768px) {
   body {
-    margin: 0 0 var(--header-height) 0;
+    margin: var(--header-height) 0 0 0;
   }
 
   .section {
-    padding: 2rem 0 4rem;
+    padding: 4rem 0 4rem;
   }
 
   .section__subtitle {
