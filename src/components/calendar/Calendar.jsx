@@ -4,87 +4,80 @@ import "./calendar.css";
 const Calendar = () => {
     const events2026 = [
         {
-            month: "January",
-            events: [
-                { date: "10-12", name: "Tanzania Open Championship", location: "Dar es Salaam" },
-                { date: "25", name: "Blitz Tournament", location: "Arusha" }
-            ]
-        },
-        {
             month: "February",
             events: [
-                { date: "14-16", name: "Valentine's Chess Festival", location: "Zanzibar" },
-                { date: "28", name: "Youth Chess Championship", location: "Mwanza" }
+                { date: "01", name: "February Prodigies Online Blitz", location: "Online" },
+                { date: "07-08", name: "1st Urafiki Gambit (Tanzania Poland Friendship Chess Tournament: Two Nation One Board)", location: "Polish Embassy, 15 Mitwara Road, Masaki, DSM" },
+                { date: "14", name: "AKES Interschool Chess Tournament 2nd Edition", location: "Agakhan Primary School" }
             ]
         },
         {
             month: "March",
             events: [
-                { date: "8", name: "Women's Chess Day Tournament", location: "Dodoma" },
-                { date: "21-23", name: "National Team Trials", location: "Dar es Salaam" }
+                { date: "01", name: "Donbosco Anniversary Tournament", location: "DBC, Upanga" }
             ]
         },
         {
             month: "April",
             events: [
-                { date: "5-7", name: "East African Championship", location: "Dar es Salaam" },
-                { date: "19", name: "Rapid Chess Open", location: "Mbeya" }
+                { date: "04-05", name: "Tanzanite Junior Chess Championship 2026", location: "To Be Announced DSM" },
+                { date: "05", name: "April Prodigies Online Tournament", location: "Online" }
             ]
         },
         {
             month: "May",
             events: [
-                { date: "1", name: "Labour Day Chess Tournament", location: "Tanga" },
-                { date: "15-17", name: "Schools Championship", location: "Arusha" }
+                { date: "01, 02, 03", name: "Tanzania National Chess Championship 2026 and Qualifier for Team Olympiad", location: "To Be Announced" }
             ]
         },
         {
             month: "June",
             events: [
-                { date: "6-8", name: "Mid-Year Grand Prix", location: "Dar es Salaam" },
-                { date: "20", name: "Blitz Marathon", location: "Moshi" }
+                { date: "TBA", name: "2nd Ultimate Junior Rapid Chess Tournament", location: "The Cube Restaurant" },
+                { date: "28", name: "June Prodigies Online Blitz", location: "Online" }
             ]
         },
         {
             month: "July",
             events: [
-                { date: "4-6", name: "Independence Cup", location: "Dodoma" },
-                { date: "25-27", name: "Summer Chess Camp Tournament", location: "Zanzibar" }
+                { date: "05", name: "DBC July Rapid Tournament", location: "DBC, Upanga" }
             ]
         },
         {
             month: "August",
             events: [
-                { date: "8-10", name: "Farmers' Day Chess Open", location: "Morogoro" },
-                { date: "22", name: "Speed Chess Championship", location: "Dar es Salaam" }
+                { date: "08-09", name: "TACA Rapid Chess Championship 2026", location: "To Be Announced" },
+                { date: "TBA", name: "August Rising Star Summer Camp Series 3", location: "To Be Announced" },
+                { date: "30", name: "August Prodigies Online Blitz", location: "Online" }
             ]
         },
         {
             month: "September",
             events: [
-                { date: "5-7", name: "National Chess Championship", location: "Dar es Salaam" },
-                { date: "19", name: "University Chess League", location: "Dodoma" }
+                { date: "15-28", name: "Team Tanzania to Participate in 46th Chess Olympiad in Samarkand, Uzbekistan", location: "World Chess Olympiad" }
             ]
         },
         {
             month: "October",
             events: [
-                { date: "10-12", name: "Kilimanjaro Open", location: "Moshi" },
-                { date: "24-26", name: "Regional Team Championship", location: "Mwanza" }
+                { date: "TBA", name: "6th IST Interschool Individual Chess Tournament", location: "To Be Announced" }
             ]
         },
         {
             month: "November",
             events: [
-                { date: "7-9", name: "All-Africa Qualifiers", location: "Dar es Salaam" },
-                { date: "21", name: "Veterans Chess Tournament", location: "Arusha" }
+                { date: "01", name: "DBC November Blitz Tournament", location: "DBC, Upanga" },
+                { date: "TBA", name: "November Prodigies Online Blitz", location: "Online" }
             ]
         },
         {
             month: "December",
             events: [
-                { date: "6-8", name: "Year-End Championship", location: "Dar es Salaam" },
-                { date: "26-28", name: "Boxing Day Chess Festival", location: "Zanzibar" }
+                { date: "05", name: "Jordan Watoto ya NNE", location: "Jordan University College, Morogoro" },
+                { date: "05-06", name: "Jordan Open - Ya Sita", location: "Jordan University College, Morogoro" },
+                { date: "11-13", name: "Tanzania Open Chess Championship 2026", location: "To Be Announced" },
+                { date: "TBA", name: "Justfit Interschool Games", location: "To Be Announced" },
+                { date: "31", name: "New Year Eve TZ Online Blitz", location: "Online" }
             ]
         }
     ];
