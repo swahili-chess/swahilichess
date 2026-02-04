@@ -14,21 +14,35 @@ const Header = () => {
     /*============== Toggle Menu =============*/
     const [Toggle, showMenu] = useState(false);
 
-
     const [activeNav, setActiveNav] = useState("#home");
+
+    /*============== Smooth Scroll Navigation =============*/
+    const handleNavClick = (e, sectionId) => {
+        e.preventDefault();
+        setActiveNav(sectionId);
+        showMenu(false); // Close mobile menu
+        
+        const section = document.querySelector(sectionId);
+        if (section) {
+            section.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
 
     return (
         <header className="header">
             <nav className="nav container">
-                <a href="index.html" className="nav__logo">
-                    <a href="#home" className="nav__logo"><h4>Chess</h4></a>
+                <a href="#home" className="nav__logo" onClick={(e) => handleNavClick(e, "#home")}>
+                    <h4>Chess</h4>
                 </a>
 
                 <div className={Toggle ? "nav__menu show-menu" : "nav__menu"}>
                     <ul className="nav__list grid">
                         <li className="nav__item">
                             <a href="#home"
-                                onClick={() => setActiveNav("#home")}
+                                onClick={(e) => handleNavClick(e, "#home")}
                                 className={activeNav === "#home" ?
                                     "nav__link active-link" : "nav__link"}>
                                 <i className="uil uil-estate nav__icon"></i>
@@ -38,20 +52,20 @@ const Header = () => {
 
                         <li className="nav__item">
                             <a href="#leaderboard"
-                                onClick={() => setActiveNav("#leaderboard")}
+                                onClick={(e) => handleNavClick(e, "#leaderboard")}
                                 className={activeNav === "#leaderboard" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-presentation-line nav__icon"></i>
-                                <div className="nav_title">Learderboard</div>
+                                <i className="uil uil-presentation-line nav__icon"></i>
+                                <div className="nav_title">Leaderboard</div>
                             </a>
                         </li>
 
                         <li className="nav__item">
                             <a href="#calendar"
-                                onClick={() => setActiveNav("#calendar")}
+                                onClick={(e) => handleNavClick(e, "#calendar")}
                                 className={activeNav === "#calendar" ?
                                     "nav__link active-link" : "nav__link"}>
-                                <i class="uil uil-calendar-alt nav__icon"></i>
+                                <i className="uil uil-calendar-alt nav__icon"></i>
                                 <div className="nav_title">Calendar</div>
                             </a>
                         </li>
