@@ -20,8 +20,9 @@ jobs:
                export NVM_DIR="$HOME/.nvm"
                [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
                
-               cd /var/www/${{ secrets.PASSWORD }}/swahilichess
+               cd /var/www/${{ secrets.USERNAME }}/swahilichess
                git pull
                npm ci
+               npm run build
       
                echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx
