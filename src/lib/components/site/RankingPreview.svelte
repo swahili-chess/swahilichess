@@ -125,7 +125,7 @@
 										<div class="mt-0.5 truncate text-xs text-muted-foreground">{player.handle}</div>
 									</Table.Cell>
 									<Table.Cell class="pr-5 text-right font-medium tabular-nums sm:pr-6"
-										>{player.ratings[format.value].toLocaleString('en-TZ')}</Table.Cell
+										>{player.ratings[format.value]}</Table.Cell
 									>
 								</Table.Row>
 							{/each}

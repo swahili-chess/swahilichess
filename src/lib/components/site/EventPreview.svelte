@@ -2,7 +2,6 @@
 	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
 	import MapPin from '@lucide/svelte/icons/map-pin';
 	import Clock from '@lucide/svelte/icons/clock-3';
-	import { Badge } from '#lib/components/ui/badge/index.js';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import * as Card from '#lib/components/ui/card/index.js';
 	import * as Dialog from '#lib/components/ui/dialog/index.js';
@@ -25,7 +24,6 @@
 					>
 					<span class="py-2 text-2xl leading-none font-semibold tabular-nums">14</span>
 				</time>
-				<Badge variant="outline" class="text-muted-foreground">Sample event</Badge>
 			</div>
 			<Card.Title
 				><h3 class="text-lg font-semibold tracking-tight">Dar es Salaam Open</h3></Card.Title
@@ -50,11 +48,9 @@
 						</Button>
 					{/snippet}
 				</Dialog.Trigger>
-				<Dialog.Content class="gap-5 p-6 sm:max-w-md">
+				<Dialog.Content aria-describedby={undefined} class="gap-5 p-6 sm:max-w-md">
 					<Dialog.Header class="gap-2 text-left">
-						<Badge variant="outline" class="mb-2">Sample event</Badge>
 						<Dialog.Title>Dar es Salaam Open</Dialog.Title>
-						<Dialog.Description>This event is fictional.</Dialog.Description>
 					</Dialog.Header>
 					<dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 border-y py-5 text-sm">
 						<dt class="text-muted-foreground">Date</dt>

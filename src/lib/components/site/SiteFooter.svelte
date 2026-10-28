@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { communityUrl } from '#lib/site.js';
 	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
 	import { Button } from '#lib/components/ui/button/index.js';
 </script>
@@ -28,7 +29,7 @@
 		<nav aria-label="Community links" class="-ml-3 flex items-center gap-1 sm:ml-0">
 			<Button
 				variant="ghost"
-				href="https://chat.whatsapp.com/ELHXyyug2VbA9XFfR8l7vi"
+				href={communityUrl}
 				target="_blank"
 				rel="noopener noreferrer"
 				class="text-muted-foreground"

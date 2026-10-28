@@ -3,15 +3,15 @@
 	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import * as Sheet from '#lib/components/ui/sheet/index.js';
+	import { communityUrl } from '#lib/site.js';
 
-	let { embedded = false }: { embedded?: boolean } = $props();
+	let { embedded = false, homePath = '/' }: { embedded?: boolean; homePath?: string } = $props();
 
-	const communityUrl = 'https://chat.whatsapp.com/ELHXyyug2VbA9XFfR8l7vi';
-	const links = [
-		{ label: 'Home', href: '/preview#home' },
-		{ label: 'Leaderboards', href: '/preview#leaderboard' },
-		{ label: 'Calendar', href: '/preview#calendar' }
-	];
+	const links = $derived([
+		{ label: 'Home', href: `${homePath}#home` },
+		{ label: 'Leaderboards', href: `${homePath}#leaderboard` },
+		{ label: 'Calendar', href: `${homePath}#calendar` }
+	]);
 	const planned = ['Blog', 'Shop', 'TACA'];
 	let menuOpen = $state(false);
 </script>
@@ -24,7 +24,7 @@
 		]}
 	>
 		<a
-			href="/preview#home"
+			href={`${homePath}#home`}
 			class="flex shrink-0 items-center gap-2 rounded-md text-xl font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
 			aria-label="chess.tz home"
 		>
@@ -78,10 +78,15 @@
 						</Button>
 					{/snippet}
 				</Sheet.Trigger>
-				<Sheet.Content class={['overflow-y-auto', embedded && 'hero-menu-surface']}>
+				<Sheet.Content
+					class={['overflow-y-auto', embedded && 'hero-menu-surface']}
+					aria-describedby={undefined}
+				>
 					<Sheet.Header class="px-5 pt-6">
-						<Sheet.Title>chess.tz</Sheet.Title>
-						<Sheet.Description>Chess in Tanzania</Sheet.Description>
+						<Sheet.Title class="flex items-center gap-2 pr-10 text-xl tracking-tight">
+							<ChessKnight class="size-7" strokeWidth={1.6} aria-hidden="true" />
+							chess.tz
+						</Sheet.Title>
 					</Sheet.Header>
 					<nav aria-label="Mobile navigation" class="flex flex-col gap-1 px-4">
 						{#each links as link (link.label)}
