@@ -27,7 +27,6 @@
 			board={data.board}
 			state={data.state}
 			snapshotAt={data.snapshotAt}
-			sample={data.sample}
 			ratingMonth={data.ratingMonth}
 		/>
 	</main>

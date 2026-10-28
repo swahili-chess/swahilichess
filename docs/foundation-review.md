@@ -1,5 +1,7 @@
 # Foundation review
 
+> **Later change, 28 October 2026:** fictional players were removed. The ranking sample and its state controls were removed from `/preview`; review those states on `/leaderboards?fixture=empty|loading|error|stale`. The event preview and button examples remain.
+
 This is roadmap chunk 1. Review the visual language and reusable UI before building the homepage and feature pages.
 
 ## Design contract

@@ -1,5 +1,7 @@
 # FIDE integration review
 
+> **Later change, 28 October 2026:** fictional players were removed. All providers and the homepage now use real data; development `?fixture=` states show over the real snapshot without a sample label.
+
 Checkpoint 4a, accepted on 28 October 2026. Both repositories use their own `website-v2` branch. Chunks 1–3 were accepted earlier the same day. Lichess integration (4b) follows.
 
 ## Start the preview

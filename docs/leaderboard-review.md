@@ -1,5 +1,7 @@
 > Accepted on 28 October 2026. This records the fixture-based interface review. The current FIDE integration is documented in [fide-review.md](fide-review.md).
 
+> **Later change, 28 October 2026:** fictional players were removed. `?fixture=empty|loading|error|stale` now shows each state over the real snapshot, `?fixture=ready` is gone, and there is no sample label. Ranking edge cases are covered by `tests/leaderboard.test.ts`.
+
 # Leaderboard review · chunk 3
 
 The homepage was accepted on 28 October 2026. This checkpoint builds the leaderboard interface. Ratings integrations are separate checkpoints and have not started.

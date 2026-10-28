@@ -1,10 +1,10 @@
-import { sampleHomepage } from './home.js';
+import { sampleTournaments } from './home.js';
 import type { Tournament } from '#lib/types/home.js';
 
 /** Development gallery only. These are fictional events and awards. */
 export function eventScenarios(now: number): Tournament[] {
 	return [
-		{ ...sampleHomepage.tournaments[0] },
+		{ ...sampleTournaments[0] },
 		{
 			id: 'demo-club-rapid',
 			name: 'Saturday Club Rapid',
@@ -21,7 +21,7 @@ export function eventScenarios(now: number): Tournament[] {
 			prizes: null
 		},
 		{
-			...sampleHomepage.tournaments[1],
+			...sampleTournaments[1],
 			id: 'demo-lichess-countdown',
 			startsAt: new Date(now + 45 * 60_000).toISOString()
 		},

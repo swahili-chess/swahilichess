@@ -1,41 +1,41 @@
 import { dev } from '$app/env';
 import { RATINGS_API_URL } from '$app/env/private';
-import { sampleHomepage } from '#lib/fixtures/home.js';
-import { readLichessSnapshot } from '#lib/server/lichess.js';
+import { sampleTournaments } from '#lib/fixtures/home.js';
+import { readFideSnapshot } from '#lib/server/fide.js';
 import type { HomepageData, RankedPlayer } from '#lib/types/home.js';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url, fetch }): Promise<HomepageData> => {
-	if (dev && url.searchParams.get('fixture') === 'empty') {
-		return { ...sampleHomepage, players: [], tournaments: [] };
+	const fixture = dev ? url.searchParams.get('fixture') : null;
+	if (fixture === 'empty') {
+		return { sample: true, playersState: 'ready', players: [], tournaments: [] };
 	}
-	if (dev && url.searchParams.get('fixture') === 'countdown') {
-		const now = Date.now();
-		return {
-			...sampleHomepage,
-			tournaments: sampleHomepage.tournaments.map((event) => ({
-				...event,
-				startsAt: new Date(now + 45 * 60_000).toISOString()
-			}))
-		};
-	}
-	// Tournaments remain fixtures until the calendar and CMS checkpoints.
-	const snapshot = await readLichessSnapshot(RATINGS_API_URL, fetch);
+	const snapshot = await readFideSnapshot(RATINGS_API_URL, fetch);
 	const players: RankedPlayer[] = snapshot.players.map((player) => ({
 		id: player.id,
 		name: player.name,
+		title: player.title,
 		profileUrl: player.profileUrl,
 		ratings: {
+			standard: player.ratings.standard?.value ?? null,
 			rapid: player.ratings.rapid?.value ?? null,
-			blitz: player.ratings.blitz?.value ?? null,
-			bullet: player.ratings.bullet?.value ?? null
+			blitz: player.ratings.blitz?.value ?? null
 		}
 	}));
+	// Tournaments remain fixtures until the calendar and CMS checkpoints.
+	const now = Date.now();
+	const tournaments =
+		fixture === 'countdown'
+			? sampleTournaments.map((event) => ({
+					...event,
+					startsAt: new Date(now + 45 * 60_000).toISOString()
+				}))
+			: sampleTournaments;
 	return {
-		...sampleHomepage,
-		playersSample: false,
+		sample: true,
 		playersState:
 			snapshot.state === 'stale' ? 'stale' : snapshot.state === 'error' ? 'error' : 'ready',
-		players
+		players,
+		tournaments
 	};
 };

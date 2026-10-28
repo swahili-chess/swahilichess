@@ -1,8 +1,9 @@
-export type RatingFormat = 'rapid' | 'blitz' | 'bullet';
+/** FIDE categories, shown in the homepage rankings. */
+export type RatingFormat = 'standard' | 'rapid' | 'blitz';
 export interface RankedPlayer {
 	id: string;
 	name: string;
-	handle?: string;
+	title?: string;
 	profileUrl?: string;
 	ratings: Record<RatingFormat, number | null>;
 }
@@ -21,9 +22,8 @@ export interface Tournament {
 	entryFee?: { currency: string; amount: number } | null;
 }
 export interface HomepageData {
-	/** Applies to tournaments. Rankings carry their own flag. */
+	/** True while tournaments are fixtures. Rankings are always real FIDE data. */
 	sample: boolean;
-	playersSample: boolean;
 	playersState: 'ready' | 'stale' | 'error';
 	players: RankedPlayer[];
 	tournaments: Tournament[];

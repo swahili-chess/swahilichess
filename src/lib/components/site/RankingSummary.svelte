@@ -7,16 +7,14 @@
 	import { ArrowRight } from '@lucide/svelte';
 	import type { RankedPlayer, RatingFormat } from '#lib/types/home.js';
 
-	let {
-		players,
-		sample = false,
-		unavailable = false
-	}: { players: RankedPlayer[]; sample?: boolean; unavailable?: boolean } = $props();
-	let format = $state<RatingFormat>('rapid');
+	let { players, unavailable = false }: { players: RankedPlayer[]; unavailable?: boolean } =
+		$props();
+	const limit = 15;
+	let format = $state<RatingFormat>('standard');
 	const formats: { value: RatingFormat; label: string }[] = [
+		{ value: 'standard', label: 'Standard' },
 		{ value: 'rapid', label: 'Rapid' },
-		{ value: 'blitz', label: 'Blitz' },
-		{ value: 'bullet', label: 'Bullet' }
+		{ value: 'blitz', label: 'Blitz' }
 	];
 	const ranked = $derived(
 		players
@@ -26,7 +24,7 @@
 			)
 	);
 	const leaders = $derived(
-		ranked.slice(0, 5).map((player) => ({
+		ranked.slice(0, limit).map((player) => ({
 			...player,
 			rank: ranked.findIndex((entry) => entry.ratings[format] === player.ratings[format]) + 1
 		}))
@@ -36,16 +34,15 @@
 <section id="leaderboard" aria-labelledby="home-rankings-title" class="min-w-0">
 	<div class="mb-5 flex items-center justify-between gap-3">
 		<h2 id="home-rankings-title" class="section-title">Player rankings</h2>
-		{#if sample}<Badge variant="outline" class="sample-badge">Sample ratings</Badge>{/if}
 	</div>
 	<Card.Root class="gap-0 overflow-hidden py-0">
 		<Card.Header class="gap-1 border-b px-5 py-5 sm:px-6">
-			<Card.Title>Lichess</Card.Title>
-			<Card.Description>Tanzania · Top 5</Card.Description>
+			<Card.Title>FIDE</Card.Title>
+			<Card.Description>Tanzania · Top {limit}</Card.Description>
 		</Card.Header>
 		<Tabs.Root bind:value={format} class="gap-0">
 			<div class="px-5 py-4 sm:px-6">
-				<Tabs.List aria-label="Lichess time control" class="w-full sm:w-auto">
+				<Tabs.List aria-label="FIDE time control" class="w-full sm:w-auto">
 					{#each formats as option (option.value)}
 						<Tabs.Trigger value={option.value} class="flex-1 px-4">{option.label}</Tabs.Trigger>
 					{/each}
@@ -64,9 +61,7 @@
 						</p>
 					{:else}
 						<Table.Root class="table-fixed">
-							<Table.Caption class="sr-only"
-								>{sample ? 'Fictional' : 'Tanzania'} Lichess {option.label} rankings</Table.Caption
-							>
+							<Table.Caption class="sr-only">Tanzania FIDE {option.label} rankings</Table.Caption>
 							<Table.Header>
 								<Table.Row class="bg-muted/50 hover:bg-muted/50">
 									<Table.Head class="w-14 pl-5 text-xs sm:pl-6">Rank</Table.Head>
@@ -81,16 +76,19 @@
 											>{player.rank}</Table.Cell
 										>
 										<Table.Cell class="py-3 pl-4">
-											{#if player.profileUrl}<a
-													href={player.profileUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-													class="block truncate rounded-sm text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-ring"
-													>{player.name}</a
-												>{:else}<div class="truncate text-sm font-medium">{player.name}</div>{/if}
-											{#if player.handle}<div class="mt-0.5 truncate text-xs text-muted-foreground">
-													{player.handle}
-												</div>{/if}
+											<div class="flex min-w-0 items-center gap-2">
+												{#if player.title}<Badge
+														class="shrink-0 rounded-md bg-title-blue px-1.5 text-[10px] text-white"
+														>{player.title}</Badge
+													>{/if}
+												{#if player.profileUrl}<a
+														href={player.profileUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														class="block min-w-0 truncate rounded-sm text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-ring"
+														>{player.name}</a
+													>{:else}<div class="truncate text-sm font-medium">{player.name}</div>{/if}
+											</div>
 										</Table.Cell>
 										<Table.Cell class="pr-5 text-right font-medium tabular-nums sm:pr-6"
 											>{player.ratings[format]}</Table.Cell
@@ -106,7 +104,7 @@
 		<Card.Footer class="border-t px-4 py-2 sm:px-5"
 			><Button
 				variant="ghost"
-				href={`/leaderboards?provider=lichess&category=${format}`}
+				href={`/leaderboards?provider=fide&category=${format}`}
 				class="min-h-11 w-full justify-between"
 				>View leaderboard<ArrowRight class="size-4" aria-hidden="true" /></Button
 			></Card.Footer

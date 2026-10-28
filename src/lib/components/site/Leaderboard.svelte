@@ -8,7 +8,6 @@
 	import * as Empty from '#lib/components/ui/empty/index.js';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import { Input } from '#lib/components/ui/input/index.js';
-	import { Badge } from '#lib/components/ui/badge/index.js';
 	import LeaderboardTable from './LeaderboardTable.svelte';
 	import LeaderboardPagination from './LeaderboardPagination.svelte';
 	import { providers, categoriesFor, categoryLabels, leaderboardHref } from '#lib/leaderboard.js';
@@ -22,13 +21,11 @@
 		board,
 		state,
 		snapshotAt,
-		sample = true,
 		ratingMonth = null
 	}: {
 		board: LeaderboardView;
 		state: LeaderboardState;
 		snapshotAt: string | null;
-		sample?: boolean;
 		ratingMonth?: string | null;
 	} = $props();
 	const source = $derived(providers.find((item) => item.value === board.provider)!);
@@ -77,7 +74,6 @@
 					class="px-4 sm:min-w-28">{provider.label}</Tabs.Trigger
 				>{/each}
 		</Tabs.List>
-		{#if sample}<Badge variant="outline" class="sample-badge">Sample ratings</Badge>{/if}
 	</div>
 	{#each providers as provider (provider.value)}
 		<Tabs.Content value={provider.value} class="m-0">
@@ -191,7 +187,7 @@
 												></Alert.Root
 											>
 										</div>{/if}
-									<LeaderboardTable {board} {sample} loading={state === 'loading'} />
+									<LeaderboardTable {board} loading={state === 'loading'} />
 									{#if board.total > 0 && state !== 'loading'}<LeaderboardPagination {board} />{/if}
 								{/if}
 							</Tabs.Content>
