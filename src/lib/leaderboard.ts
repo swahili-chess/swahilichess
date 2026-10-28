@@ -18,7 +18,7 @@ export const providers = [
 		value: 'chesscom',
 		label: 'Chess.com',
 		url: 'https://www.chess.com',
-		coverage: 'Accounts identified with Tanzania on Chess.com.'
+		coverage: 'Active Chess.com accounts that list Tanzania as their country.'
 	},
 	{
 		value: 'fide',

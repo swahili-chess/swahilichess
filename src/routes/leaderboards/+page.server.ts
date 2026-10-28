@@ -2,6 +2,7 @@ import { dev } from '$app/env';
 import { RATINGS_API_URL } from '$app/env/private';
 import { readFideSnapshot } from '#lib/server/fide.js';
 import { readLichessSnapshot } from '#lib/server/lichess.js';
+import { readChessComSnapshot } from '#lib/server/chesscom.js';
 import { leaderboardFixture, sampleSnapshotAt } from '#lib/fixtures/leaderboard.js';
 import { rankLeaderboard, readLeaderboardQuery } from '#lib/leaderboard.js';
 import type { LeaderboardState } from '#lib/types/leaderboard.js';
@@ -16,8 +17,12 @@ export const load: PageServerLoad = async ({ url, fetch }) => {
 		fixture === 'error' ||
 		fixture === 'loading' ||
 		fixture === 'stale';
-	if (query.provider !== 'chesscom' && !fixtureMode) {
-		const read = query.provider === 'fide' ? readFideSnapshot : readLichessSnapshot;
+	if (!fixtureMode) {
+		const read = {
+			fide: readFideSnapshot,
+			lichess: readLichessSnapshot,
+			chesscom: readChessComSnapshot
+		}[query.provider];
 		const snapshot = await read(RATINGS_API_URL, fetch);
 		return {
 			board: rankLeaderboard(snapshot.players, query),

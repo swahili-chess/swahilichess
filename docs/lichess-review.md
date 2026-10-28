@@ -1,6 +1,6 @@
 # Lichess integration review
 
-Checkpoint 4b, ready for review on 28 October 2026. Both repositories use their own `website-v2` branch. Chunks 1–3 and 4a are accepted. Stop here for review before Chess.com integration.
+Checkpoint 4b, accepted on 28 October 2026. Both repositories use their own `website-v2` branch. Chunks 1–3 and 4a are accepted. Stop here for review before Chess.com integration.
 
 ## Who is included
 

@@ -5,6 +5,7 @@
 	import * as Card from '#lib/components/ui/card/index.js';
 	import * as Tabs from '#lib/components/ui/tabs/index.js';
 	import * as Alert from '#lib/components/ui/alert/index.js';
+	import * as Empty from '#lib/components/ui/empty/index.js';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import { Input } from '#lib/components/ui/input/index.js';
 	import { Badge } from '#lib/components/ui/badge/index.js';
@@ -158,23 +159,28 @@
 						{#each categories as category (category)}
 							<Tabs.Content value={category} class="m-0">
 								{#if state === 'error'}
-									<div class="p-5 sm:p-6">
-										<Alert.Root
-											><CircleAlert class="size-4" /><Alert.Title
-												>Ratings are unavailable</Alert.Title
-											><Alert.Description
-												>Try again, or choose another rating provider.</Alert.Description
-											></Alert.Root
-										><Button
-											variant="outline"
-											href={leaderboardHref(board)}
-											onclick={(event) => {
-												event.preventDefault();
-												void retry();
-											}}
-											class="mt-4 min-h-11">Try again</Button
+									<Empty.Root role="status" class="min-h-80 rounded-none border-0 px-6">
+										<Empty.Header>
+											<Empty.Media variant="icon"><CircleAlert aria-hidden="true" /></Empty.Media>
+											<Empty.Title><h3>Ratings are unavailable</h3></Empty.Title>
+											<Empty.Description
+												>Try again, or choose another rating provider.</Empty.Description
+											>
+										</Empty.Header>
+										<Empty.Content
+											><Button
+												variant="outline"
+												href={leaderboardHref(board)}
+												onclick={(event) => {
+													event.preventDefault();
+													void retry();
+												}}
+												disabled={busy}
+												class="min-h-11"
+												><RefreshCw class="size-3.5" aria-hidden="true" />Try again</Button
+											></Empty.Content
 										>
-									</div>
+									</Empty.Root>
 								{:else}
 									{#if state === 'stale'}<div class="px-5 pt-5 sm:px-6">
 											<Alert.Root

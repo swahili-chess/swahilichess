@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { ArrowUpRight, SearchX, Users } from '@lucide/svelte';
 	import * as Table from '#lib/components/ui/table/index.js';
+	import * as Empty from '#lib/components/ui/empty/index.js';
 	import { Badge } from '#lib/components/ui/badge/index.js';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import { Skeleton } from '#lib/components/ui/skeleton/index.js';
@@ -27,23 +28,26 @@
 		{/each}
 	</div>
 {:else if board.rows.length === 0}
-	<div role="status" class="flex min-h-80 flex-col items-center justify-center px-6 text-center">
-		{#if board.q}<SearchX
-				class="mb-4 size-6 text-muted-foreground"
-				aria-hidden="true"
-			/>{:else}<Users class="mb-4 size-6 text-muted-foreground" aria-hidden="true" />{/if}
-		<h3 class="text-base font-medium">{board.q ? 'No players found' : 'No ratings available'}</h3>
-		<p class="mt-2 max-w-sm text-sm text-muted-foreground [overflow-wrap:anywhere]">
-			{board.q
-				? `No matches for "${board.q}". Try a name or username.`
-				: `There are no ${categoryLabels[board.category].toLowerCase()} ratings to show for ${source.label}.`}
-		</p>
-		{#if board.q}<Button
-				href={leaderboardHref(board, { q: '', page: 1 })}
-				variant="outline"
-				class="mt-5 min-h-11">Clear search</Button
+	<Empty.Root role="status" class="min-h-80 rounded-none border-0 px-6">
+		<Empty.Header>
+			<Empty.Media variant="icon">
+				{#if board.q}<SearchX aria-hidden="true" />{:else}<Users aria-hidden="true" />{/if}
+			</Empty.Media>
+			<Empty.Title><h3>{board.q ? 'No players found' : 'No ratings available'}</h3></Empty.Title>
+			<Empty.Description class="[overflow-wrap:anywhere]">
+				{board.q
+					? `No matches for "${board.q}". Try a name or username.`
+					: `There are no ${categoryLabels[board.category].toLowerCase()} ratings to show for ${source.label}.`}
+			</Empty.Description>
+		</Empty.Header>
+		{#if board.q}<Empty.Content
+				><Button
+					href={leaderboardHref(board, { q: '', page: 1 })}
+					variant="outline"
+					class="min-h-11">Clear search</Button
+				></Empty.Content
 			>{/if}
-	</div>
+	</Empty.Root>
 {:else}
 	<Table.Root class="table-fixed">
 		<Table.Caption class="sr-only"
