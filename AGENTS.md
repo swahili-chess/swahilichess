@@ -1,0 +1,58 @@
+# chess.tz contributor instructions
+
+## Start here
+
+Read `docs/website-v2-roadmap.md` before changing scope. Work on `website-v2`. Check Git status and preserve user changes. Keep shared documentation portable: use repository-relative paths and never hardcode a contributor's username or checkout location. This repository is the public website. Related backend services live in separate repositories, conventionally checked out beside it.
+
+Deliver one roadmap chunk at a time. Finish it, provide a working browser preview and a short test checklist, then wait for the user's review before beginning the next chunk. Do not build the entire roadmap in one turn. Keep the roadmap's progress notes current so work can resume after context compaction.
+
+## Required skills
+
+Read the relevant installed `SKILL.md` files before their first use in a conversation. Skills supplement these instructions; the user's explicit requests take precedence. Do not assume React examples in general design skills apply literally to Svelte.
+
+- Every Svelte component or Svelte module change: `svelte-code-writer` and `svelte-core-bestpractices`, installed at `~/.codex/skills/svelte-code-writer/SKILL.md` and `~/.codex/skills/svelte-core-bestpractices/SKILL.md`.
+- UI design and interactions: `~/.agents/skills/emil-design-eng/SKILL.md` and `~/.agents/skills/frontend-ui-engineering/SKILL.md`.
+- Headlines and introductory copy: `~/.agents/skills/copywriting/SKILL.md`.
+- Interface copy: `~/.agents/skills/ux-writing/SKILL.md`.
+- All writing: `~/.agents/skills/unslop/SKILL.md`.
+
+Skill paths are relative to the current contributor's home directory. If `CODEX_HOME` is configured, look in `$CODEX_HOME/skills` instead of `~/.codex/skills`. Use the session's skill catalog to locate skills by name when paths differ. Use the official Svelte documentation tools when needed and run `svelte-autofixer` before finalizing Svelte changes. Never silently skip a missing required skill; report the limitation.
+
+## Frontend and component rules
+
+- Svelte 5, SvelteKit, strict TypeScript, pnpm 12.3.4, one `pnpm-lock.yaml`. Use `pnpm install --frozen-lockfile` for reproducible installs.
+- Use shadcn-svelte for all UI controls. Reusable site components must wrap or compose shadcn-svelte components. Semantic page markup and layout CSS are allowed. Do not hand-build alternative buttons, tabs, dialogs, tables, menus, or form controls.
+- Generate upstream components through `pnpm ui:add <components>` with the dev server stopped. This wrapper handles the current SvelteKit 3/shadcn CLI config compatibility issue. Keep generated components in `src/lib/components/ui`; put reusable site compositions in `src/lib/components/site`. Centralize visual tokens in the theme stylesheet.
+- Adapt Medusa's neutral colors, fine borders, layered shadows, Inter typography, and control styling. Do not import its React UI library. Preserve notices for copied source.
+- Use runes, typed props, keyed lists, and `$derived` for computed state. Avoid synchronization effects and legacy Svelte syntax. Keep request/user state out of shared mutable server modules.
+- Controls use Medusa charcoal `#27272A` with white text. The current hero uses Tanzania blue `#00A3DD` with lighter glass highlights; keep charcoal controls and black text. Do not darken the hero below its base blue, to preserve text contrast.
+- The current hero review uses edge-to-edge Tanzania blue with a CSS fluted-glass pattern, lightly rounded navigation, and centered Londrina Shadow typography with positive letter spacing. The hero fills at least the viewport height, with no design-preview strip. Keep the sample badges on fictional data. The pawn has been removed per the latest request; do not restore it or Kablammo without new direction. Inter remains the interface font. This direction is pending user acceptance.
+- Hero interactions use translucent dark hover/expanded surfaces; the mobile Sheet uses pale blue. The menu trigger has two unequal strokes and a 44px target. Keep the entire hero wordmark dark, including `.tz`.
+- Hero copy: “Chess brings us together.” followed by “A community for everyone who loves the game in Tanzania.” On mobile, center the action group and hide the subtitle and divider. On desktop, keep the subtitle on the left, actions at the far right, and the divider above the footer row.
+- Copy should be direct and sparse. The whole site explains the community and its offerings; the hero is a brief introduction, not a feature catalog.
+- Keep roadmap and implementation plans out of user-facing UI, including navigation labels, helper text, and tooltips. Do not add redundant explanations such as "Opens our WhatsApp group." Record plans in project docs instead.
+- English first, Kiswahili later. Keep copy easy to extract and translate. Use Africa/Dar_es_Salaam for local event display and TZS for shop prices.
+- Hero motion: CSS ambient animation: stationary upright glass flutes over a broad gradient highlight that travels from upper right to upper left and back (32s each direction, ease-in-out). Animate the original light/dark distribution, not an added narrow ripple or shimmer band. The arc has its own 14s alternate loop. Never skew or rotate the glass lines. The mobile arc is enlarged with 40% overscan and translates/scales without rotation so no layer edge enters view. Headline lines reveal over 900ms with an 80ms stagger and ease-out; footer enters over 600ms. Keep a shadcn pause/resume button, pause ambient motion offscreen and in hidden tabs, and clean up observers. Reduced motion uses a static background and 140ms text fade. Pointer-only arrow hover uses 160ms/2px; keyboard focus skips the entrance. For motion work use animate, animation-vocabulary, and find-animation-opportunities skills.
+- Use short, purposeful transitions with reduced-motion support. Touch and keyboard interactions must work. Maintain visible focus, semantic headings, accessible names, and readable contrast.
+- Make fixtures unmistakable and keep development-only review controls out of production routes.
+
+## Services and data decisions
+
+- `../swahilichess-api`: existing Go/Echo/PostgreSQL/sqlc backend. Extend it for collection, refresh jobs, and rating snapshots. Preserve existing bot and auth consumers. Create a backend branch before source changes there.
+- `../live-ratings-sse`: unfinished streaming prototype. Defer live push updates for the first release.
+- `../swahilichess-cms`: planned separate Payload service, created during the CMS chunk. It owns its database/migrations and content/media/product/referral data. Its Next.js admin is separate from the Svelte public website.
+- Lichess: maintain the existing player-list approach, refresh ratings with its official API.
+- Chess.com: official country-player/profile/stats APIs first. Review coverage; do not implement authenticated scraping unless the user revisits that decision.
+- FIDE: tested Tanzania search with `search_country=TAN`, official downloadable lists as fallback. Parse all result tables and validate counts.
+- Online categories: Rapid, Blitz, Bullet. FIDE categories: Standard, Rapid, Blitz. Never invent FIDE Bullet or combine provider ratings into one score.
+- Read stored snapshots from the website. Do not scrape or refresh providers on visitor requests. Retain the last good snapshot on failures and show its age.
+- Never infer cross-platform identity from similar names. Missing ratings are null, not zero.
+- Shop payments are deferred. A referral click is not a sale. Never report a paid order or collect card details in the initial version.
+
+## Checks and handoff
+
+Use the commands in `README.md`. Run Svelte analysis, type checks, formatting checks, and a production build for frontend changes. Add meaningful tests for parsers and important flows when those features arrive, not tests that merely restate styling.
+
+Inspect the actual browser result on desktop and at mobile widths. Exercise navigation, keyboard focus, empty/error/loading states, and reduced motion. Report what was actually verified and any remaining limits.
+
+At each checkpoint provide the exact preview URL, startup command, routes, sample-data status, and a short click-through checklist. Update the roadmap with completed work and the next review gate. Do not merge or deploy as part of a preview chunk; production release has its own final review.

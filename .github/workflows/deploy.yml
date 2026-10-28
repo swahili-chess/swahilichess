@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Pull, NPM Install, Restart Service and Reload Nginx
+      - name: Pull, install with pnpm, build and reload Nginx
         uses: appleboy/ssh-action@master
         with:
            host: ${{ secrets.HOST }}
@@ -17,12 +17,13 @@ jobs:
            password: ${{ secrets.PASSWORD }}
            port: ${{ secrets.PORT }}
            script: |
+               set -e
                export NVM_DIR="$HOME/.nvm"
                [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
                
                cd /var/www/${{ secrets.USERNAME }}/swahilichess
                git pull
-               npm ci
-               npm run build
+               pnpm install --frozen-lockfile
+               pnpm build
       
                echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx

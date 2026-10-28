@@ -1,39 +1,51 @@
 {
-  "name": "chesswahili",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.1",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^5.0.8"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "chess-tz",
+	"private": true,
+	"version": "0.2.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev --host 127.0.0.1 --port 5174 --strictPort",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"start": "node build",
+		"ui:add": "node scripts/shadcn-add.mjs"
+	},
+	"devDependencies": {
+		"@internationalized/date": "3.12.4",
+		"@sveltejs/adapter-node": "6.0.0",
+		"@sveltejs/kit": "3.1.0",
+		"@sveltejs/mcp": "0.1.28",
+		"@sveltejs/vite-plugin-svelte": "7.3.1",
+		"@tailwindcss/vite": "4.3.3",
+		"bits-ui": "2.20.2",
+		"cn": "0.5.0",
+		"prettier": "3.9.10",
+		"prettier-plugin-svelte": "4.1.1",
+		"shadcn-svelte": "1.7.1",
+		"svelte": "5.57.3",
+		"svelte-check": "4.7.7",
+		"tailwind-variants": "3.3.1",
+		"tailwindcss": "4.3.3",
+		"tw-animate-css": "1.4.0",
+		"typescript": "6.0.3",
+		"vite": "8.3.5"
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
+	},
+	"dependencies": {
+		"@fontsource-variable/inter": "5.3.0",
+		"@fontsource/londrina-shadow": "5.3.0",
+		"@lucide/svelte": "1.63.0"
+	},
+	"engines": {
+		"node": ">=24.0.0"
+	},
+	"packageManager": "pnpm@12.3.4"
 }
