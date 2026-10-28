@@ -3,6 +3,8 @@
 	import * as Table from '#lib/components/ui/table/index.js';
 	import * as Tabs from '#lib/components/ui/tabs/index.js';
 	import { Badge } from '#lib/components/ui/badge/index.js';
+	import { Button } from '#lib/components/ui/button/index.js';
+	import { ArrowRight } from '@lucide/svelte';
 	import type { RankedPlayer, RatingFormat } from '#lib/types/home.js';
 
 	let { players, sample = false }: { players: RankedPlayer[]; sample?: boolean } = $props();
@@ -89,5 +91,13 @@
 				</Tabs.Content>
 			{/each}
 		</Tabs.Root>
+		<Card.Footer class="border-t px-4 py-2 sm:px-5"
+			><Button
+				variant="ghost"
+				href={`/leaderboards?provider=lichess&category=${format}`}
+				class="min-h-11 w-full justify-between"
+				>View leaderboard<ArrowRight class="size-4" aria-hidden="true" /></Button
+			></Card.Footer
+		>
 	</Card.Root>
 </section>

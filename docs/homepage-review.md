@@ -1,6 +1,6 @@
 # Homepage review · chunk 2
 
-Chunk 1 was accepted on 28 October 2026. This checkpoint builds the homepage only; full leaderboards, calendar pages, API collection, and CMS integration remain later chunks.
+Chunks 1 and 2 were accepted on 28 October 2026. This checkpoint builds the homepage only; full leaderboards, calendar pages, API collection, and CMS integration remain later chunks.
 
 ## Run and review
 

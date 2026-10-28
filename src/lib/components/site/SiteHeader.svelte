@@ -5,11 +5,15 @@
 	import * as Sheet from '#lib/components/ui/sheet/index.js';
 	import { communityUrl } from '#lib/site.js';
 
-	let { embedded = false, homePath = '/' }: { embedded?: boolean; homePath?: string } = $props();
+	let {
+		embedded = false,
+		homePath = '/',
+		currentPage
+	}: { embedded?: boolean; homePath?: string; currentPage?: 'leaderboards' } = $props();
 
 	const links = $derived([
 		{ label: 'Home', href: `${homePath}#home` },
-		{ label: 'Leaderboards', href: `${homePath}#leaderboard` },
+		{ label: 'Leaderboards', href: '/leaderboards' },
 		{ label: 'Calendar', href: `${homePath}#calendar` }
 	]);
 	const planned = ['Blog', 'Shop', 'TACA'];
@@ -37,6 +41,9 @@
 				<Button
 					variant="ghost"
 					href={link.href}
+					aria-current={currentPage === 'leaderboards' && link.href === '/leaderboards'
+						? 'page'
+						: undefined}
 					class={embedded ? 'text-foreground' : 'text-muted-foreground'}>{link.label}</Button
 				>
 			{/each}
@@ -93,6 +100,9 @@
 							<Button
 								variant="ghost"
 								href={link.href}
+								aria-current={currentPage === 'leaderboards' && link.href === '/leaderboards'
+									? 'page'
+									: undefined}
 								class="h-11 justify-start"
 								onclick={() => (menuOpen = false)}
 							>

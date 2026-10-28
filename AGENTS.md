@@ -6,7 +6,7 @@ Read `docs/website-v2-roadmap.md` before changing scope. Work on `website-v2`. C
 
 Deliver one roadmap chunk at a time. Finish it, provide a working browser preview and a short test checklist, then wait for the user's review before beginning the next chunk. Do not build the entire roadmap in one turn. Keep the roadmap's progress notes current so work can resume after context compaction.
 
-Current checkpoint: chunk 1 accepted; chunk 2 homepage in review. The homepage is `/`; `/preview` is the development-only foundation review, and `/preview/events` is the development-only six-scenario event gallery. Reuse EventCard/EventDialog and their shared EventTag/EventFacts/EventCosts compositions when changing homepage events; keep the gallery in sync. Do not begin chunk 3 until the homepage is accepted.
+Current checkpoint: chunks 1 and 2 accepted on 28 October 2026; chunk 3 leaderboard interface in review. The homepage is `/`; `/preview` is the development-only foundation review, and `/preview/events` is the development-only six-scenario event gallery. Reuse EventCard/EventDialog and their shared EventTag/EventFacts/EventCosts compositions when changing homepage events; keep the gallery in sync. The leaderboard is `/leaderboards` with fictional fixtures. Do not start rating integrations until chunk 3 is accepted.
 
 ## Required skills
 
@@ -28,7 +28,7 @@ Skill paths are relative to the current contributor's home directory. If `CODEX_
 - Adapt Medusa's neutral colors, fine borders, layered shadows, Inter typography, and control styling. Do not import its React UI library. Preserve notices for copied source.
 - Use runes, typed props, keyed lists, and `$derived` for computed state. Avoid synchronization effects and legacy Svelte syntax. Keep request/user state out of shared mutable server modules.
 - Controls use Medusa charcoal `#27272A` with white text. The current hero uses Tanzania blue `#00A3DD` with lighter glass highlights; keep charcoal controls and black text. Do not darken the hero below its base blue, to preserve text contrast.
-- The current hero review uses edge-to-edge Tanzania blue with a CSS fluted-glass pattern, lightly rounded navigation, and centered Londrina Shadow typography with positive letter spacing. The hero fills at least the viewport height, with no design-preview strip. Keep sample labels on fictional ratings; event sample labels were removed at the user's request. The pawn has been removed per the latest request; do not restore it or Kablammo without new direction. Inter remains the interface font. Chunk 1 and this visual direction were accepted on 28 October 2026. Preserve them while building chunk 2.
+- The current hero review uses edge-to-edge Tanzania blue with a CSS fluted-glass pattern, lightly rounded navigation, and centered Londrina Shadow typography with positive letter spacing. The hero fills at least the viewport height, with no design-preview strip. Keep sample labels on fictional ratings; event sample labels were removed at the user's request. The pawn has been removed per the latest request; do not restore it or Kablammo without new direction. Inter remains the interface font. Chunk 1 and this visual direction were accepted on 28 October 2026. Preserve them in later chunks.
 - Hero interactions use translucent dark hover/expanded surfaces; the mobile Sheet uses pale blue. The menu trigger has two unequal strokes and a 44px target. Keep the entire hero wordmark dark, including `.tz`.
 - Hero copy: “Chess brings us together.” followed by “A community for everyone who loves the game in Tanzania.” On mobile, center the action group and hide the subtitle and divider. On desktop, keep the subtitle on the left, actions at the far right, and the divider above the footer row.
 - Copy should be direct and sparse. The whole site explains the community and its offerings; the hero is a brief introduction, not a feature catalog.
@@ -53,6 +53,15 @@ Skill paths are relative to the current contributor's home directory. If `CODEX_
 - Never infer cross-platform identity from similar names. Missing ratings are null, not zero.
 - Display chess ratings without thousands separators, for example `2248`, not `2,248`. Currency amounts keep their normal formatting.
 - Shop payments are deferred. A referral click is not a sale. Never report a paid order or collect card details in the initial version.
+
+## Leaderboard interface
+
+- Provider, category, search, and page are URL state. Use `src/lib/leaderboard.ts` for normalization, ranking, and links. Search preserves global ranks, ties use competition ranks, and missing/zero ratings are excluded.
+- Lichess and Chess.com have Rapid/Blitz/Bullet; FIDE has Standard/Rapid/Blitz. Incompatible categories fall back to the provider default.
+- Exclude inactive FIDE players before ranking, search, and pagination. Excluded players do not count as unrated. Fixtures retain inactive records to verify this filter, alongside provisional, missing-rating, tied, and long-name cases. Fake player profiles must not link to invented accounts. Preserve the sample label and noindex until real integration.
+- `?fixture=empty|loading|error|stale` controls are development-only and documented in `docs/leaderboard-review.md`. No planning copy in the UI.
+- Leaderboard copy: show the provider's data-source description directly beneath the rankings title, where the Tanzania subheading previously sat. Omit the standalone Tanzania subheading, provider footer link, and the note about players without ratings. Label the timestamp Last updated.
+- Run `node --test tests/leaderboard.test.ts` for ranking and query rules.
 
 ## Checks and handoff
 

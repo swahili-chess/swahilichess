@@ -11,22 +11,23 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open <http://127.0.0.1:5174/> for the homepage, or <http://127.0.0.1:5174/preview> for the development-only foundation review. Port 5174 is fixed; the command fails if another process is already using it. No environment variables, backend, database, or CMS are needed for this checkpoint.
+Open <http://127.0.0.1:5174/> for the homepage, <http://127.0.0.1:5174/leaderboards> for the leaderboard, or <http://127.0.0.1:5174/preview> for the development-only foundation review. Port 5174 is fixed; the command fails if another process is already using it. No environment variables, backend, database, or CMS are needed for this checkpoint.
 
-The homepage uses clearly labeled fictional players, ratings, and tournaments. Rating tabs and event dialogs work; navigation scrolls to the matching homepage sections. Blog, Shop, TACA, registration, and the full leaderboard/calendar pages are not implemented yet. The WhatsApp invitation is preserved from the original website.
+The homepage and leaderboard use fictional fixtures. Ratings carry a sample label; event sample labels were removed at the user's request. The leaderboard supports provider/category filters, search, and pagination. Event dialogs work, and Calendar navigation scrolls to homepage events. Blog, Shop, TACA, registration, and the full calendar page are not implemented yet. The WhatsApp invitation is preserved from the original website.
 
 The homepage renders at `/` in both development and production. It remains `noindex` while using fixtures. `/preview` returns 404 in production. This branch is not ready to deploy. Use `/?fixture=empty` in development to review the homepage widgets without data.
 
 ## Check changes
 
 ```sh
+node --test tests/leaderboard.test.ts
 pnpm check
 pnpm format:check
 pnpm build
 pnpm exec svelte-mcp svelte-autofixer src/routes/preview/+page.svelte --svelte-version 5.57.3
 ```
 
-Run the autofixer for every changed Svelte component. Use `pnpm format` to format source and documentation. Follow the [homepage review checklist](docs/homepage-review.md) before handing off a checkpoint.
+Run the autofixer for every changed Svelte component. Use `pnpm format` to format source and documentation. Follow the [leaderboard review checklist](docs/leaderboard-review.md) before handing off a checkpoint.
 
 Stop the dev server before bulk formatting, config changes, or production builds, then restart it afterward. This avoids stale module state during the current toolchain's hot reload.
 
