@@ -23,7 +23,13 @@
 				Tanzanian players, ranked by rating.
 			</p>
 		</div>
-		<Leaderboard board={data.board} state={data.state} snapshotAt={data.snapshotAt} />
+		<Leaderboard
+			board={data.board}
+			state={data.state}
+			snapshotAt={data.snapshotAt}
+			sample={data.sample}
+			ratingMonth={data.ratingMonth}
+		/>
 	</main>
 	<SiteFooter />
 </div>

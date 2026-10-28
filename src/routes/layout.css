@@ -30,6 +30,7 @@
 	--brand: #27272a;
 	--brand-soft: #e4e4e7;
 	--hero-blue: #00a3dd;
+	--title-blue: #0076a0;
 	--hero-ink: #18181b;
 	--radius: 0.5rem;
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -62,6 +63,7 @@
 	--color-ring: var(--ring);
 	--color-brand: var(--brand);
 	--color-brand-soft: var(--brand-soft);
+	--color-title-blue: var(--title-blue);
 	--radius-sm: calc(var(--radius) - 2px);
 	--radius-md: var(--radius);
 	--radius-lg: calc(var(--radius) + 2px);

@@ -20,19 +20,38 @@
 	let {
 		board,
 		state,
-		snapshotAt
-	}: { board: LeaderboardView; state: LeaderboardState; snapshotAt: string } = $props();
+		snapshotAt,
+		sample = true,
+		ratingMonth = null
+	}: {
+		board: LeaderboardView;
+		state: LeaderboardState;
+		snapshotAt: string | null;
+		sample?: boolean;
+		ratingMonth?: string | null;
+	} = $props();
 	const source = $derived(providers.find((item) => item.value === board.provider)!);
 	const categories = $derived(categoriesFor(board.provider));
 	const busy = $derived(Boolean(navigating.to) || state === 'loading');
 	const search = $derived(board.q);
 	const snapshot = $derived(
-		new Intl.DateTimeFormat('en-TZ', {
-			dateStyle: 'medium',
-			timeStyle: 'short',
-			timeZone: 'Africa/Dar_es_Salaam',
-			hour12: false
-		}).format(new Date(snapshotAt))
+		snapshotAt
+			? new Intl.DateTimeFormat('en-TZ', {
+					dateStyle: 'medium',
+					timeStyle: 'short',
+					timeZone: 'Africa/Dar_es_Salaam',
+					hour12: false
+				}).format(new Date(snapshotAt))
+			: null
+	);
+	const period = $derived(
+		ratingMonth
+			? new Intl.DateTimeFormat('en-TZ', {
+					month: 'long',
+					year: 'numeric',
+					timeZone: 'UTC'
+				}).format(new Date(`${ratingMonth}-01T00:00:00Z`))
+			: null
 	);
 	function navigate(changes: { provider?: RatingProvider; category?: RatingCategory }) {
 		void goto(leaderboardHref(board, { ...changes, page: 1 }), { reset: false });
@@ -53,7 +72,7 @@
 					class="px-4 sm:min-w-28">{provider.label}</Tabs.Trigger
 				>{/each}
 		</Tabs.List>
-		<Badge variant="outline" class="sample-badge">Sample ratings</Badge>
+		{#if sample}<Badge variant="outline" class="sample-badge">Sample ratings</Badge>{/if}
 	</div>
 	{#each providers as provider (provider.value)}
 		<Tabs.Content value={provider.value} class="m-0">
@@ -150,11 +169,11 @@
 												><CircleAlert class="size-4" /><Alert.Title
 													>Showing the last saved ratings</Alert.Title
 												><Alert.Description
-													>The latest update failed. These ratings are still available.</Alert.Description
+													>A newer update is unavailable. You can still browse these ratings.</Alert.Description
 												></Alert.Root
 											>
 										</div>{/if}
-									<LeaderboardTable {board} loading={state === 'loading'} />
+									<LeaderboardTable {board} {sample} loading={state === 'loading'} />
 									{#if board.total > 0 && state !== 'loading'}<LeaderboardPagination {board} />{/if}
 								{/if}
 							</Tabs.Content>
@@ -163,13 +182,14 @@
 					<Card.Footer
 						class="flex flex-wrap justify-between gap-3 border-t bg-muted/20 px-5 py-4 text-xs text-muted-foreground sm:px-6"
 					>
-						{#if state === 'error'}
+						{#if state === 'error' || !snapshotAt}
 							<span>Last update unavailable</span>
 						{:else}
 							<p class="flex flex-wrap gap-x-1">
 								<span>Last updated ·</span><time datetime={snapshotAt}>{snapshot} EAT</time>
 							</p>
 						{/if}
+						{#if period}<span>{period} ratings</span>{/if}
 					</Card.Footer>
 				</Card.Root>
 			{/if}

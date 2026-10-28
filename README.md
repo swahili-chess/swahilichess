@@ -11,16 +11,16 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open <http://127.0.0.1:5174/> for the homepage, <http://127.0.0.1:5174/leaderboards> for the leaderboard, or <http://127.0.0.1:5174/preview> for the development-only foundation review. Port 5174 is fixed; the command fails if another process is already using it. No environment variables, backend, database, or CMS are needed for this checkpoint.
+Open <http://127.0.0.1:5174/> for the homepage, <http://127.0.0.1:5174/leaderboards> for the leaderboard, or <http://127.0.0.1:5174/preview> for the development-only foundation review. Port 5174 is fixed; the command fails if another process is already using it. FIDE requires the Go API and `RATINGS_API_URL` in `.env.local`; see [FIDE review](docs/fide-review.md). Other previews still work without the backend.
 
-The homepage and leaderboard use fictional fixtures. Ratings carry a sample label; event sample labels were removed at the user's request. The leaderboard supports provider/category filters, search, and pagination. Event dialogs work, and Calendar navigation scrolls to homepage events. Blog, Shop, TACA, registration, and the full calendar page are not implemented yet. The WhatsApp invitation is preserved from the original website.
+The FIDE leaderboard reads real monthly ratings. The homepage, Lichess and Chess.com leaderboards still use fictional fixtures. Ratings carry a sample label; event sample labels were removed at the user's request. The leaderboard supports provider/category filters, search, and pagination. Event dialogs work, and Calendar navigation scrolls to homepage events. Blog, Shop, TACA, registration, and the full calendar page are not implemented yet. The WhatsApp invitation is preserved from the original website.
 
 The homepage renders at `/` in both development and production. It remains `noindex` while using fixtures. `/preview` returns 404 in production. This branch is not ready to deploy. Use `/?fixture=empty` in development to review the homepage widgets without data.
 
 ## Check changes
 
 ```sh
-node --test tests/leaderboard.test.ts
+node --test tests/*.test.ts
 pnpm check
 pnpm format:check
 pnpm build
@@ -51,6 +51,6 @@ The wrapper temporarily resolves SvelteKit 3's `$app/tsconfig` alias for shadcn-
 
 ## Continue the project
 
-Read [AGENTS.md](AGENTS.md) for required skills and conventions, and the [roadmap](docs/website-v2-roadmap.md) for scope and review gates. The sibling Go API will own ratings collection. A separate Payload service is planned for the CMS checkpoint. Neither service is changed by the foundation preview.
+Read [AGENTS.md](AGENTS.md) for required skills and conventions, and the [roadmap](docs/website-v2-roadmap.md) for scope and review gates. The sibling Go API owns monthly FIDE collection on its own `website-v2` branch. A separate Payload service is planned for the CMS checkpoint. The CMS remains deferred.
 
 Styling references and licenses are recorded in [third-party notices](docs/third-party-notices.md).

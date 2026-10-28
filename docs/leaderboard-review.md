@@ -1,3 +1,5 @@
+> Accepted on 28 October 2026. This records the fixture-based interface review. The current FIDE integration is documented in [fide-review.md](fide-review.md).
+
 # Leaderboard review · chunk 3
 
 The homepage was accepted on 28 October 2026. This checkpoint builds the leaderboard interface. Ratings integrations are separate checkpoints and have not started.

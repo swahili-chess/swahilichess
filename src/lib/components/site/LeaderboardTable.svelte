@@ -6,7 +6,11 @@
 	import { Skeleton } from '#lib/components/ui/skeleton/index.js';
 	import { categoryLabels, leaderboardHref, providers } from '#lib/leaderboard.js';
 	import type { LeaderboardView } from '#lib/types/leaderboard.js';
-	let { board, loading = false }: { board: LeaderboardView; loading?: boolean } = $props();
+	let {
+		board,
+		loading = false,
+		sample = true
+	}: { board: LeaderboardView; loading?: boolean; sample?: boolean } = $props();
 	const source = $derived(providers.find((item) => item.value === board.provider)!);
 </script>
 
@@ -44,7 +48,8 @@
 	<Table.Root class="table-fixed">
 		<Table.Caption class="sr-only"
 			>Tanzania {source.label}
-			{categoryLabels[board.category]} rankings. Sample ratings. Equal ratings share a rank.</Table.Caption
+			{categoryLabels[board.category]} rankings. {sample ? 'Sample ratings. ' : ''}Equal ratings
+			share a rank.</Table.Caption
 		>
 		<Table.Header
 			><Table.Row class="bg-muted/40 hover:bg-muted/40">
@@ -61,7 +66,8 @@
 					>
 					<Table.Cell class="py-3.5 whitespace-normal">
 						<div class="flex flex-wrap items-center gap-x-2 gap-y-1">
-							{#if player.title}<Badge variant="outline" class="rounded-md px-1.5 text-[10px]"
+							{#if player.title}<Badge
+									class="rounded-md bg-title-blue px-1.5 text-[10px] text-white"
 									>{player.title}</Badge
 								>{/if}
 							{#if player.profileUrl}<a
