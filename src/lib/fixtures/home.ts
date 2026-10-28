@@ -4,6 +4,8 @@ import type { HomepageData } from '#lib/types/home.js';
 /** Fictional fixtures, never real ratings or bookable tournaments. */
 export const sampleHomepage: HomepageData = {
 	sample: true,
+	playersSample: true,
+	playersState: 'ready',
 	players: samplePlayers,
 	tournaments: [
 		{

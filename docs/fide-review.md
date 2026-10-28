@@ -1,6 +1,6 @@
 # FIDE integration review
 
-Checkpoint 4a, ready for review on 28 October 2026. Both repositories use their own `website-v2` branch. Chunks 1–3 are accepted. Stop here for review before Lichess integration.
+Checkpoint 4a, accepted on 28 October 2026. Both repositories use their own `website-v2` branch. Chunks 1–3 were accepted earlier the same day. Lichess integration (4b) follows.
 
 ## Start the preview
 

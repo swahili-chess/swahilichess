@@ -7,7 +7,11 @@
 	import { ArrowRight } from '@lucide/svelte';
 	import type { RankedPlayer, RatingFormat } from '#lib/types/home.js';
 
-	let { players, sample = false }: { players: RankedPlayer[]; sample?: boolean } = $props();
+	let {
+		players,
+		sample = false,
+		unavailable = false
+	}: { players: RankedPlayer[]; sample?: boolean; unavailable?: boolean } = $props();
 	let format = $state<RatingFormat>('rapid');
 	const formats: { value: RatingFormat; label: string }[] = [
 		{ value: 'rapid', label: 'Rapid' },
@@ -54,7 +58,9 @@
 							class="flex min-h-86 items-center justify-center border-t px-6 text-sm text-muted-foreground"
 							role="status"
 						>
-							No {option.label.toLowerCase()} ratings available.
+							{unavailable
+								? 'Ratings are unavailable right now.'
+								: `No ${option.label.toLowerCase()} ratings available.`}
 						</p>
 					{:else}
 						<Table.Root class="table-fixed">
@@ -75,10 +81,16 @@
 											>{player.rank}</Table.Cell
 										>
 										<Table.Cell class="py-3 pl-4">
-											<div class="truncate text-sm font-medium">{player.name}</div>
-											<div class="mt-0.5 truncate text-xs text-muted-foreground">
-												{player.handle}
-											</div>
+											{#if player.profileUrl}<a
+													href={player.profileUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													class="block truncate rounded-sm text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-ring"
+													>{player.name}</a
+												>{:else}<div class="truncate text-sm font-medium">{player.name}</div>{/if}
+											{#if player.handle}<div class="mt-0.5 truncate text-xs text-muted-foreground">
+													{player.handle}
+												</div>{/if}
 										</Table.Cell>
 										<Table.Cell class="pr-5 text-right font-medium tabular-nums sm:pr-6"
 											>{player.ratings[format]}</Table.Cell

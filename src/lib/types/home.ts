@@ -2,7 +2,8 @@ export type RatingFormat = 'rapid' | 'blitz' | 'bullet';
 export interface RankedPlayer {
 	id: string;
 	name: string;
-	handle: string;
+	handle?: string;
+	profileUrl?: string;
 	ratings: Record<RatingFormat, number | null>;
 }
 export interface Tournament {
@@ -20,7 +21,10 @@ export interface Tournament {
 	entryFee?: { currency: string; amount: number } | null;
 }
 export interface HomepageData {
+	/** Applies to tournaments. Rankings carry their own flag. */
 	sample: boolean;
+	playersSample: boolean;
+	playersState: 'ready' | 'stale' | 'error';
 	players: RankedPlayer[];
 	tournaments: Tournament[];
 }

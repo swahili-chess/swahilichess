@@ -23,7 +23,11 @@
 	<HomeHero />
 	<div class="site-container py-12 sm:py-16">
 		<div class="grid items-start gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-8">
-			<RankingSummary players={data.players} sample={data.sample} />
+			<RankingSummary
+				players={data.players}
+				sample={data.playersSample}
+				unavailable={data.playersState === 'error'}
+			/>
 			<TournamentSummary tournaments={data.tournaments} sample={data.sample} />
 		</div>
 	</div>

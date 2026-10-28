@@ -1,14 +1,7 @@
-import type { LeaderboardPlayer, LeaderboardState } from '../types/leaderboard.js';
+import type { LeaderboardPlayer } from '../types/leaderboard.js';
+import { isObject as object, readSnapshot, type Snapshot } from './ratings.ts';
 
-type Snapshot = {
-	players: LeaderboardPlayer[];
-	snapshotAt: string | null;
-	ratingMonth: string | null;
-	state: LeaderboardState;
-};
 const categories = ['standard', 'rapid', 'blitz'] as const;
-const object = (value: unknown): value is Record<string, unknown> =>
-	typeof value === 'object' && value !== null && !Array.isArray(value);
 
 /** Validate the API boundary and construct profile links from FIDE IDs only. */
 export function parseFideSnapshot(value: unknown): Snapshot {
@@ -75,23 +68,5 @@ export function parseFideSnapshot(value: unknown): Snapshot {
 	};
 }
 
-export async function readFideSnapshot(
-	baseURL: string | undefined,
-	fetcher: typeof fetch
-): Promise<Snapshot> {
-	try {
-		if (!baseURL) throw new Error('RATINGS_API_URL is not configured');
-		const response = await fetcher(new URL('/fide/leaderboard', baseURL), {
-			signal: AbortSignal.timeout(5000),
-			headers: { Accept: 'application/json' }
-		});
-		if (!response.ok) throw new Error(`Ratings API returned ${response.status}`);
-		return parseFideSnapshot(await response.json());
-	} catch (error) {
-		console.warn(
-			'FIDE snapshot unavailable:',
-			error instanceof Error ? error.message : 'Unknown error'
-		);
-		return { players: [], snapshotAt: null, ratingMonth: null, state: 'error' };
-	}
-}
+export const readFideSnapshot = (baseURL: string | undefined, fetcher: typeof fetch) =>
+	readSnapshot(baseURL, fetcher, '/fide/leaderboard', parseFideSnapshot, 'FIDE');

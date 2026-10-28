@@ -11,7 +11,8 @@ export const providers = [
 		value: 'lichess',
 		label: 'Lichess',
 		url: 'https://lichess.org',
-		coverage: 'Players on our maintained Tanzania list.'
+		coverage: 'Members of the Nyumbani Mates team on Lichess.',
+		coverageLink: { text: 'Nyumbani Mates', href: 'https://lichess.org/team/nyumbani-mates' }
 	},
 	{
 		value: 'chesscom',

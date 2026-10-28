@@ -32,6 +32,10 @@
 	} = $props();
 	const source = $derived(providers.find((item) => item.value === board.provider)!);
 	const categories = $derived(categoriesFor(board.provider));
+	const coverageLink = $derived('coverageLink' in source ? source.coverageLink : null);
+	const coverageParts = $derived(
+		coverageLink ? source.coverage.split(coverageLink.text) : [source.coverage]
+	);
 	const busy = $derived(Boolean(navigating.to) || state === 'loading');
 	const search = $derived(board.q);
 	const snapshot = $derived(
@@ -82,7 +86,15 @@
 						<div class="flex flex-wrap items-center justify-between gap-3">
 							<div class="min-w-0 flex-1">
 								<h2 class="text-lg font-semibold tracking-tight">{source.label} rankings</h2>
-								<p class="mt-1 text-sm leading-relaxed text-muted-foreground">{source.coverage}</p>
+								<p class="mt-1 text-sm leading-relaxed text-muted-foreground">
+									{#if coverageLink && coverageParts.length === 2}{coverageParts[0]}<a
+											href={coverageLink.href}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="rounded-sm font-medium text-foreground underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-ring"
+											>{coverageLink.text}</a
+										>{coverageParts[1]}{:else}{source.coverage}{/if}
+								</p>
 							</div>
 							<Button
 								variant="outline"
