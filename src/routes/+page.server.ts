@@ -1,16 +1,21 @@
 import { dev } from '$app/env';
 import { RATINGS_API_URL } from '$app/env/private';
-import { sampleTournaments } from '#lib/fixtures/home.js';
+import { isPast, sortEvents } from '#lib/calendar.js';
 import { readFideSnapshot } from '#lib/server/fide.js';
+import { readCalendarEvents } from '#lib/server/calendar.js';
 import type { HomepageData, RankedPlayer } from '#lib/types/home.js';
 import type { PageServerLoad } from './$types';
 
+const state = (value: string) => (value === 'stale' || value === 'error' ? value : 'ready');
+
 export const load: PageServerLoad = async ({ url, fetch }): Promise<HomepageData> => {
-	const fixture = dev ? url.searchParams.get('fixture') : null;
-	if (fixture === 'empty') {
-		return { sample: true, playersState: 'ready', players: [], tournaments: [] };
+	if (dev && url.searchParams.get('fixture') === 'empty') {
+		return { playersState: 'ready', players: [], events: [], eventsState: 'ready' };
 	}
-	const snapshot = await readFideSnapshot(RATINGS_API_URL, fetch);
+	const [snapshot, calendar] = await Promise.all([
+		readFideSnapshot(RATINGS_API_URL, fetch),
+		readCalendarEvents(RATINGS_API_URL, fetch)
+	]);
 	const players: RankedPlayer[] = snapshot.players.map((player) => ({
 		id: player.id,
 		name: player.name,
@@ -22,20 +27,16 @@ export const load: PageServerLoad = async ({ url, fetch }): Promise<HomepageData
 			blitz: player.ratings.blitz?.value ?? null
 		}
 	}));
-	// Tournaments remain fixtures until the calendar and CMS checkpoints.
+	// Official Lichess tournaments stay on the calendar; the homepage shows the community's own.
 	const now = Date.now();
-	const tournaments =
-		fixture === 'countdown'
-			? sampleTournaments.map((event) => ({
-					...event,
-					startsAt: new Date(now + 45 * 60_000).toISOString()
-				}))
-			: sampleTournaments;
+	const events = sortEvents(
+		calendar.events.filter((event) => event.source !== 'lichess' && !isPast(event, now)),
+		'upcoming'
+	).slice(0, 3);
 	return {
-		sample: true,
-		playersState:
-			snapshot.state === 'stale' ? 'stale' : snapshot.state === 'error' ? 'error' : 'ready',
+		playersState: state(snapshot.state),
 		players,
-		tournaments
+		events,
+		eventsState: state(calendar.online.state)
 	};
 };

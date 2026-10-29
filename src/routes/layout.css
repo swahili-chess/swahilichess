@@ -516,3 +516,178 @@ html:has(:focus-visible) .hero-bottom,
 	transform: none;
 	transition: none !important;
 }
+
+/*
+ * Event tones: calendar cards and 24/7 blocks share these. Each tone sets a soft
+ * three-stop gradient, a border, and an ink color for accents and text that must
+ * stand out. Inks meet 4.5:1 contrast on their gradients.
+ */
+.event-tone {
+	--tone-a: #ffffff;
+	--tone-b: #fafafa;
+	--tone-c: #f4f4f5;
+	--tone-ink: #27272a;
+	--tone-border: var(--border);
+	position: relative;
+	isolation: isolate;
+	/* clip, not hidden: hidden would make each card a scroll container and break sticky labels. */
+	overflow: clip;
+	border-color: var(--tone-border);
+	background-color: var(--tone-a);
+	background-image: linear-gradient(
+		115deg,
+		var(--tone-a) 0%,
+		var(--tone-b) 55%,
+		var(--tone-c) 100%
+	);
+	box-shadow:
+		0 1px 2px rgb(24 24 27 / 4%),
+		inset 0 1px 0 rgb(255 255 255 / 70%);
+}
+.event-tone::before {
+	content: '';
+	position: absolute;
+	inset-block: 0;
+	left: 0;
+	width: 3px;
+	background: linear-gradient(
+		180deg,
+		var(--tone-ink),
+		color-mix(in srgb, var(--tone-ink) 35%, transparent)
+	);
+}
+.event-tone .tone-ink {
+	color: var(--tone-ink);
+}
+.event-tone .tone-chip {
+	color: var(--tone-ink);
+	background: rgb(255 255 255 / 75%);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone-ink) 18%, transparent);
+}
+.event-tone[data-tone='otb'] {
+	--tone-a: #ffffff;
+	--tone-b: #fcfcfc;
+	--tone-c: #f6f6f7;
+	--tone-ink: #27272a;
+}
+.event-tone[data-tone='online'] {
+	--tone-a: #fbfcfe;
+	--tone-b: #f3f6fb;
+	--tone-c: #eef1fb;
+	--tone-ink: #3f4a63;
+	--tone-border: #e2e7f1;
+}
+.event-tone[data-tone='club'] {
+	--tone-a: #f1fbff;
+	--tone-b: #dcf3fd;
+	--tone-c: #e6eeff;
+	--tone-ink: #00668a;
+	--tone-border: #bfe6f7;
+}
+.event-tone[data-tone='bullet'] {
+	--tone-a: #fff6ef;
+	--tone-b: #ffe3d3;
+	--tone-c: #ffd6e4;
+	--tone-ink: #b4330d;
+	--tone-border: #f8cdb8;
+}
+.event-tone[data-tone='blitz'] {
+	--tone-a: #fffbea;
+	--tone-b: #fdebbf;
+	--tone-c: #fdd9c4;
+	--tone-ink: #9a4a03;
+	--tone-border: #f3d9a0;
+}
+.event-tone[data-tone='rapid'] {
+	--tone-a: #effcf6;
+	--tone-b: #d4f4e6;
+	--tone-c: #d3ebfb;
+	--tone-ink: #046c4e;
+	--tone-border: #b5e5cf;
+}
+.event-tone[data-tone='chess960'] {
+	--tone-a: #f7f5ff;
+	--tone-b: #e9e2ff;
+	--tone-c: #fbe2f4;
+	--tone-ink: #5b21b6;
+	--tone-border: #d8cdfa;
+}
+/* Expected club events: the same tone, faded, with a dashed outline. */
+.event-tone[data-expected] {
+	border-style: dashed;
+	background-image: linear-gradient(
+		115deg,
+		color-mix(in srgb, var(--tone-a) 55%, transparent),
+		color-mix(in srgb, var(--tone-b) 55%, transparent)
+	);
+	box-shadow: none;
+}
+.event-tone[data-expected]::before {
+	opacity: 0.4;
+}
+.event-tone[data-next]::before {
+	/* The next event borrows the timeline's red marker for its stripe. */
+	background: linear-gradient(
+		180deg,
+		var(--destructive),
+		color-mix(in srgb, var(--destructive) 35%, transparent)
+	);
+}
+.event-tone[data-ended] {
+	opacity: 0.55;
+	filter: saturate(0.6);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+	/* A soft sheen sweeps once across the card on hover; it never runs backwards. */
+	.event-tone::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: linear-gradient(
+			105deg,
+			transparent 30%,
+			rgb(255 255 255 / 50%) 50%,
+			transparent 70%
+		);
+		transform: translateX(-130%);
+		pointer-events: none;
+	}
+	:is(a, button):hover > .event-tone::after,
+	.event-tone:is(a, button):hover::after {
+		animation: event-sheen 1300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+	.event-tone:is(a, button) {
+		transition:
+			transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+			border-color 320ms ease;
+	}
+	.event-tone:is(a, button):hover {
+		transform: translateY(-2px);
+		box-shadow:
+			0 10px 24px -12px color-mix(in srgb, var(--tone-ink) 50%, transparent),
+			inset 0 1px 0 rgb(255 255 255 / 70%);
+	}
+	/* Events in progress breathe slowly. */
+	.event-tone[data-live] {
+		animation: event-live 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+	}
+}
+@keyframes event-sheen {
+	from {
+		transform: translateX(-130%);
+	}
+	to {
+		transform: translateX(130%);
+	}
+}
+@keyframes event-live {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 color-mix(in srgb, var(--tone-ink) 30%, transparent);
+	}
+	50% {
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--tone-ink) 8%, transparent);
+	}
+}

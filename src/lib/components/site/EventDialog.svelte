@@ -7,19 +7,32 @@
 	import EventFacts from './EventFacts.svelte';
 	import EventCosts from './EventCosts.svelte';
 	import EventPrizes from './EventPrizes.svelte';
+	import { eventSpan } from '#lib/calendar.js';
 	import { prizeTotal } from '#lib/event-presentation.js';
-	import type { Tournament } from '#lib/types/home.js';
+	import type { CalendarEvent } from '#lib/types/event.js';
 	let {
 		event,
-		now,
+		now = null,
 		sample = false
-	}: { event: Tournament; now: number | null; sample?: boolean } = $props();
+	}: { event: CalendarEvent; now?: number | null; sample?: boolean } = $props();
 	const hasPrizes = $derived(prizeTotal(event) > 0);
 	const url = $derived(
-		event.location.kind === 'online' ? event.location.tournamentUrl : event.location.registrationUrl
+		event.location.kind === 'online' ? event.location.url : event.location.registrationUrl
+	);
+	const actionable = $derived(Boolean(url && !sample && !event.status));
+	/** The dialog renders when opened, so the current time is fresh enough here. */
+	const ended = $derived(eventSpan(event).end < (now ?? Date.now()));
+	const platform = $derived(
+		event.location.kind === 'online' ? (event.location.platform ?? 'the tournament site') : ''
 	);
 	const action = $derived(
-		event.location.kind === 'online' ? `View on ${event.location.platform}` : 'Register'
+		event.location.kind !== 'online'
+			? 'Register'
+			: event.expected
+				? `View club on ${platform}`
+				: ended
+					? `View on ${platform}`
+					: `Join on ${platform}`
 	);
 </script>
 
@@ -50,18 +63,20 @@
 			</Tabs.Root>
 		{:else}{@render details()}{/if}
 	</div>
-	<Dialog.Footer class="m-0 shrink-0 rounded-none border-t bg-muted/20 p-4 sm:p-5">
-		{#if url && !sample}<Button
-				href={url}
-				target="_blank"
-				rel="noopener noreferrer"
-				class="min-h-11 w-full whitespace-normal"
-				>{action}<ArrowUpRight class="size-4" aria-hidden="true" /></Button
-			>
-		{:else}<Button disabled class="min-h-11 w-full whitespace-normal"
-				>{event.location.kind === 'online'
-					? 'Tournament link unavailable'
-					: 'Registration unavailable'}</Button
-			>{/if}
-	</Dialog.Footer>
+	{#if actionable || sample}
+		<Dialog.Footer class="m-0 shrink-0 rounded-none border-t bg-muted/20 p-4 sm:p-5">
+			{#if actionable}<Button
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="min-h-11 w-full whitespace-normal"
+					>{action}<ArrowUpRight class="size-4" aria-hidden="true" /></Button
+				>
+			{:else}<Button disabled class="min-h-11 w-full whitespace-normal"
+					>{event.location.kind === 'online'
+						? 'Tournament link unavailable'
+						: 'Registration unavailable'}</Button
+				>{/if}
+		</Dialog.Footer>
+	{/if}
 </Dialog.Content>

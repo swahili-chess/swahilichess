@@ -3,19 +3,37 @@
 	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import * as Sheet from '#lib/components/ui/sheet/index.js';
+	import * as NavigationMenu from '#lib/components/ui/navigation-menu/index.js';
+	import { navigationMenuTriggerStyle } from '#lib/components/ui/navigation-menu/navigation-menu-trigger.svelte';
 	import { communityUrl } from '#lib/site.js';
 
 	let {
 		embedded = false,
 		homePath = '/',
 		currentPage
-	}: { embedded?: boolean; homePath?: string; currentPage?: 'leaderboards' } = $props();
+	}: {
+		embedded?: boolean;
+		homePath?: string;
+		currentPage?: 'leaderboards' | 'calendar' | 'around-the-clock';
+	} = $props();
 
 	const links = $derived([
 		{ label: 'Home', href: `${homePath}#home` },
-		{ label: 'Leaderboards', href: '/leaderboards' },
-		{ label: 'Calendar', href: `${homePath}#calendar` }
+		{ label: 'Leaderboards', href: '/leaderboards' }
 	]);
+	const tournaments = [
+		{
+			label: '24/7 chess',
+			href: '/around-the-clock',
+			description: 'Lichess tournaments starting in the next few hours.'
+		},
+		{
+			label: 'Calendar',
+			href: '/calendar',
+			description: 'Club, community and national events.'
+		}
+	];
+	const current = (href: string) => (href === `/${currentPage}` ? 'page' : undefined);
 	const planned = ['Blog', 'Shop', 'TACA'];
 	let menuOpen = $state(false);
 </script>
@@ -36,21 +54,52 @@
 			<span>chess<span class={embedded ? 'text-inherit' : 'text-muted-foreground'}>.tz</span></span>
 		</a>
 
-		<nav aria-label="Main navigation" class="hidden items-center gap-0.5 lg:flex">
-			{#each links as link (link.label)}
-				<Button
-					variant="ghost"
-					href={link.href}
-					aria-current={currentPage === 'leaderboards' && link.href === '/leaderboards'
-						? 'page'
-						: undefined}
-					class={embedded ? 'text-foreground' : 'text-muted-foreground'}>{link.label}</Button
-				>
-			{/each}
-			{#each planned as label (label)}
-				<Button variant="ghost" disabled>{label}</Button>
-			{/each}
-		</nav>
+		<NavigationMenu.Root viewport={false} class="hidden lg:flex" aria-label="Main navigation">
+			<NavigationMenu.List class="gap-0.5">
+				{#each links as link (link.label)}
+					<NavigationMenu.Item>
+						<NavigationMenu.Link
+							href={link.href}
+							aria-current={current(link.href)}
+							class={[
+								navigationMenuTriggerStyle(),
+								'font-normal',
+								embedded ? 'text-foreground' : 'text-muted-foreground'
+							]}>{link.label}</NavigationMenu.Link
+						>
+					</NavigationMenu.Item>
+				{/each}
+				<NavigationMenu.Item>
+					<NavigationMenu.Trigger
+						class={[
+							'bg-transparent font-normal',
+							embedded ? 'text-foreground' : 'text-muted-foreground'
+						]}>Tournaments</NavigationMenu.Trigger
+					>
+					<NavigationMenu.Content class={['z-50', embedded && 'hero-menu-surface']}>
+						<ul class="grid w-72 gap-1">
+							{#each tournaments as link (link.href)}
+								<li>
+									<NavigationMenu.Link
+										href={link.href}
+										aria-current={current(link.href)}
+										class="flex-col items-start gap-0.5"
+									>
+										<span class="font-medium">{link.label}</span>
+										<span class="text-xs text-muted-foreground">{link.description}</span>
+									</NavigationMenu.Link>
+								</li>
+							{/each}
+						</ul>
+					</NavigationMenu.Content>
+				</NavigationMenu.Item>
+				{#each planned as label (label)}
+					<NavigationMenu.Item>
+						<Button variant="ghost" disabled>{label}</Button>
+					</NavigationMenu.Item>
+				{/each}
+			</NavigationMenu.List>
+		</NavigationMenu.Root>
 
 		<div class="flex items-center gap-2">
 			<Button
@@ -100,9 +149,19 @@
 							<Button
 								variant="ghost"
 								href={link.href}
-								aria-current={currentPage === 'leaderboards' && link.href === '/leaderboards'
-									? 'page'
-									: undefined}
+								aria-current={current(link.href)}
+								class="h-11 justify-start"
+								onclick={() => (menuOpen = false)}
+							>
+								{link.label}
+							</Button>
+						{/each}
+						<p class="mt-3 px-4 text-xs font-medium text-muted-foreground">Tournaments</p>
+						{#each tournaments as link (link.href)}
+							<Button
+								variant="ghost"
+								href={link.href}
+								aria-current={current(link.href)}
 								class="h-11 justify-start"
 								onclick={() => (menuOpen = false)}
 							>

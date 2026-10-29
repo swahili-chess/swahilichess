@@ -2,8 +2,8 @@
 	import { Trophy } from '@lucide/svelte';
 	import * as Card from '#lib/components/ui/card/index.js';
 	import { money, prizeTotal } from '#lib/event-presentation.js';
-	import type { Tournament } from '#lib/types/home.js';
-	let { event }: { event: Tournament } = $props();
+	import type { CalendarEvent } from '#lib/types/event.js';
+	let { event }: { event: CalendarEvent } = $props();
 </script>
 
 {#if event.prizes && prizeTotal(event) > 0}

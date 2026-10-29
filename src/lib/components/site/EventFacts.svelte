@@ -1,27 +1,62 @@
 <script lang="ts">
-	import { CalendarDays, Clock, Timer, MapPin, Building2 } from '@lucide/svelte';
+	import { onMount } from 'svelte';
+	import { CalendarDays, Clock, Timer, MapPin, Building2, Users, Globe } from '@lucide/svelte';
 	import * as Card from '#lib/components/ui/card/index.js';
 	import { Badge } from '#lib/components/ui/badge/index.js';
+	import { dateLabel } from '#lib/calendar.js';
 	import { eventCountdown } from '#lib/event-countdown.js';
-	import { eventDate, eventTime } from '#lib/event-presentation.js';
-	import type { Tournament } from '#lib/types/home.js';
+	import { eventTime } from '#lib/event-presentation.js';
+	import type { CalendarEvent } from '#lib/types/event.js';
 	let {
 		event,
-		now,
+		now = null,
 		expanded = false
-	}: { event: Tournament; now: number | null; expanded?: boolean } = $props();
-	const remaining = $derived(eventCountdown(event.startsAt, now));
+	}: { event: CalendarEvent; now?: number | null; expanded?: boolean } = $props();
+	/** A live clock while these facts are on screen, so the countdown ticks every second. */
+	let tick = $state<number | null>(null);
+	onMount(() => {
+		if (!event.startsAt) return;
+		tick = Date.now();
+		const interval = window.setInterval(() => (tick = Date.now()), 1_000);
+		return () => window.clearInterval(interval);
+	});
+	const remaining = $derived(event.startsAt ? eventCountdown(event.startsAt, tick ?? now) : null);
+	const announced = 'To be announced';
 	const rows = $derived([
-		...(expanded
-			? [{ label: 'Date', icon: CalendarDays, value: eventDate.format(new Date(event.startsAt)) }]
+		...(expanded || !('start' in event.date)
+			? [{ label: 'Date', icon: CalendarDays, value: dateLabel(event) }]
 			: []),
-		{ label: 'Time control', icon: Timer, value: `${event.format} · ${event.timeControl}` },
-		{ label: 'Starts', icon: Clock, value: `${eventTime.format(new Date(event.startsAt))} EAT` },
+		...(event.format || event.timeControl
+			? [
+					{
+						label: 'Time control',
+						icon: Timer,
+						value: [event.format, event.timeControl].filter(Boolean).join(' · ')
+					}
+				]
+			: []),
+		...(event.startsAt
+			? [
+					{
+						label: 'Starts',
+						icon: Clock,
+						value: `${eventTime.format(new Date(event.startsAt))} EAT`
+					}
+				]
+			: []),
 		...(event.location.kind === 'otb'
 			? [
-					{ label: 'Location', icon: MapPin, value: event.location.city },
-					...(expanded ? [{ label: 'Venue', icon: Building2, value: event.location.venue }] : [])
+					{ label: 'Location', icon: MapPin, value: event.location.city ?? announced },
+					...(expanded || !event.location.city
+						? [{ label: 'Venue', icon: Building2, value: event.location.venue ?? announced }]
+						: [])
 				]
+			: []),
+		...(expanded && event.location.kind === 'online'
+			? [{ label: 'Where', icon: Globe, value: event.location.platform ?? 'Online' }]
+			: []),
+		...(event.clubs?.length
+			? [{ label: 'Club', icon: Users, value: event.clubs.map((club) => club.name).join(', ') }]
 			: [])
 	]);
 </script>

@@ -1,6 +1,6 @@
 # Homepage review · chunk 2
 
-> **Later change, 28 October 2026:** the rankings widget now shows the real FIDE top 15 for Standard, Rapid and Blitz, read from the Go API. It has no fictional players or sample label. `?fixture=empty` shows the widget without players, and `?fixture=countdown` keeps real rankings. Tournaments remain fictional. The notes below describe the accepted chunk 2 review.
+> **Later change, 28 October 2026:** the rankings widget now shows the real FIDE top 15 for Standard, Rapid and Blitz, read from the Go API. It has no fictional players or sample label. `?fixture=empty` shows the widget without players, and `?fixture=countdown` keeps real rankings. Tournaments were fictional until chunk 5; the homepage now shows the next three real created or club events. The notes below describe the accepted chunk 2 review.
 
 Chunks 1 and 2 were accepted on 28 October 2026. This checkpoint builds the homepage only; full leaderboards, calendar pages, API collection, and CMS integration remain later chunks.
 

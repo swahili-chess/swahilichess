@@ -2,8 +2,8 @@
 	import { Trophy, Ticket } from '@lucide/svelte';
 	import * as Card from '#lib/components/ui/card/index.js';
 	import { money, prizeTotal, entryFeeLabel } from '#lib/event-presentation.js';
-	import type { Tournament } from '#lib/types/home.js';
-	let { event }: { event: Tournament } = $props();
+	import type { CalendarEvent } from '#lib/types/event.js';
+	let { event }: { event: CalendarEvent } = $props();
 	const total = $derived(prizeTotal(event));
 	const fee = $derived(entryFeeLabel(event));
 </script>
