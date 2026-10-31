@@ -51,6 +51,6 @@ The wrapper temporarily resolves SvelteKit 3's `$app/tsconfig` alias for shadcn-
 
 ## Continue the project
 
-Read [AGENTS.md](AGENTS.md) for required skills and conventions, and the [roadmap](docs/website-v2-roadmap.md) for scope and review gates. The sibling Go API owns monthly FIDE collection on its own `website-v2` branch. A separate Payload service is planned for the CMS checkpoint. The CMS remains deferred.
+Read [AGENTS.md](AGENTS.md) for required skills and conventions, and the [roadmap](docs/website-v2-roadmap.md) for scope and review gates. The sibling Go API owns monthly FIDE collection on its own `website-v2` branch. Our events and Lichess prizes come from a Google Sheet; see [events sheet](docs/events-sheet.md). The [going-live checklist](docs/go-live-checklist.md) tracks the release.
 
 Styling references and licenses are recorded in [third-party notices](docs/third-party-notices.md).

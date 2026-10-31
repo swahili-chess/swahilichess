@@ -1,6 +1,6 @@
 # Deployment notes
 
-Recorded 28 October 2026 for the release checkpoint (chunk 11). Nothing here has been deployed. The user deploys; contributors prepare and review the changes on `website-v2` without merging or deploying during a review checkpoint.
+Recorded 28 October 2026 for the release checkpoint (chunk 11). Nothing here has been deployed. The [going-live checklist](go-live-checklist.md) tracks every step, including rate limits and the firewall. The user deploys; contributors prepare and review the changes on `website-v2` without merging or deploying during a review checkpoint.
 
 ## Ratings collectors
 
@@ -21,8 +21,9 @@ Chess.com collection builds its roster by keeping every account from each daily 
 2. **Add a systemd unit per collector**, following the existing `swahilichess-api.service`. Run `<collector> -watch` with `Restart=always`, and enable it at boot. Read `SW_DB_DSN` and, for Lichess, `LICHESS_TOKEN` from an environment file readable only by the service user, not from the unit or workflow.
 3. **Apply migrations once, by hand, before starting the new code.** The API never migrates implicitly. Apply `000002_fide_snapshot`, `000003_lichess_snapshot`, `000004_chesscom_snapshot` and `000005_events_snapshot` to the production database. Run each collector once afterwards so the endpoints have data; they return HTTP 503 until a first snapshot exists.
 4. **Deploy the website as a Node service.** The SvelteKit site uses `adapter-node` and server rendering, so it is no longer static files behind Nginx. Run `pnpm install --frozen-lockfile`, `pnpm build`, and `node build` as a systemd service, with Nginx proxying to it. Set the server-only `RATINGS_API_URL` to the API's address. The current website workflow on `main` copies a static build and must change.
-5. **Merge to `main` deliberately.** The API deploys on every push to `main`, so merging `website-v2` releases all backend changes at once. Existing consumers are preserved: `/lichess/leaderboard`, the bot's `lichess` table and `/bot` routes, and auth routes are unchanged. Check them after release.
-6. **Remove development-only routes and `noindex`** only when the content review in chunk 11 is accepted. `/preview` routes and `?fixture=` controls are already disabled outside development.
+5. **Connect the events sheet.** Set the server-only `EVENTS_SHEET_URL` and `PRIZES_SHEET_URL` to the two tabs' published CSV links; see `events-sheet.md`. Without them the calendar still shows Lichess tournaments, with an alert that some events couldn't load.
+6. **Merge to `main` deliberately.** The API deploys on every push to `main`, so merging `website-v2` releases all backend changes at once. Existing consumers are preserved: `/lichess/leaderboard`, the bot's `lichess` table and `/bot` routes, and auth routes are unchanged. Check them after release.
+7. **Remove development-only routes and `noindex`** only when the content review in chunk 11 is accepted. `/preview` routes and `?fixture=` controls are already disabled outside development.
 
 ## Rollback
 

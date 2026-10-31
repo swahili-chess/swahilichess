@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { CalendarDays, Clock, Timer, MapPin, Building2, Users, Globe } from '@lucide/svelte';
+	import { CalendarDays, Clock, Timer, MapPin, Building2, Users } from '@lucide/svelte';
 	import * as Card from '#lib/components/ui/card/index.js';
 	import { Badge } from '#lib/components/ui/badge/index.js';
 	import { dateLabel } from '#lib/calendar.js';
@@ -51,9 +51,6 @@
 						? [{ label: 'Venue', icon: Building2, value: event.location.venue ?? announced }]
 						: [])
 				]
-			: []),
-		...(expanded && event.location.kind === 'online'
-			? [{ label: 'Where', icon: Globe, value: event.location.platform ?? 'Online' }]
 			: []),
 		...(event.clubs?.length
 			? [{ label: 'Club', icon: Users, value: event.clubs.map((club) => club.name).join(', ') }]

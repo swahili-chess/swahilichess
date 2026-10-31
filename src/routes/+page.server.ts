@@ -1,5 +1,5 @@
 import { dev } from '$app/env';
-import { RATINGS_API_URL } from '$app/env/private';
+import { EVENTS_SHEET_URL, PRIZES_SHEET_URL, RATINGS_API_URL } from '$app/env/private';
 import { isPast, sortEvents } from '#lib/calendar.js';
 import { readFideSnapshot } from '#lib/server/fide.js';
 import { readCalendarEvents } from '#lib/server/calendar.js';
@@ -14,7 +14,10 @@ export const load: PageServerLoad = async ({ url, fetch }): Promise<HomepageData
 	}
 	const [snapshot, calendar] = await Promise.all([
 		readFideSnapshot(RATINGS_API_URL, fetch),
-		readCalendarEvents(RATINGS_API_URL, fetch)
+		readCalendarEvents(
+			{ ratings: RATINGS_API_URL, events: EVENTS_SHEET_URL, prizes: PRIZES_SHEET_URL },
+			fetch
+		)
 	]);
 	const players: RankedPlayer[] = snapshot.players.map((player) => ({
 		id: player.id,
@@ -37,6 +40,6 @@ export const load: PageServerLoad = async ({ url, fetch }): Promise<HomepageData
 		playersState: state(snapshot.state),
 		players,
 		events,
-		eventsState: state(calendar.online.state)
+		eventsState: calendar.created === 'error' ? 'error' : state(calendar.online.state)
 	};
 };

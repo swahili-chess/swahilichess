@@ -23,7 +23,12 @@
 				Tournaments and events, over the board and online. Times are in East Africa Time.
 			</p>
 		</div>
-		<CalendarAgenda calendar={data.calendar} onlineState={data.onlineState} now={data.now} />
+		<CalendarAgenda
+			calendar={data.calendar}
+			onlineState={data.onlineState}
+			createdState={data.createdState}
+			now={data.now}
+		/>
 	</main>
 	<SiteFooter />
 </div>

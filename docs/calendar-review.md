@@ -1,6 +1,6 @@
 # Calendar review
 
-Checkpoint 5, ready for review on 28 October 2026. Both repositories use their own `website-v2` branch. Chunks 1–4c are accepted. Stop here for review before the CMS.
+Checkpoint 5, accepted on 29 October 2026. Both repositories use their own `website-v2` branch. Since chunk 6, created events come from the events sheet (`events-sheet.md`) instead of `src/lib/content/events.ts`.
 
 ## Event sources
 

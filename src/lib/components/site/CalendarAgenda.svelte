@@ -24,9 +24,14 @@
 	let {
 		calendar,
 		onlineState,
+		createdState = 'ready',
 		now
-	}: { calendar: CalendarListing; onlineState: 'ready' | 'stale' | 'error'; now: number } =
-		$props();
+	}: {
+		calendar: CalendarListing;
+		onlineState: 'ready' | 'stale' | 'error';
+		createdState?: 'ready' | 'error';
+		now: number;
+	} = $props();
 	const query = $derived(calendar.query);
 	const types: { value: CalendarType; label: string }[] = [
 		{ value: 'all', label: 'All events' },
@@ -181,6 +186,12 @@
 	{#each ['upcoming', 'past'] as view (view)}
 		<Tabs.Content value={view} class="m-0" aria-busy={Boolean(navigating.to)}>
 			{#if view === query.view}
+				{#if createdState === 'error'}
+					<Alert.Root class="mb-6"
+						><CircleAlert class="size-4" /><Alert.Title>Some events couldn't load</Alert.Title
+						><Alert.Description>Try again in a few minutes.</Alert.Description></Alert.Root
+					>
+				{/if}
 				{#if onlineState !== 'ready'}
 					<Alert.Root class="mb-6"
 						><CircleAlert class="size-4" /><Alert.Title

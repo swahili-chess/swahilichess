@@ -25,7 +25,7 @@
 		{
 			label: '24/7 chess',
 			href: '/around-the-clock',
-			description: 'Lichess tournaments starting in the next few hours.'
+			description: 'Lichess tournaments available around the clock.'
 		},
 		{
 			label: 'Calendar',

@@ -13,7 +13,7 @@
 <svelte:head
 	><title>24/7 chess · chess.tz</title><meta
 		name="description"
-		content="Online chess tournaments starting in the next few hours, from Tanzanian clubs and Lichess."
+		content="Lichess tournaments and Tanzanian club tournaments, available around the clock."
 	/><meta name="robots" content="noindex, nofollow" /></svelte:head
 >
 <Button href="#main-content" class="skip-link">Skip to content</Button>
@@ -23,7 +23,8 @@
 		<div class="mb-8">
 			<h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">24/7 chess</h1>
 			<p class="mt-3 text-sm text-muted-foreground sm:text-base">
-				Online tournaments starting in the next few hours. Times are in East Africa Time.
+				Lichess tournaments and Tanzanian club tournaments, available around the clock. Times are in
+				East Africa Time.
 			</p>
 		</div>
 		{#if data.onlineState !== 'ready'}
