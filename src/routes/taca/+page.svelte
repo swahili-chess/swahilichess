@@ -58,7 +58,7 @@
 	><title>TACA · chess.tz</title><meta
 		name="description"
 		content="Public information about the Tanzania Chess Association (TACA): what it does, its Executive Committee, membership and its constitution."
-	/><meta name="robots" content="noindex, nofollow" /></svelte:head
+	/></svelte:head
 >
 
 {#snippet fileActions(file: TacaDocument)}

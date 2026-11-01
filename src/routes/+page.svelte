@@ -15,7 +15,6 @@
 		content="A community for everyone who loves chess in Tanzania. Find tournaments, follow player rankings, and join the conversation."
 	/>
 	<!-- Keep this fixture-backed checkpoint out of search indexes. -->
-	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
 <Button href="#home" class="skip-link">Skip to content</Button>

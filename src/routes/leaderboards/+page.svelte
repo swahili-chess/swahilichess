@@ -11,7 +11,7 @@
 	><title>Leaderboards · chess.tz</title><meta
 		name="description"
 		content="Tanzanian chess player rankings on Lichess, Chess.com, and FIDE."
-	/><meta name="robots" content="noindex, nofollow" /></svelte:head
+	/></svelte:head
 >
 <Button href="#main-content" class="skip-link">Skip to content</Button>
 <div class="flex min-h-dvh flex-col">

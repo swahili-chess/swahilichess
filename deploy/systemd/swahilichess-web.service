@@ -1,0 +1,27 @@
+# Installed by .github/workflows/deploy.yml, which fills in __USER__, __NODE__
+# and __RELEASES__. Settings come from /etc/swahilichess/web.env; see
+# docs/server-setup.md.
+[Unit]
+Description=chess.tz website
+After=network-online.target swahilichess-api.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+# `current` points at the latest good build; the workflow switches it.
+WorkingDirectory=__RELEASES__/current
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+EnvironmentFile=/etc/swahilichess/web.env
+ExecStart=__NODE__ index.js
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target

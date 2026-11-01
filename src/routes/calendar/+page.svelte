@@ -11,7 +11,7 @@
 	><title>Calendar · chess.tz</title><meta
 		name="description"
 		content="Chess tournaments and events in Tanzania, over the board and online."
-	/><meta name="robots" content="noindex, nofollow" /></svelte:head
+	/></svelte:head
 >
 <Button href="#main-content" class="skip-link">Skip to content</Button>
 <div class="flex min-h-dvh flex-col">

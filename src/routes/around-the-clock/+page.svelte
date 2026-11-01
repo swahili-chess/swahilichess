@@ -14,7 +14,7 @@
 	><title>24/7 chess · chess.tz</title><meta
 		name="description"
 		content="Lichess tournaments and Tanzanian club tournaments, available around the clock."
-	/><meta name="robots" content="noindex, nofollow" /></svelte:head
+	/></svelte:head
 >
 <Button href="#main-content" class="skip-link">Skip to content</Button>
 <div class="flex min-h-dvh flex-col">

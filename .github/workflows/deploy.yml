@@ -4,26 +4,81 @@ on:
   push:
     branches:
       - main
- 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Pull, install with pnpm, build and reload Nginx
+      - name: Pull, build, and switch the website to the new build
         uses: appleboy/ssh-action@master
+        env:
+           SUDO_PASSWORD: ${{ secrets.PASSWORD }}
         with:
            host: ${{ secrets.HOST }}
            username: ${{ secrets.USERNAME }}
            password: ${{ secrets.PASSWORD }}
            port: ${{ secrets.PORT }}
+           envs: SUDO_PASSWORD
+           command_timeout: 20m
            script: |
                set -e
+               as_root() { printf '%s\n' "$SUDO_PASSWORD" | sudo -S -p '' "$@"; }
                export NVM_DIR="$HOME/.nvm"
                [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-               
-               cd /var/www/${{ secrets.USERNAME }}/swahilichess
-               git pull
+               # Node 24 with the pnpm version pinned in package.json, with no prompts.
+               export CI=true COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+               nvm install 24 > /dev/null
+               nvm use 24 > /dev/null
+               corepack enable pnpm
+
+               APP=/var/www/${{ secrets.USERNAME }}/swahilichess
+               RELEASES=/var/www/${{ secrets.USERNAME }}/swahilichess-releases
+               cd "$APP"
+               git pull --ff-only
                pnpm install --frozen-lockfile
                pnpm build
-      
-               echo ${{ secrets.PASSWORD }} | sudo -S systemctl reload nginx
+
+               # The site's settings are created once by hand; see docs/server-setup.md.
+               if ! as_root test -f /etc/swahilichess/web.env; then
+                 echo "Website not started: /etc/swahilichess/web.env is missing."
+                 exit 1
+               fi
+
+               # Each build gets its own folder; the service runs whichever one `current` points to.
+               mkdir -p "$RELEASES"
+               PREVIOUS=$(readlink "$RELEASES/current" || true)
+               RELEASE="$RELEASES/$(date -u +%Y%m%d%H%M%S)-$(git rev-parse --short HEAD)"
+               mkdir "$RELEASE"
+               cp -r build/. "$RELEASE/"
+               cp package.json "$RELEASE/"
+               ln -sfn "$RELEASE" "$RELEASES/current"
+
+               sed -e "s|__USER__|${{ secrets.USERNAME }}|g" \
+                   -e "s|__NODE__|$(nvm which 24)|g" \
+                   -e "s|__RELEASES__|$RELEASES|g" \
+                   deploy/systemd/swahilichess-web.service > /tmp/swahilichess-web.service
+               as_root install -m 644 /tmp/swahilichess-web.service /etc/systemd/system/swahilichess-web.service
+               rm /tmp/swahilichess-web.service
+               as_root systemctl daemon-reload
+               as_root systemctl enable swahilichess-web.service
+               as_root systemctl restart swahilichess-web.service
+
+               # Go back to the previous build if the new one does not answer.
+               for attempt in 1 2 3 4 5 6 7 8 9 10; do
+                 if curl -fsS -o /dev/null http://127.0.0.1:3000/; then break; fi
+                 if [ "$attempt" = 10 ]; then
+                   echo "The new build did not answer on port 3000."
+                   if [ -n "$PREVIOUS" ]; then
+                     ln -sfn "$PREVIOUS" "$RELEASES/current"
+                     as_root systemctl restart swahilichess-web.service
+                     echo "Rolled back to $PREVIOUS."
+                   fi
+                   exit 1
+                 fi
+                 sleep 3
+               done
+
+               # Keep the five newest builds for rollback.
+               find "$RELEASES" -mindepth 1 -maxdepth 1 -type d | sort -r | tail -n +6 | xargs -r rm -rf
+
+               as_root systemctl reload nginx
