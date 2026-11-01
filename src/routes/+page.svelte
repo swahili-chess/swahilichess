@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageMeta from '#lib/components/site/PageMeta.svelte';
 	import type { PageProps } from './$types';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import HomeHero from '#lib/components/site/HomeHero.svelte';
@@ -8,14 +9,11 @@
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head>
-	<title>chess.tz · Chess in Tanzania</title>
-	<meta
-		name="description"
-		content="A community for everyone who loves chess in Tanzania. Find tournaments, follow player rankings, and join the conversation."
-	/>
-	<!-- Keep this fixture-backed checkpoint out of search indexes. -->
-</svelte:head>
+<PageMeta
+	title="chess.tz · Chess in Tanzania"
+	description="A community for everyone who loves chess in Tanzania. Find tournaments, check player rankings and join us on WhatsApp."
+	path="/"
+/>
 
 <Button href="#home" class="skip-link">Skip to content</Button>
 <main id="main-content" tabindex="-1" class="outline-none">

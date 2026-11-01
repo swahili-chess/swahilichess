@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageMeta from '#lib/components/site/PageMeta.svelte';
 	import type { PageProps } from './$types';
 	import { CircleAlert, CalendarX } from '@lucide/svelte';
 	import { Button } from '#lib/components/ui/button/index.js';
@@ -10,12 +11,11 @@
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head
-	><title>24/7 chess · chess.tz</title><meta
-		name="description"
-		content="Lichess tournaments and Tanzanian club tournaments, available around the clock."
-	/></svelte:head
->
+<PageMeta
+	title="Online chess tournaments, 24/7 · chess.tz"
+	description="Online chess tournaments to join at any hour: official Lichess events and Tanzanian club tournaments."
+	path="/around-the-clock"
+/>
 <Button href="#main-content" class="skip-link">Skip to content</Button>
 <div class="flex min-h-dvh flex-col">
 	<SiteHeader currentPage="around-the-clock" />

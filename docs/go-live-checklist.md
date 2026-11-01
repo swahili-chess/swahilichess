@@ -10,10 +10,23 @@ The first release covers the homepage, leaderboards, calendar, 24/7 chess and TA
 - [x] Our events and Lichess prizes come from a Google Sheet ([events sheet](events-sheet.md)). All visitors share one copy for a minute, so traffic never reaches Google directly. If Google fails, the last good copy stays up for a day.
 - [x] Invalid sheet rows are skipped and listed at `/calendar/sheet-check`.
 - [x] Server addresses (`RATINGS_API_URL`, `EVENTS_SHEET_URL`, `PRIZES_SHEET_URL`) are server-only.
-- [x] Development-only routes (`/preview`, the local sheet templates, `?fixture=`) return 404 in production.
+- [x] Development-only routes (the local sheet templates, the share image page, `?fixture=`) are unavailable in production.
 
 - [x] Both deploy workflows updated to build and restart everything ([server setup](server-setup.md)). The API workflow builds the four collectors and installs their services; the website workflow runs v2 as a Node service, keeps the five newest builds and rolls back if a new one does not answer.
-- [x] `noindex` removed from the public pages; it stays on `/preview` and `/calendar/sheet-check`.
+- [x] `noindex` removed from the public pages; it stays on `/calendar/sheet-check`.
+
+- [x] Link previews: every public page has its own title, description, canonical URL and Open Graph tags, with `static/share.jpg` (1200 × 630, 157 KB; WhatsApp ignores images over about 300 KB).
+- [x] `sitemap.xml` (listed in `robots.txt`), `favicon.ico` and an iPhone home-screen icon.
+- [x] Accessibility check on the five public pages at 1280 px and 375 px, including the mobile menu and an event dialog: every control has a name, headings run in order, no duplicate IDs, text contrast meets WCAG AA, focus is visible, and nothing scrolls sideways. The mobile menu takes focus on open and returns it on Escape. Checked with a script in the browser; axe-core could not be loaded.
+
+To redraw the share image after changing the hero, run the dev server and:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+  --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=4000 \
+  --screenshot=/tmp/share.png http://127.0.0.1:5174/preview/share-image
+sips -s format jpeg -s formatOptions 82 /tmp/share.png --out static/share.jpg
+```
 
 ## Before going live
 
@@ -44,6 +57,15 @@ Every step is in [server setup](server-setup.md).
 - [ ] Merge the API's `website-v2` into `main` first. Check the collectors, the API, the bots, auth and `/lichess/leaderboard`.
 - [ ] Then merge the website's `website-v2` into `main`, and check the site on port 3000.
 - [ ] Switch Nginx to the new site and check `https://chess.tz` on a phone and a desktop.
+- [ ] Real phone test, on mobile data as well as Wi-Fi:
+  - Home: the hero fills the screen; Join us on WhatsApp opens the group; an upcoming event opens its dialog.
+  - Menu: each link opens its page; the menu closes after a tap.
+  - Leaderboards: switch FIDE, Lichess and Chess.com and a category; search for a player; page through.
+  - Calendar: Upcoming and Past; open an event; its button opens Lichess or the registration link.
+  - 24/7 chess: scroll the timeline sideways; join a tournament.
+  - TACA: view and download each PDF; tap a phone number and the email link.
+  - Share `https://chess.tz` in a WhatsApp chat: the preview shows the blue card, title and description.
+- [ ] Submit `https://chess.tz/sitemap.xml` in Google Search Console.
 - [ ] Check the TACA page against TACA's documents, and compare the Executive Committee with the FIDE directory once FIDE updates it.
 
 ### After release

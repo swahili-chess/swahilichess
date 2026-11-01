@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageMeta from '#lib/components/site/PageMeta.svelte';
 	import {
 		ArrowUpRight,
 		Check,
@@ -54,12 +55,11 @@
 	];
 </script>
 
-<svelte:head
-	><title>TACA · chess.tz</title><meta
-		name="description"
-		content="Public information about the Tanzania Chess Association (TACA): what it does, its Executive Committee, membership and its constitution."
-	/></svelte:head
->
+<PageMeta
+	title="Tanzania Chess Association (TACA) · chess.tz"
+	description="Public information about the Tanzania Chess Association (TACA): what it does, its Executive Committee, membership and its constitution."
+	path="/taca"
+/>
 
 {#snippet fileActions(file: TacaDocument)}
 	<Item.Actions class="w-full flex-wrap pl-12 sm:w-auto sm:pl-0">

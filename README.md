@@ -11,11 +11,11 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open <http://127.0.0.1:5174/> for the homepage, <http://127.0.0.1:5174/leaderboards> for the leaderboard, or <http://127.0.0.1:5174/preview> for the development-only foundation review. Port 5174 is fixed; the command fails if another process is already using it. FIDE requires the Go API and `RATINGS_API_URL` in `.env.local`; see [FIDE review](docs/fide-review.md). Other previews still work without the backend.
+Open <http://127.0.0.1:5174/> for the homepage, or <http://127.0.0.1:5174/leaderboards> for the leaderboard. Port 5174 is fixed; the command fails if another process is already using it. FIDE requires the Go API and `RATINGS_API_URL` in `.env.local`; see [FIDE review](docs/fide-review.md). Other previews still work without the backend.
 
 The FIDE leaderboard reads real monthly ratings. The homepage, Lichess and Chess.com leaderboards still use fictional fixtures. Ratings carry a sample label; event sample labels were removed at the user's request. The leaderboard supports provider/category filters, search, and pagination. Event dialogs work, and Calendar navigation scrolls to homepage events. Blog, Shop, TACA, registration, and the full calendar page are not implemented yet. The WhatsApp invitation is preserved from the original website.
 
-The homepage renders at `/` in both development and production. It remains `noindex` while using fixtures. `/preview` returns 404 in production. This branch is not ready to deploy. Use `/?fixture=empty` in development to review the homepage widgets without data.
+The homepage renders at `/` in both development and production. The development tools under `/preview` return 404 in production. Use `/?fixture=empty` in development to review the homepage widgets without data.
 
 ## Check changes
 
@@ -24,7 +24,7 @@ node --test tests/*.test.ts
 pnpm check
 pnpm format:check
 pnpm build
-pnpm exec svelte-mcp svelte-autofixer src/routes/preview/+page.svelte --svelte-version 5.57.3
+pnpm exec svelte-mcp svelte-autofixer src/routes/+page.svelte --svelte-version 5.57.3
 ```
 
 Run the autofixer for every changed Svelte component. Use `pnpm format` to format source and documentation. Follow the [leaderboard review checklist](docs/leaderboard-review.md) before handing off a checkpoint.

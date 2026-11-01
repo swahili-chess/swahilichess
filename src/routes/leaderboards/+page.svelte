@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PageMeta from '#lib/components/site/PageMeta.svelte';
 	import type { PageProps } from './$types';
 	import { Button } from '#lib/components/ui/button/index.js';
 	import SiteHeader from '#lib/components/site/SiteHeader.svelte';
@@ -7,12 +8,11 @@
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head
-	><title>Leaderboards · chess.tz</title><meta
-		name="description"
-		content="Tanzanian chess player rankings on Lichess, Chess.com, and FIDE."
-	/></svelte:head
->
+<PageMeta
+	title="Tanzania chess rankings · chess.tz"
+	description="Tanzanian chess players ranked by FIDE, Lichess and Chess.com rating."
+	path="/leaderboards"
+/>
 <Button href="#main-content" class="skip-link">Skip to content</Button>
 <div class="flex min-h-dvh flex-col">
 	<SiteHeader currentPage="leaderboards" />

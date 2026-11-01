@@ -10,7 +10,7 @@
 	import EventDateBadge from './EventDateBadge.svelte';
 	import { prizeTotal } from '#lib/event-presentation.js';
 	import type { CalendarEvent } from '#lib/types/event.js';
-	let { event, sample = false }: { event: CalendarEvent; sample?: boolean } = $props();
+	let { event }: { event: CalendarEvent } = $props();
 	const hasCosts = $derived(prizeTotal(event) > 0 || event.entryFee != null);
 </script>
 
@@ -19,7 +19,7 @@
 		<Card.Header class="flex flex-row items-start gap-4 p-5">
 			<EventDateBadge {event} />
 			<div class="min-w-0 flex-1 space-y-2">
-				<EventTag {event} {sample} />
+				<EventTag {event} />
 				<h3 class="text-base leading-snug font-semibold tracking-tight [overflow-wrap:anywhere]">
 					{event.name}
 				</h3>
@@ -41,5 +41,5 @@
 			>
 		</Card.Footer>
 	</Card.Root>
-	<EventDialog {event} {sample} />
+	<EventDialog {event} />
 </Dialog.Root>

@@ -3,7 +3,6 @@
 	import { Button } from '#lib/components/ui/button/index.js';
 	import SiteHeader from './SiteHeader.svelte';
 	import { communityUrl } from '#lib/site.js';
-	let { homePath = '/' }: { homePath?: string } = $props();
 	let motionPaused = $state(false);
 	let heroVisible = $state(true);
 	let pageVisible = $state(true);
@@ -32,7 +31,7 @@
 		<div class="hero-glass"></div>
 	</div>
 	<div class="hero-panel">
-		<SiteHeader embedded {homePath} />
+		<SiteHeader embedded />
 		<Button
 			variant="ghost"
 			size="icon"
@@ -60,7 +59,7 @@
 							class="size-4"
 						/></Button
 					>
-					<Button variant="ghost" href={`${homePath}#calendar`} class="h-11 px-4 text-foreground"
+					<Button variant="ghost" href="/#calendar" class="h-11 px-4 text-foreground"
 						>View events<ArrowUpRight class="size-4" /></Button
 					>
 				</div>

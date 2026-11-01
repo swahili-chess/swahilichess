@@ -14,8 +14,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 UI components in `src/lib/components/ui` were generated with shadcn-svelte 1.7.1, Nova style, using the Lucide icon library. See their upstream [source and license](https://github.com/huntabyte/shadcn-svelte). Project changes specify button transitions and remove tab transitions. Inter is served locally through `@fontsource-variable/inter`; its package includes the font's license.
 
-Kablammo is served locally through `@fontsource-variable/kablammo` (OFL-1.1). Its full license is included in `static/licenses/kablammo.txt`. See the [Fontsource font details](https://fontsource.org/fonts/kablammo/about).
-
-Freckle Face is served locally through `@fontsource/freckle-face`; its full license is included in `static/licenses/freckle-face.txt`. It replaces Kablammo in the current hero.
-
-The current hero serves Londrina Shadow locally through `@fontsource/londrina-shadow`. Its full license is in `static/licenses/londrina-shadow.txt`; Freckle Face and Kablammo are no longer dependencies.
+The hero serves Londrina Shadow locally through `@fontsource/londrina-shadow`. Its full license is in `static/licenses/londrina-shadow.txt`.

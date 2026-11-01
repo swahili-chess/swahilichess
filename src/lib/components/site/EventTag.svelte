@@ -2,11 +2,7 @@
 	import { ArrowUpRight } from '@lucide/svelte';
 	import { Badge } from '#lib/components/ui/badge/index.js';
 	import type { CalendarEvent } from '#lib/types/event.js';
-	let {
-		event,
-		sample = false,
-		linked = true
-	}: { event: CalendarEvent; sample?: boolean; linked?: boolean } = $props();
+	let { event, linked = true }: { event: CalendarEvent; linked?: boolean } = $props();
 	const platformHome = { Lichess: 'https://lichess.org/', 'Chess.com': 'https://www.chess.com/' };
 	const otbLabel = $derived(
 		event.location.kind === 'otb' && event.location.fideRated !== undefined
@@ -26,9 +22,7 @@
 		<Badge
 			variant="outline"
 			class="relative h-6 overflow-visible rounded-md border-border/80 px-2 text-xs after:absolute after:inset-x-0 after:-inset-y-2"
-			href={!sample && event.location.url
-				? event.location.url
-				: platformHome[event.location.platform]}
+			href={event.location.url ?? platformHome[event.location.platform]}
 			target="_blank"
 			rel="noopener noreferrer"
 		>

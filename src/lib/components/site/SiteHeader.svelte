@@ -9,21 +9,19 @@
 
 	let {
 		embedded = false,
-		homePath = '/',
 		currentPage
 	}: {
 		embedded?: boolean;
-		homePath?: string;
 		currentPage?: 'leaderboards' | 'calendar' | 'around-the-clock' | 'taca';
 	} = $props();
 
-	const links = $derived([
-		{ label: 'Home', href: homePath },
+	const links = [
+		{ label: 'Home', href: '/' },
 		{ label: 'Leaderboards', href: '/leaderboards' },
 		{ label: '24/7 chess', href: '/around-the-clock' },
 		{ label: 'Calendar', href: '/calendar' },
 		{ label: 'TACA', href: '/taca' }
-	]);
+	];
 	const current = (href: string) => (href === `/${currentPage}` ? 'page' : undefined);
 	let menuOpen = $state(false);
 </script>
@@ -36,7 +34,7 @@
 		]}
 	>
 		<a
-			href={homePath}
+			href="/"
 			class="flex shrink-0 items-center gap-2 rounded-md text-xl font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
 			aria-label="chess.tz home"
 		>

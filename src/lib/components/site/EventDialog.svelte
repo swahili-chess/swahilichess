@@ -10,16 +10,12 @@
 	import { eventSpan } from '#lib/calendar.js';
 	import { prizeTotal } from '#lib/event-presentation.js';
 	import type { CalendarEvent } from '#lib/types/event.js';
-	let {
-		event,
-		now = null,
-		sample = false
-	}: { event: CalendarEvent; now?: number | null; sample?: boolean } = $props();
+	let { event, now = null }: { event: CalendarEvent; now?: number | null } = $props();
 	const hasPrizes = $derived(prizeTotal(event) > 0);
 	const url = $derived(
 		event.location.kind === 'online' ? event.location.url : event.location.registrationUrl
 	);
-	const actionable = $derived(Boolean(url && !sample && !event.status));
+	const actionable = $derived(Boolean(url && !event.status));
 	/** The dialog renders when opened, so the current time is fresh enough here. */
 	const ended = $derived(eventSpan(event).end < (now ?? Date.now()));
 	const platform = $derived(
@@ -44,7 +40,7 @@
 	class="flex max-h-[calc(100dvh-2rem)] flex-col gap-0 overflow-hidden p-0 sm:max-w-lg"
 >
 	<Dialog.Header class="shrink-0 gap-3 border-b p-5 pr-12 text-left sm:p-6 sm:pr-14">
-		<div><EventTag {event} {sample} /></div>
+		<div><EventTag {event} /></div>
 		<Dialog.Title class="text-xl leading-snug font-semibold tracking-tight [overflow-wrap:anywhere]"
 			>{event.name}</Dialog.Title
 		>
@@ -63,20 +59,15 @@
 			</Tabs.Root>
 		{:else}{@render details()}{/if}
 	</div>
-	{#if actionable || sample}
+	{#if actionable}
 		<Dialog.Footer class="m-0 shrink-0 rounded-none border-t bg-muted/20 p-4 sm:p-5">
-			{#if actionable}<Button
-					href={url}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="min-h-11 w-full whitespace-normal"
-					>{action}<ArrowUpRight class="size-4" aria-hidden="true" /></Button
-				>
-			{:else}<Button disabled class="min-h-11 w-full whitespace-normal"
-					>{event.location.kind === 'online'
-						? 'Tournament link unavailable'
-						: 'Registration unavailable'}</Button
-				>{/if}
+			<Button
+				href={url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="min-h-11 w-full whitespace-normal"
+				>{action}<ArrowUpRight class="size-4" aria-hidden="true" /></Button
+			>
 		</Dialog.Footer>
 	{/if}
 </Dialog.Content>
