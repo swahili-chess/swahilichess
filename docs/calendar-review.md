@@ -37,7 +37,7 @@ On desktop a ruler beside the page works as the page's scrollbar. It starts leve
 
 `/around-the-clock` shows online tournaments in a timeline from half an hour ago to as far ahead as Lichess lists, at most eight hours. Lanes are Tanzanian clubs, Bullet, Blitz and Rapid; overlapping tournaments stack in rows. A red line marks the current time and moves every 30 seconds. Each block links to its event page. The timeline scrolls horizontally inside its frame, so the page itself never does.
 
-The header now has a Tournaments menu, built with shadcn NavigationMenu, holding 24/7 chess and Calendar. On mobile they appear under a Tournaments label in the sheet.
+Since 31 October 2026, 24/7 chess and Calendar are individual header links on desktop and mobile, replacing the earlier Tournaments menu. On mobile they appear under a Tournaments label in the sheet.
 
 ## Chess.com
 

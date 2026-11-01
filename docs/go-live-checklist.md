@@ -61,6 +61,7 @@ The first release covers the homepage, leaderboards, calendar, 24/7 chess and TA
 
 ### Content and release
 
+- [ ] Check the TACA page against TACA's documents, and compare the Executive Committee with the FIDE directory once FIDE updates it.
 - [ ] Remove `noindex` after the content review.
 - [ ] Update the website workflow on `main`, which still copies a static build.
 - [ ] Merge `website-v2` deliberately: the API deploys on every push to `main`.

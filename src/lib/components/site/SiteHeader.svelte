@@ -14,27 +14,17 @@
 	}: {
 		embedded?: boolean;
 		homePath?: string;
-		currentPage?: 'leaderboards' | 'calendar' | 'around-the-clock';
+		currentPage?: 'leaderboards' | 'calendar' | 'around-the-clock' | 'taca';
 	} = $props();
 
 	const links = $derived([
-		{ label: 'Home', href: `${homePath}#home` },
-		{ label: 'Leaderboards', href: '/leaderboards' }
+		{ label: 'Home', href: homePath },
+		{ label: 'Leaderboards', href: '/leaderboards' },
+		{ label: '24/7 chess', href: '/around-the-clock' },
+		{ label: 'Calendar', href: '/calendar' },
+		{ label: 'TACA', href: '/taca' }
 	]);
-	const tournaments = [
-		{
-			label: '24/7 chess',
-			href: '/around-the-clock',
-			description: 'Lichess tournaments available around the clock.'
-		},
-		{
-			label: 'Calendar',
-			href: '/calendar',
-			description: 'Club, community and national events.'
-		}
-	];
 	const current = (href: string) => (href === `/${currentPage}` ? 'page' : undefined);
-	const planned = ['Blog', 'Shop', 'TACA'];
 	let menuOpen = $state(false);
 </script>
 
@@ -46,7 +36,7 @@
 		]}
 	>
 		<a
-			href={`${homePath}#home`}
+			href={homePath}
 			class="flex shrink-0 items-center gap-2 rounded-md text-xl font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
 			aria-label="chess.tz home"
 		>
@@ -67,35 +57,6 @@
 								embedded ? 'text-foreground' : 'text-muted-foreground'
 							]}>{link.label}</NavigationMenu.Link
 						>
-					</NavigationMenu.Item>
-				{/each}
-				<NavigationMenu.Item>
-					<NavigationMenu.Trigger
-						class={[
-							'bg-transparent font-normal',
-							embedded ? 'text-foreground' : 'text-muted-foreground'
-						]}>Tournaments</NavigationMenu.Trigger
-					>
-					<NavigationMenu.Content class={['z-50', embedded && 'hero-menu-surface']}>
-						<ul class="grid w-72 gap-1">
-							{#each tournaments as link (link.href)}
-								<li>
-									<NavigationMenu.Link
-										href={link.href}
-										aria-current={current(link.href)}
-										class="flex-col items-start gap-0.5"
-									>
-										<span class="font-medium">{link.label}</span>
-										<span class="text-xs text-muted-foreground">{link.description}</span>
-									</NavigationMenu.Link>
-								</li>
-							{/each}
-						</ul>
-					</NavigationMenu.Content>
-				</NavigationMenu.Item>
-				{#each planned as label (label)}
-					<NavigationMenu.Item>
-						<Button variant="ghost" disabled>{label}</Button>
 					</NavigationMenu.Item>
 				{/each}
 			</NavigationMenu.List>
@@ -155,21 +116,6 @@
 							>
 								{link.label}
 							</Button>
-						{/each}
-						<p class="mt-3 px-4 text-xs font-medium text-muted-foreground">Tournaments</p>
-						{#each tournaments as link (link.href)}
-							<Button
-								variant="ghost"
-								href={link.href}
-								aria-current={current(link.href)}
-								class="h-11 justify-start"
-								onclick={() => (menuOpen = false)}
-							>
-								{link.label}
-							</Button>
-						{/each}
-						{#each planned as label (label)}
-							<Button variant="ghost" disabled class="h-11 justify-start">{label}</Button>
 						{/each}
 					</nav>
 					<Sheet.Footer class="px-5 pb-6">
