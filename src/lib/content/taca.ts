@@ -43,14 +43,15 @@ export const affiliations = [
  * The Executive Committee (Article 5): seven members. From the FIDE directory,
  * with the changes the Vice Chairperson confirmed on 1 November 2026: Kaushi
  * Rishit Shah is Vice Chairperson, Albert Njau is General Secretary, Ali
- * Makongoro has left and Veer Gandhi has joined.
+ * Makongoro has left and Veer Gandhi has joined. Musa Mangula is TACA's
+ * Ofisa Habari, shown as Communications Officer.
  */
 export const leaders: Leader[] = [
 	{ name: 'Geoffrey Mwanyika', role: 'Chairman' },
 	{ name: 'Kaushi Rishit Shah', role: 'Vice Chairperson' },
 	{ name: 'Albert Njau', role: 'General Secretary' },
 	{ name: 'Mustafa Ibrahim', role: 'Treasurer' },
-	{ name: 'Musa Mangula', role: 'Committee member' },
+	{ name: 'Musa Mangula', role: 'Communications Officer' },
 	{ name: 'Fred Kazi', role: 'Committee member' },
 	{ name: 'Veer Gandhi', role: 'Committee member' }
 ];

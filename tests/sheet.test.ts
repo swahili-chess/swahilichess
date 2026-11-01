@@ -59,6 +59,62 @@ test('reads the date, time and amount formats Google Sheets produces', () => {
 	assert.equal(parsePrizes('Winner 50,000'), null);
 });
 
+test('reads typed Google Sheets cells: date pickers, currency formats and checkboxes', () => {
+	// Date cells publish as their display format.
+	for (const shown of [
+		'Nov 1, 2026',
+		'November 1, 2026',
+		'Sunday, November 1, 2026',
+		'1-Nov-2026',
+		'1st November, 2026',
+		'2026/11/01',
+		'2026-11-01 19:00:00',
+		'1 Nov 2026 7:00 PM'
+	])
+		assert.deepEqual(parseDate(shown), { day: '2026-11-01' }, shown);
+	assert.deepEqual(parseDate('Sept 2026'), { month: '2026-09' });
+	// Slashed dates depend on the sheet's locale, and weekdays are not months.
+	assert.equal(parseDate('01/11/2026'), null);
+	assert.equal(parseDate('Sunday 2026'), null);
+	assert.equal(parseDate('Nov 31, 2026'), null);
+
+	assert.equal(parseAmount('TSh 50,000.00'), 50000);
+	assert.equal(parseAmount('50,000/='), 50000);
+	assert.equal(parseAmount('$1,250.50'), 1250.5);
+	assert.equal(parseAmount('50,000 TZS'), 50000);
+
+	const { events, problems } = parseEventsTab(
+		[
+			header,
+			row({ Show: 'FALSE', Name: 'Draft', Date: 'Nov 1, 2026', Type: 'OTB' }),
+			row({
+				Show: 'TRUE',
+				Name: 'Dar Open',
+				Date: 'Sunday, November 1, 2026',
+				'Start time': '9:30:00 AM',
+				Type: 'OTB',
+				'FIDE rated': 'TRUE',
+				'Entry fee': '$20.00'
+			}),
+			row({ Name: 'Mixed', Date: 'Nov 8, 2026', Type: 'OTB', 'Entry fee': '$20', Currency: 'TZS' })
+		].join('\n')
+	);
+	assert.equal(events.length, 1);
+	assert.equal(events[0].startsAt, '2026-11-01T09:30:00+03:00');
+	assert.deepEqual(events[0].location, {
+		kind: 'otb',
+		venue: undefined,
+		city: undefined,
+		fideRated: true,
+		registrationUrl: undefined
+	});
+	// A $ amount with an empty Currency column is in US dollars.
+	assert.deepEqual(events[0].entryFee, { currency: 'USD', amount: 20 });
+	assert.deepEqual(problems, [
+		{ tab: 'Events', row: 4, message: 'The amounts are in USD but Currency says TZS.' }
+	]);
+});
+
 test('maps event rows, hides Show: no and keeps unknown details empty', () => {
 	const csv = [
 		header,
@@ -151,7 +207,7 @@ test('skips invalid rows and says how to fix each', () => {
 		problems.map((problem) => problem.row),
 		[2, 3, 4, 5, 6, 7, 8]
 	);
-	assert.match(problems[1].message, /2026-11-01 or 1 Nov 2026/);
+	assert.match(problems[1].message, /format the column to show 1 Nov 2026/);
 });
 
 test('keeps two events with the same name and day apart', () => {

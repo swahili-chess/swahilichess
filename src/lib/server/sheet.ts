@@ -76,24 +76,58 @@ const validDay = (year: number, month: number, day: number) => {
 	const date = new Date(Date.UTC(year, month - 1, day));
 	return date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
 };
-const monthIndex = (name: string) => months.indexOf(name.slice(0, 3).toLowerCase()) + 1;
+const monthNames = [
+	'january',
+	'february',
+	'march',
+	'april',
+	'may',
+	'june',
+	'july',
+	'august',
+	'september',
+	'october',
+	'november',
+	'december'
+];
+/** "Nov", "Sept" or "November" → 11; anything else, including weekdays, → 0. */
+const monthIndex = (name: string) => {
+	const lower = name.toLowerCase();
+	const index = lower === 'sept' ? 8 : months.indexOf(lower.slice(0, 3));
+	return index >= 0 && monthNames[index].startsWith(lower) ? index + 1 : 0;
+};
+const dayOf = (year: number, month: number, day: number) =>
+	month && validDay(year, month, day) ? { day: `${year}-${pad(month)}-${pad(day)}` } : null;
 
-/** "2026-11-01" or "1 Nov 2026" → a day; "2026-11" or "Nov 2026" → a month. Slashed dates are ambiguous and rejected. */
-export function parseDate(value: string): { day: string } | { month: string } | null {
-	let match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(value);
-	if (match) {
-		const [year, month, day] = match.slice(1).map(Number);
-		return validDay(year, month, day) ? { day: `${year}-${pad(month)}-${pad(day)}` } : null;
-	}
+/**
+ * A day or a month, as typed or as Google Sheets shows a date cell: "2026-11-01",
+ * "1 Nov 2026", "Nov 1, 2026", "Sunday, 1 November 2026", "1-Nov-2026"; a month
+ * as "2026-12" or "Dec 2026". A time after the date is ignored. Slashed dates
+ * such as 01/11/2026 read differently by locale and are rejected.
+ */
+export function parseDate(input: string): { day: string } | { month: string } | null {
+	const value = input
+		.trim()
+		.replace(/[T\s]+\d{1,2}:\d{2}(?::\d{2})?(?:\s*[ap]\.?m\.?)?$/i, '')
+		.trim();
+	let match = /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})$/.exec(value);
+	if (match) return dayOf(Number(match[1]), Number(match[2]), Number(match[3]));
 	match = /^(\d{4})-(\d{1,2})$/.exec(value);
 	if (match && Number(match[2]) >= 1 && Number(match[2]) <= 12)
 		return { month: `${match[1]}-${pad(Number(match[2]))}` };
-	match = /^(?:[a-z]+,?\s+)?(\d{1,2})\s+([a-z]{3,9})\.?\s+(\d{4})$/i.exec(value);
-	if (match && monthIndex(match[2])) {
-		const [day, month, year] = [Number(match[1]), monthIndex(match[2]), Number(match[3])];
-		return validDay(year, month, day) ? { day: `${year}-${pad(month)}-${pad(day)}` } : null;
-	}
-	match = /^([a-z]{3,9})\.?\s+(\d{4})$/i.exec(value);
+	const weekday = '(?:[a-z]+\\.?,?\\s+)?';
+	const ordinal = '(?:st|nd|rd|th)?';
+	match = new RegExp(
+		`^${weekday}(\\d{1,2})${ordinal}[\\s-]+([a-z]{3,9})\\.?,?[\\s-]+(\\d{4})$`,
+		'i'
+	).exec(value);
+	if (match) return dayOf(Number(match[3]), monthIndex(match[2]), Number(match[1]));
+	match = new RegExp(
+		`^${weekday}([a-z]{3,9})\\.?\\s+(\\d{1,2})${ordinal},?\\s+(\\d{4})$`,
+		'i'
+	).exec(value);
+	if (match) return dayOf(Number(match[3]), monthIndex(match[1]), Number(match[2]));
+	match = /^([a-z]{3,9})\.?,?[\s-]+(\d{4})$/i.exec(value);
 	if (match && monthIndex(match[1])) return { month: `${match[2]}-${pad(monthIndex(match[1]))}` };
 	return null;
 }
@@ -112,11 +146,29 @@ export function parseTime(value: string): string | null {
 	return hour < 24 && minute < 60 ? `${pad(hour)}:${pad(minute)}` : null;
 }
 
-/** "50,000", "50 000" or "TZS 50,000" → 50000. */
+/**
+ * An amount as typed or as Sheets shows a currency cell: "50,000", "50 000",
+ * "TZS 50,000", "TSh 50,000.00", "50,000/=" or "$100.00".
+ */
 export function parseAmount(value: string): number | null {
-	const digits = value.replace(/^[A-Z]{3}\s*/i, '').replace(/[,\s]/g, '');
+	const digits = value
+		.trim()
+		.replace(/^(?:TZS|TSh|USD|US\$|\$)\s*/i, '')
+		.replace(/\s*(?:TZS|TSh|USD|\/=|\/-)$/i, '')
+		.replace(/[,\s]/g, '');
 	return /^\d+(\.\d+)?$/.test(digits) ? Number(digits) : null;
 }
+
+/** The currency an amount is marked with: "$100" or "USD 100" is USD; "TSh", "TZS" or "/=" is TZS. */
+export function amountCurrency(value: string): 'TZS' | 'USD' | null {
+	if (/^\s*(?:US)?\$|USD/i.test(value)) return 'USD';
+	if (/TZS|TSh|\/=|\/-/i.test(value)) return 'TZS';
+	return null;
+}
+
+/** Yes/no cells, typed or as Sheets checkboxes, which publish as TRUE and FALSE. */
+const yes = (value: string) => /^(?:yes|true)$/i.test(value);
+const no = (value: string) => /^(?:no|false)$/i.test(value);
 
 /** "1st place: 50,000; 2nd place: 30,000", one award per line or separated by semicolons. */
 export function parsePrizes(value: string): { category: string; amount: number }[] | null {
@@ -155,11 +207,21 @@ function costs(get: (name: string) => string): Extras {
 	const currencyCell = get('currency').toUpperCase();
 	if (currencyCell && currencyCell !== 'TZS' && currencyCell !== 'USD')
 		throw new RowError('Currency must be TZS or USD.');
-	const currency = currencyCell || 'TZS';
 	const prizeCell = get('prizes');
+	const feeCell = get('entry fee');
+	// Amounts formatted as currency in Sheets carry their own mark, such as $ or TSh.
+	const marks = new Set(
+		[feeCell, ...prizeCell.split(/[;\n]/).map((part) => part.slice(part.lastIndexOf(':') + 1))]
+			.map(amountCurrency)
+			.filter((mark) => mark !== null)
+	);
+	if (marks.size > 1) throw new RowError('Use one currency for the prizes and the entry fee.');
+	const [mark] = marks;
+	if (currencyCell && mark && mark !== currencyCell)
+		throw new RowError(`The amounts are in ${mark} but Currency says ${currencyCell}.`);
+	const currency = currencyCell || mark || 'TZS';
 	const awards = prizeCell ? parsePrizes(prizeCell) : [];
 	if (!awards) throw new RowError('Write prizes as "1st place: 50,000; 2nd place: 30,000".');
-	const feeCell = get('entry fee');
 	const fee = feeCell ? (/^free$/i.test(feeCell) ? 0 : parseAmount(feeCell)) : null;
 	if (feeCell && fee === null) throw new RowError('Entry fee must be a number, 0 or Free.');
 	return {
@@ -177,14 +239,16 @@ const slugify = (value: string) =>
 		.slice(0, 80) || 'event';
 
 function parseEventRow(get: (name: string) => string): CalendarEvent | null {
-	if (/^no$/i.test(get('show'))) return null;
+	if (no(get('show'))) return null;
 	const name = get('name');
 	if (!name) throw new RowError('Add a name.');
 	if (name.length > 200) throw new RowError('The name is longer than 200 characters.');
 
 	const when = parseDate(get('date'));
 	if (!when)
-		throw new RowError('Write the date as 2026-11-01 or 1 Nov 2026, or Nov 2026 for a month.');
+		throw new RowError(
+			'Write the date as 1 Nov 2026 or 2026-11-01, or Nov 2026 for a month. For dates like 01/11/2026, format the column to show 1 Nov 2026.'
+		);
 	let date: CalendarEvent['date'];
 	let startsAt: string | undefined;
 	let endsAt: string | undefined;
@@ -233,8 +297,8 @@ function parseEventRow(get: (name: string) => string): CalendarEvent | null {
 		if (linkCell && !url) throw new RowError('The tournament link must start with https://.');
 		location = { kind: 'online', platform, url: url ?? undefined };
 	} else if (type === 'otb' || type === 'over the board') {
-		const rated = get('fide rated').toLowerCase();
-		if (rated && rated !== 'yes' && rated !== 'no')
+		const rated = get('fide rated');
+		if (rated && !yes(rated) && !no(rated))
 			throw new RowError('FIDE rated must be yes, no or empty.');
 		const linkCell = get('registration link');
 		const registrationUrl = linkCell ? https(linkCell) : null;
@@ -244,7 +308,7 @@ function parseEventRow(get: (name: string) => string): CalendarEvent | null {
 			kind: 'otb',
 			venue: get('venue') || undefined,
 			city: get('city') || undefined,
-			fideRated: rated ? rated === 'yes' : undefined,
+			fideRated: rated ? yes(rated) : undefined,
 			registrationUrl: registrationUrl ?? undefined
 		};
 	} else throw new RowError('Type must be OTB or Online.');
