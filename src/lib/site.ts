@@ -1,4 +1,4 @@
-export const communityUrl = 'https://chat.whatsapp.com/ELHXyyug2VbA9XFfR8l7vi';
+export const communityUrl = 'https://chat.whatsapp.com/BdXC1Z2oBBj26wESEafCcj';
 /** The public address, for canonical links, link previews and the sitemap. */
 export const siteUrl = 'https://chess.tz';
 /** Public pages, in navigation order. */
