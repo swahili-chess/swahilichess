@@ -38,7 +38,7 @@ jobs:
                pnpm install --frozen-lockfile
                pnpm build
 
-               # The site's settings are created once by hand; see docs/server-setup.md.
+               # The site's settings are created once by hand.
                if ! as_root test -f /etc/swahilichess/web.env; then
                  echo "Website not started: /etc/swahilichess/web.env is missing."
                  exit 1

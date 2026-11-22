@@ -1,6 +1,5 @@
 # Installed by .github/workflows/deploy.yml, which fills in __USER__, __NODE__
-# and __RELEASES__. Settings come from /etc/swahilichess/web.env; see
-# docs/server-setup.md.
+# and __RELEASES__. Settings come from /etc/swahilichess/web.env.
 [Unit]
 Description=chess.tz website
 After=network-online.target swahilichess-api.service

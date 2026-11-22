@@ -3,7 +3,7 @@ import type { CalendarEvent, EventLocation } from '../types/event.js';
 /**
  * Events are kept in a Google Sheet with two tabs, each published to the web as
  * CSV. "Events" lists events we organize or announce; "Lichess prizes" adds
- * prizes and entry fees to Lichess tournaments by their link. See docs/events-sheet.md.
+ * prizes and entry fees to Lichess tournaments by their link.
  */
 
 export type Extras = Pick<CalendarEvent, 'prizes' | 'entryFee'>;

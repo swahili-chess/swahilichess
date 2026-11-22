@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { dev } from '$app/env';
-import events from '../../../../../docs/sheet-templates/events.csv?raw';
-import prizes from '../../../../../docs/sheet-templates/lichess-prizes.csv?raw';
+import events from '#lib/server/sheet-templates/events.csv?raw';
+import prizes from '#lib/server/sheet-templates/lichess-prizes.csv?raw';
 import type { RequestHandler } from './$types';
 
 /** Development only: serves the sheet templates as if Google published them, so the calendar works without a sheet. */

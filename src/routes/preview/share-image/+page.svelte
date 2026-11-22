@@ -4,7 +4,8 @@
 
 <!--
 	The link preview image (static/share.png), drawn from the hero's styles.
-	Regenerate it with the command in docs/go-live-checklist.md after changing the hero.
+	Regenerate it after changing the hero: screenshot this page at 1200 x 630 with headless Chrome
+	and save it as a JPEG under 300 KB.
 -->
 <svelte:head><title>Share image · chess.tz</title></svelte:head>
 
