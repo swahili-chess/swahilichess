@@ -691,3 +691,85 @@ html:has(:focus-visible) .hero-bottom,
 		box-shadow: 0 0 0 4px color-mix(in srgb, var(--tone-ink) 8%, transparent);
 	}
 }
+
+/* WHITE HERO TRIAL: delete this block to restore the Tanzania blue hero. */
+.hero-stage {
+	background-color: #ffffff;
+}
+.hero-menu-surface {
+	--popover: #f4f4f5;
+	--background: #f4f4f5;
+}
+.hero-atmosphere > .hero-light {
+	background: radial-gradient(ellipse 36% 90% at 50% 10%, #f4f4f5, transparent 70%);
+}
+.hero-atmosphere > .hero-arc {
+	background: radial-gradient(
+		ellipse 120% 120% at 0% 130%,
+		#ffffff 0%,
+		#fafafa 49%,
+		#e4e4e7 50%,
+		transparent 53%
+	);
+}
+.hero-glass {
+	background: repeating-linear-gradient(
+		90deg,
+		rgb(24 24 27 / 6%) 0,
+		rgb(24 24 27 / 2%) 1px,
+		rgb(255 255 255 / 0%) 2px,
+		transparent 12px,
+		rgb(24 24 27 / 3%) 31px,
+		rgb(24 24 27 / 5%) 39px,
+		rgb(24 24 27 / 6%) 40px
+	);
+}
+@media (max-width: 767px) {
+	.hero-atmosphere > .hero-arc {
+		background: radial-gradient(
+			ellipse 160% 120% at 0% 130%,
+			#ffffff 0%,
+			#fafafa 49%,
+			#e4e4e7 50%,
+			transparent 53%
+		);
+	}
+}
+
+/* PAWN TRIAL: the v1 Tanzania-flag pawn, cut out onto the hero background. Delete this block and the
+   hero-pawn image in HomeHero.svelte to remove it. */
+.hero-pawn {
+	order: -1;
+	width: auto;
+	height: clamp(8rem, 30vw, 11rem);
+	filter: drop-shadow(0 18px 24px rgb(24 24 27 / 14%));
+	animation: hero-pawn-enter 900ms var(--ease-out) 240ms both;
+}
+@media (min-width: 1024px) {
+	.hero-composition {
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 48px;
+	}
+	.hero-composition h1 {
+		font-size: clamp(5rem, 8.5vw, 8.5rem);
+		text-align: left;
+	}
+	.hero-pawn {
+		order: 0;
+		flex-shrink: 0;
+		height: clamp(20rem, 30vw, 26rem);
+		margin-inline-end: clamp(0rem, 4vw, 4rem);
+	}
+}
+@keyframes hero-pawn-enter {
+	from {
+		opacity: 0;
+		transform: translateY(12px) scale(0.97);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.hero-pawn {
+		animation: none;
+	}
+}

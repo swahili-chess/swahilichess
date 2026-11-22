@@ -3,6 +3,7 @@
 	import { Button } from '#lib/components/ui/button/index.js';
 	import SiteHeader from './SiteHeader.svelte';
 	import { communityUrl } from '#lib/site.js';
+	import heroPawn from '#lib/assets/hero-pawn.png';
 	let motionPaused = $state(false);
 	let heroVisible = $state(true);
 	let pageVisible = $state(true);
@@ -50,6 +51,7 @@
 						<span class="hero-line" aria-hidden="true"><span>{line}</span></span>
 					{/each}
 				</h1>
+				<img class="hero-pawn" src={heroPawn} alt="" width="356" height="640" />
 			</div>
 			<div class="hero-bottom">
 				<p class="hero-description">A community for everyone who loves the game in Tanzania.</p>
