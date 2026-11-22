@@ -57,9 +57,9 @@ jobs:
 
                # Go back to the previous build if the new one does not answer.
                for attempt in 1 2 3 4 5 6 7 8 9 10; do
-                 if curl -fsS -o /dev/null http://127.0.0.1:3000/; then break; fi
+                 if curl -fsS -o /dev/null http://127.0.0.1:3040/; then break; fi
                  if [ "$attempt" = 10 ]; then
-                   echo "The new build did not answer on port 3000."
+                   echo "The new build did not answer on port 3040."
                    if [ -n "$PREVIOUS" ]; then
                      ln -sfn "$PREVIOUS" "$RELEASES/current"
                      as_root systemctl restart swahilichess-web.service
