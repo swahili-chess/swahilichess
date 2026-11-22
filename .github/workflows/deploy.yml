@@ -38,7 +38,7 @@ jobs:
                pnpm install --frozen-lockfile
                pnpm build
 
-               # The site's settings are created once by hand.
+               # The swahilichess-web service and its settings are set up once by hand.
                if ! as_root test -f /etc/swahilichess/web.env; then
                  echo "Website not started: /etc/swahilichess/web.env is missing."
                  exit 1
@@ -53,14 +53,6 @@ jobs:
                cp package.json "$RELEASE/"
                ln -sfn "$RELEASE" "$RELEASES/current"
 
-               sed -e "s|__USER__|${{ secrets.USERNAME }}|g" \
-                   -e "s|__NODE__|$(nvm which 24)|g" \
-                   -e "s|__RELEASES__|$RELEASES|g" \
-                   deploy/systemd/swahilichess-web.service > /tmp/swahilichess-web.service
-               as_root install -m 644 /tmp/swahilichess-web.service /etc/systemd/system/swahilichess-web.service
-               rm /tmp/swahilichess-web.service
-               as_root systemctl daemon-reload
-               as_root systemctl enable swahilichess-web.service
                as_root systemctl restart swahilichess-web.service
 
                # Go back to the previous build if the new one does not answer.
